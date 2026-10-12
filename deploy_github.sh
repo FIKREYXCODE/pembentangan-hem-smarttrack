@@ -17,11 +17,11 @@ echo ""
 # Pastikan branch main
 git checkout -B main
 
-# Tambah semua fail
-git add index.html slides_hem_smarttrack.html logo-kpm-cutout.png logo-skrg-cutout.png icon-smarttrack-choice-192.png .nojekyll README.md deploy_github.sh
+# Tambah semua fail rasmi
+git add -A
 
 # Commit
-git commit -m "Kemas kini pembentangan rasmi HEM SmartTrack SK Ranggu 2026: 10 Slaid Mengikut Kertas Konsep, Montaj Gimik 60s, Skrip Mohammad Fikrey bin Abdul Gapar" || echo "Tiada perubahan baharu untuk dicommit."
+git commit -m "Kemas kini rasmi: Mengintegrasikan Logo Rasmi HEM SmartTrack, 10 Slaid Kertas Konsep, Montaj Gimik 60s, Skrip Mohammad Fikrey bin Abdul Gapar" || echo "Tiada perubahan baharu untuk dicommit."
 
 # Semak remote origin
 if ! git remote get-url origin > /dev/null 2>&1; then

@@ -133,7 +133,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         <img src="./logo-skrg-cutout.png" alt="Sekolah Kebangsaan Ranggu" class="h-9 w-auto object-contain drop-shadow" title="SK Ranggu, Tawau">
         <div class="w-[1px] h-6 bg-slate-700"></div>
         <!-- 3. Logo HEM SmartTrack -->
-        <img src="./icon-smarttrack-choice-192.png" alt="HEM SmartTrack" class="h-8 w-8 rounded-lg object-contain shadow-md" title="HEM SmartTrack">
+        <img src="./logo_rasmi_hem_smarttrack.jpg" alt="Logo Rasmi HEM SmartTrack" class="h-9 w-9 rounded-lg object-contain shadow-md border border-cyan-400/40" title="Logo Rasmi HEM SmartTrack">
       </div>
 
       <div class="flex flex-col">
@@ -373,12 +373,17 @@ HTML_TEMPLATE = """<!DOCTYPE html>
                 <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Kategori Guru Sekolah Rendah: Hal Ehwal Murid</span>
               </div>
               
-              <h1 class="text-3xl md:text-5xl font-black heading-font text-white leading-tight tracking-tight">
-                HEM SmartTrack
-              </h1>
-              <p class="text-lg md:text-xl text-blue-300 font-semibold leading-snug">
-                Pendigitalan Pengurusan HEM Bersepadu Berasaskan Data Masa Nyata
-              </p>
+              <div class="flex items-center gap-4 my-1">
+                <img src="./logo_rasmi_hem_smarttrack.jpg" alt="Logo Rasmi HEM SmartTrack" class="w-20 h-20 md:w-24 md:h-24 rounded-2xl shadow-2xl border-2 border-cyan-400/50 object-cover flex-shrink-0">
+                <div>
+                  <h1 class="text-3xl md:text-5xl font-black heading-font text-white leading-tight tracking-tight">
+                    HEM SmartTrack
+                  </h1>
+                  <p class="text-base md:text-xl text-blue-300 font-semibold leading-snug">
+                    Pendigitalan Pengurusan HEM Bersepadu Berasaskan Data Masa Nyata
+                  </p>
+                </div>
+              </div>
 
               <p class="text-sm text-slate-300 max-w-2xl leading-relaxed">
                 Transformasi pengurusan Hal Ehwal Murid SK Ranggu daripada rekod berselerak kepada ekosistem digital awan berpusat: memantau kehadiran masa nyata, mencegah kerosakan buku rekod disiplin, serta menjana laporan One-Page Report (OPR) terus ke arkib Google Drive sekolah.
@@ -1377,7 +1382,7 @@ Sekian sahaja pembentangan amalan terbaik daripada saya, MOHAMMAD FIKREY BIN ABD
             <div class="flex items-center justify-center gap-4 py-2">
               <img src="./logo-kpm-cutout.png" class="h-14 w-auto drop-shadow" alt="KPM">
               <img src="./logo-skrg-cutout.png" class="h-14 w-auto drop-shadow" alt="SK Ranggu">
-              <img src="./icon-smarttrack-choice-192.png" class="h-12 w-12 rounded-xl shadow-lg" alt="HEM SmartTrack">
+              <img src="./logo_rasmi_hem_smarttrack.jpg" class="h-14 w-14 rounded-2xl shadow-xl border-2 border-cyan-400 object-cover" alt="Logo Rasmi HEM SmartTrack">
             </div>
             <h3 class="text-2xl font-black text-amber-400 heading-font">SK RANGGU MELANGKAH KE HADAPAN</h3>
             <p class="text-base text-slate-200 max-w-xl mx-auto">
@@ -1417,8 +1422,8 @@ Sekian sahaja pembentangan amalan terbaik daripada saya, MOHAMMAD FIKREY BIN ABD
         subtitle: "Satu Portal, Sifar Kehilangan Rekod!",
         content: `
           <div class="space-y-4 animate-fade-in">
-            <span class="text-4xl">🏆</span>
-            <h3 class="text-3xl font-black text-amber-400 heading-font">HEM SMARTTRACK SK RANGGU</h3>
+            <div class="flex justify-center mb-1"><img src="./logo_rasmi_hem_smarttrack.jpg" class="h-20 w-20 rounded-2xl shadow-2xl border-2 border-amber-400/80 object-cover" alt="Logo Rasmi HEM SmartTrack"></div>
+            <h3 class="text-2xl font-black text-amber-400 heading-font">HEM SMARTTRACK SK RANGGU</h3>
             <p class="text-base text-slate-100 max-w-xl mx-auto">
               Penjimatan masa 89% • Sifar rekod disiplin hilang • 100% pemfailan awan selamat.
             </p>
