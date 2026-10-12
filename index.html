@@ -3,89 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HEM SmartTrack - Pembentangan Anugerah Emas Amalan Terbaik Sekolah</title>
+  <title>HEM SmartTrack - Pembentangan Amalan Terbaik SK Ranggu</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   
   <style>
-    :root {
-      --gold-gradient: linear-gradient(135deg, #FDE68A 0%, #F59E0B 50%, #D97706 100%);
-      --emerald-gradient: linear-gradient(135deg, #6EE7B7 0%, #10B981 50%, #047857 100%);
-      --sky-gradient: linear-gradient(135deg, #7DD3FC 0%, #0284C7 50%, #0369A1 100%);
-    }
-
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #060913;
+      background-color: #070B16;
       color: #F8FAFC;
       overflow: hidden;
     }
+    .heading-font { font-family: 'Space Grotesk', sans-serif; }
+    .mono-font { font-family: 'JetBrains Mono', monospace; }
 
-    .heading-font {
-      font-family: 'Space Grotesk', sans-serif;
-    }
-
-    .mono-font {
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    /* Ambient animated mesh backdrop */
     .mesh-glow {
       position: absolute;
       width: 600px;
       height: 600px;
       border-radius: 50%;
-      filter: blur(120px);
-      opacity: 0.15;
+      filter: blur(140px);
+      opacity: 0.18;
       pointer-events: none;
       z-index: 0;
-      animation: floatGlow 12s ease-in-out infinite alternate;
+      animation: floatGlow 14s ease-in-out infinite alternate;
     }
-
     @keyframes floatGlow {
       0% { transform: translate(-10%, -10%) scale(1); }
       100% { transform: translate(20%, 20%) scale(1.15); }
     }
 
-    /* Deluxe Glassmorphism */
     .gold-glass {
-      background: rgba(15, 23, 42, 0.75);
+      background: rgba(15, 23, 42, 0.78);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(251, 191, 36, 0.25);
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
     }
-
     .card-glass {
-      background: rgba(15, 23, 42, 0.65);
+      background: rgba(15, 23, 42, 0.7);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.5);
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
-
     .card-glass:hover {
-      transform: translateY(-4px) scale(1.01);
-      border-color: rgba(56, 189, 248, 0.35);
-      box-shadow: 0 25px 45px -10px rgba(14, 165, 233, 0.15);
-    }
-
-    /* Gold Badge */
-    .badge-gold {
-      background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(217, 119, 6, 0.1));
-      border: 1px solid rgba(245, 158, 11, 0.4);
-      color: #FDE68A;
-      box-shadow: 0 0 15px rgba(245, 158, 11, 0.15);
-    }
-
-    /* Slide Transition Animations */
-    .slide-wrapper {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      max-width: 100vw;
-      max-height: 100vh;
+      transform: translateY(-3px);
+      border-color: rgba(56, 189, 248, 0.4);
     }
 
     .slide {
@@ -94,17 +59,16 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      width: 100%;
-      height: 100%;
-      padding: 5rem 4rem 5.5rem 4rem;
+      width: 100vw;
+      height: 100vh;
+      padding: 4.8rem 4.5rem 5.2rem 4.5rem;
       opacity: 0;
       visibility: hidden;
-      transform: scale(0.96) translateY(12px);
-      transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.45s;
+      transform: scale(0.97) translateY(12px);
+      transition: opacity 0.4s ease-out, transform 0.4s ease-out, visibility 0.4s;
       pointer-events: none;
       z-index: 10;
     }
-
     .slide.active {
       opacity: 1;
       visibility: visible;
@@ -113,48 +77,15 @@
       z-index: 20;
     }
 
-    /* Staggered entrance animation for child items */
-    .slide.active .anim-item {
-      animation: slideUpFade 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
-    }
-
-    .slide.active .anim-delay-1 { animation-delay: 0.08s; }
-    .slide.active .anim-delay-2 { animation-delay: 0.16s; }
-    .slide.active .anim-delay-3 { animation-delay: 0.24s; }
-    .slide.active .anim-delay-4 { animation-delay: 0.32s; }
-
-    @keyframes slideUpFade {
-      from {
-        opacity: 0;
-        transform: translateY(18px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Pulsing Live Dot */
-    .pulse-dot {
-      animation: pulseGlow 1.8s infinite;
-    }
-
+    .pulse-dot { animation: pulseGlow 1.8s infinite; }
     @keyframes pulseGlow {
       0%, 100% { opacity: 1; transform: scale(1); }
       50% { opacity: 0.4; transform: scale(0.85); }
     }
 
-    /* PRINT STYLES FOR EXACT 16:9 PDF */
     @media print {
-      @page {
-        size: landscape;
-        margin: 0;
-      }
-      body {
-        background-color: #060913 !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-      }
+      @page { size: landscape; margin: 0; }
+      body { background-color: #070B16 !important; -webkit-print-color-adjust: exact !important; }
       .slide {
         display: flex !important;
         position: relative !important;
@@ -162,44 +93,35 @@
         visibility: visible !important;
         transform: none !important;
         page-break-after: always !important;
-        page-break-inside: avoid !important;
         width: 100vw !important;
         height: 100vh !important;
-        padding: 3.5rem 4rem !important;
-        box-sizing: border-box !important;
+        padding: 3rem 4rem !important;
       }
-      .no-print, header, footer, #notesDrawer, #toastBox {
-        display: none !important;
-      }
+      header, footer, #notesDrawer, #toastBox { display: none !important; }
     }
   </style>
 </head>
-<body class="bg-[#060913] text-slate-100 select-none">
+<body class="bg-[#070B16] text-slate-100 select-none">
 
-  <!-- Background Ambient Glows -->
   <div class="mesh-glow bg-sky-500 top-0 left-10"></div>
-  <div class="mesh-glow bg-amber-500 bottom-0 right-10" style="animation-delay: -6s;"></div>
-  <div class="mesh-glow bg-emerald-500 top-1/2 left-1/3" style="animation-delay: -3s;"></div>
+  <div class="mesh-glow bg-amber-500 bottom-0 right-10" style="animation-delay: -7s;"></div>
+  <div class="mesh-glow bg-emerald-500 top-1/2 left-1/3" style="animation-delay: -3.5s;"></div>
 
-  <!-- Particle Canvas -->
-  <canvas id="particleCanvas" class="absolute inset-0 pointer-events-none z-0"></canvas>
-
-  <!-- ==================== HEADER KORPORAT ATAS ==================== -->
-  <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-3 bg-[#060913]/85 backdrop-blur-xl border-b border-white/10 no-print">
+  <!-- Header Atas -->
+  <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-3 bg-[#070B16]/85 backdrop-blur-xl border-b border-white/10">
     <div class="flex items-center space-x-3">
-      <div class="badge-gold px-3 py-1 rounded-full text-xs font-black tracking-wider flex items-center gap-1.5 uppercase">
-        <span class="text-amber-400">🏆</span>
-        <span>Penyertaan Anugerah Emas TS25</span>
+      <div class="px-3 py-1 rounded-full text-xs font-black tracking-wider flex items-center gap-1.5 uppercase bg-amber-500/15 border border-amber-500/40 text-amber-300">
+        <span>🏆</span>
+        <span>Amalan Terbaik Sekolah Rendah 2026</span>
       </div>
       <span class="text-white/20">|</span>
-      <span class="text-xs font-semibold text-slate-300">Penanda Arasan Amalan Terbaik Sekolah Rendah 2026</span>
+      <span class="text-xs font-semibold text-slate-300">Hal Ehwal Murid • SK Ranggu, Tawau</span>
     </div>
 
-    <!-- Actions & Controls -->
     <div class="flex items-center space-x-3">
-      <!-- 10-Minute Video Timer -->
+      <!-- Video Timer -->
       <div class="flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full">
-        <span class="text-[11px] text-slate-400 font-medium">Masa Video:</span>
+        <span class="text-[11px] text-slate-400 font-medium">Masa:</span>
         <span id="speechTimer" class="mono-font text-xs font-bold text-sky-400">00:00</span>
         <button onclick="toggleTimer()" id="timerBtn" class="text-[10px] px-2 py-0.5 rounded font-bold bg-sky-500/20 text-sky-300 hover:bg-sky-500/40 transition">
           Mula
@@ -207,280 +129,300 @@
       </div>
 
       <!-- Slide Counter -->
-      <div id="slideCounter" class="px-3.5 py-1 text-xs font-extrabold tracking-widest text-white rounded-full bg-white/10 mono-font">
+      <div id="slideCounter" class="px-3 py-1 text-xs font-extrabold tracking-widest text-white rounded-full bg-white/10 mono-font">
         01 / 10
       </div>
 
       <!-- Sound Toggle -->
-      <button onclick="toggleSound()" id="soundBtn" class="px-2.5 py-1 text-xs font-medium text-slate-300 hover:text-white rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 transition" title="Bunyi Animasi">
+      <button onclick="toggleSound()" id="soundBtn" class="px-2.5 py-1 text-xs text-slate-300 hover:text-white rounded-lg bg-white/5 border border-white/10 transition">
         🔊 On
       </button>
 
-      <!-- Presenter Notes -->
-      <button onclick="toggleNotes()" class="flex items-center gap-1.5 px-3 py-1 text-xs font-bold text-sky-300 hover:text-white rounded-lg bg-sky-500/10 hover:bg-sky-500/20 border border-sky-500/30 transition">
-        <span>🎙️ Skrip (N)</span>
-      </button>
-
-      <!-- Print to PDF -->
-      <button onclick="window.print()" class="flex items-center gap-1.5 px-3.5 py-1 text-xs font-black text-slate-950 bg-gradient-to-r from-amber-300 to-amber-500 hover:from-amber-200 hover:to-amber-400 rounded-lg transition shadow-lg shadow-amber-500/20">
-        <span>🖨️ Cetak PDF Emas</span>
+      <!-- Presenter Script Button -->
+      <button onclick="toggleNotes()" class="flex items-center gap-1.5 px-3 py-1 text-xs font-bold text-amber-300 hover:text-white rounded-lg bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 transition">
+        <span>🎙️ Skrip Nota (N)</span>
       </button>
 
       <!-- Fullscreen -->
-      <button onclick="toggleFullScreen()" class="px-2.5 py-1 text-xs text-slate-300 hover:text-white rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 transition" title="Skrin Penuh (F)">
+      <button onclick="toggleFullScreen()" class="px-2.5 py-1 text-xs text-slate-300 hover:text-white rounded-lg bg-white/5 border border-white/10 transition" title="Skrin Penuh (F)">
         ⛶ F
       </button>
     </div>
   </header>
 
-  <!-- ==================== SLIDE WRAPPER ==================== -->
-  <main class="slide-wrapper">
+  <!-- Container Slaid -->
+  <main class="relative w-screen h-screen">
 
-    <!-- ==========================================
-         SLAID 1: TAJUK UTAMA (ANUGERAH EMAS)
-         ========================================== -->
+    <!-- ==================== SLAID 1: TAJUK UTAMA & PROFIL PEMBANGUN ==================== -->
     <section class="slide active" data-slide="1">
-      <div class="flex items-center justify-between anim-item">
+      <div class="flex items-center justify-between">
         <div class="flex items-center gap-2">
           <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-sky-500/15 text-sky-300 border border-sky-500/30">
-            Program Transformasi Sekolah 2025 (TS25)
+            Program Transformasi Sekolah (TS25)
           </span>
           <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-            Inovasi Digital Pengurusan HEM
+            Inovasi Pengurusan Digital HEM
           </span>
         </div>
         <div class="text-right">
           <div class="text-xs font-black tracking-widest text-amber-400 uppercase mono-font">SK RANGGU, TAWAU</div>
-          <div class="text-[11px] text-slate-400">Kategori Guru Sekolah Rendah (Hal Ehwal Murid)</div>
+          <div class="text-[11px] text-slate-400">Penanda Arasan Amalan Terbaik 2026</div>
         </div>
       </div>
 
-      <div class="my-auto py-2">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-gradient-to-r from-amber-500/20 via-sky-500/20 to-emerald-500/20 border border-amber-400/30 text-amber-300 text-xs font-black tracking-wide mb-3 anim-item anim-delay-1">
-          <span>✨</span> AMALAN TERBAIK: PENGURUSAN DIGITAL & KEMENJADIAN MURID
+      <div class="grid grid-cols-12 gap-8 my-auto items-center">
+        <!-- Left: Details -->
+        <div class="col-span-8">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-gradient-to-r from-amber-500/20 to-sky-500/20 border border-amber-400/30 text-amber-300 text-xs font-black tracking-wide mb-3">
+            <span>✨</span> KATEGORI: HAL EHWAL MURID & KEMENJADIAN MURID
+          </div>
+
+          <h1 class="text-5xl lg:text-6xl font-black tracking-tight heading-font leading-none text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-amber-200">
+            HEM SmartTrack
+          </h1>
+
+          <p class="text-2xl text-emerald-400 font-bold mt-2 heading-font">
+            Pendigitalan Pengurusan HEM Bersepadu Berasaskan Data Masa Nyata
+          </p>
+
+          <p class="text-sm text-slate-300 mt-3 leading-relaxed max-w-2xl">
+            Menghapuskan isu data kehadiran WhatsApp yang berterabur, mencegah insiden buku disiplin fizikal dikoyak, dan menyusun laporan pemantauan Guru Penyayang serta surat rasmi terus ke Google Drive Penolong Kanan HEM.
+          </p>
+
+          <!-- 3 Metrik Utama -->
+          <div class="grid grid-cols-3 gap-4 mt-6 max-w-2xl">
+            <div class="card-glass p-3.5 rounded-xl border-l-4 border-amber-400">
+              <div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Semakan Kehadiran</div>
+              <div class="text-xl font-black text-white mt-0.5 heading-font"><span class="counter-num" data-target="8">0</span> Minit Sahaja</div>
+              <div class="text-[10px] text-amber-300">Ganti grup WhatsApp</div>
+            </div>
+
+            <div class="card-glass p-3.5 rounded-xl border-l-4 border-emerald-400">
+              <div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Integriti Disiplin</div>
+              <div class="text-xl font-black text-white mt-0.5 heading-font"><span class="counter-num" data-target="100">0</span>% Kalis Sabotaj</div>
+              <div class="text-[10px] text-emerald-300">Tiada buku koyak</div>
+            </div>
+
+            <div class="card-glass p-3.5 rounded-xl border-l-4 border-sky-400">
+              <div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Pemilikan Data</div>
+              <div class="text-xl font-black text-white mt-0.5 heading-font">Awan Rasmi</div>
+              <div class="text-[10px] text-sky-300">Drive PK HEM Pn. Komala</div>
+            </div>
+          </div>
         </div>
-        
-        <h1 class="text-5xl lg:text-7xl font-black tracking-tight heading-font leading-none text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-amber-200 anim-item anim-delay-1">
-          HEM SmartTrack
-        </h1>
-        
-        <p class="text-2xl lg:text-3xl text-emerald-400 font-bold mt-2 heading-font tracking-tight anim-item anim-delay-2">
-          Pendigitalan Pengurusan HEM Bersepadu Berasaskan Data Masa Nyata
-        </p>
 
-        <p class="text-base text-slate-300 max-w-3xl mt-4 leading-relaxed font-normal anim-item anim-delay-2">
-          Mentransformasi pengurusan data murid daripada kaedah borang manual yang lambat dan berselerak kepada platform awan mudah alih masa nyata yang telus, pantas, dan berimpak tinggi.
-        </p>
-
-        <!-- 3 Highlight Metric Cards with Live Countups -->
-        <div class="grid grid-cols-3 gap-5 mt-7 max-w-3xl anim-item anim-delay-3">
-          <div class="gold-glass p-4 rounded-2xl border-l-4 border-amber-400">
-            <div class="text-[11px] text-slate-400 uppercase font-bold tracking-wider">Masa Tindakan Semakan</div>
-            <div class="text-2xl font-black text-white mt-1 heading-font"><span class="counter-num" data-target="8">0</span> Minit Sahaja</div>
-            <div class="text-[11px] text-amber-300 mt-0.5">Selesai sebelum 8:30 pagi</div>
-          </div>
-
-          <div class="card-glass p-4 rounded-2xl border-l-4 border-emerald-400">
-            <div class="text-[11px] text-slate-400 uppercase font-bold tracking-wider">Integriti & Akauntabiliti</div>
-            <div class="text-2xl font-black text-white mt-1 heading-font"><span class="counter-num" data-target="100">0</span>% Telus</div>
-            <div class="text-[11px] text-emerald-300 mt-0.5">Log masa & identiti pengisi</div>
-          </div>
-
-          <div class="card-glass p-4 rounded-2xl border-l-4 border-sky-400">
-            <div class="text-[11px] text-slate-400 uppercase font-bold tracking-wider">Kos Pelaksanaan</div>
-            <div class="text-2xl font-black text-white mt-1 heading-font">RM 0.00 (Sifar)</div>
-            <div class="text-[11px] text-sky-300 mt-0.5">Google Workspace sedia ada</div>
+        <!-- Right: Developer & App Photo Showcase -->
+        <div class="col-span-4 flex flex-col items-center justify-center">
+          <div class="gold-glass p-4 rounded-3xl relative w-full max-w-[280px] text-center border-2 border-amber-400/40 shadow-2xl shadow-amber-500/10">
+            <div class="w-32 h-24 mx-auto rounded-2xl overflow-hidden border-2 border-amber-400/60 shadow-lg relative bg-slate-900 mb-3">
+              <img src="data:image/png;base64,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" alt="Pembangun Sistem HEM SmartTrack" class="w-full h-full object-cover">
+            </div>
+            <div class="text-sm font-black text-white">Pembangun Sistem</div>
+            <div class="text-xs text-amber-300 font-semibold">SK Ranggu, Tawau</div>
+            <div class="mt-3 pt-2.5 border-t border-white/10 text-[11px] text-slate-300 text-left space-y-1">
+              <div class="flex items-center gap-1.5">
+                <span class="text-emerald-400">📁</span>
+                <span><b>Storan Induk:</b> Drive PK HEM</span>
+              </div>
+              <div class="text-[10px] text-slate-400 pl-5">Pn. Komala Joseph (PK HEM)</div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="flex items-center justify-between border-t border-white/10 pt-3 text-xs text-slate-400 anim-item anim-delay-4">
-        <div>Pembentang: <span class="text-white font-bold">Pasukan Inovasi HEM SK Ranggu</span></div>
+      <div class="flex items-center justify-between border-t border-white/10 pt-3 text-xs text-slate-400">
+        <div>Pembangun Inovasi: <span class="text-white font-bold">Guru Inovasi SK Ranggu</span> | Pemilik Storan: <span class="text-amber-300 font-bold">Pn. Komala Joseph (PK HEM)</span></div>
         <div class="flex items-center gap-3">
-          <span class="text-emerald-400 font-semibold">📱 Format PWA (Sedia Pelbagai Peranti)</span>
+          <span class="text-emerald-400 font-semibold">📱 Aplikasi Web PWA</span>
           <span class="text-white/20">|</span>
           <span class="text-amber-300 font-bold">Pemberat Impak: 50 Markah</span>
         </div>
       </div>
     </section>
 
-    <!-- ==========================================
-         SLAID 2: LATAR BELAKANG / ISU SEBENAR
-         ========================================== -->
+    <!-- ==================== SLAID 2: ISU SEBENAR (BUKAN TEORI!) ==================== -->
     <section class="slide" data-slide="2">
-      <div class="anim-item">
+      <div>
         <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-rose-500/15 text-rose-400 border border-rose-500/30 mb-1 inline-block">
-          02. Analisis Masalah & Jurang Operasi
+          02. Isu & Realiti Sebenar Sebelum Inovasi
         </span>
-        <h2 class="text-4xl font-black heading-font text-white">Isu & Kekangan Pengurusan Manual Terdahulu</h2>
-        <p class="text-slate-400 text-sm mt-0.5">4 Titik kelemahan utama yang menjejaskan kecekapan pengurusan harian hal ehwal murid.</p>
+        <h2 class="text-4xl font-black heading-font text-white">Mengapa Pengurusan Terdahulu Menjejaskan Operasi HEM?</h2>
+        <p class="text-slate-400 text-sm mt-0.5">Masalah sebenar yang berlaku di sekolah sebelum HEM SmartTrack diwujudkan.</p>
       </div>
 
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-5 my-auto">
-        <div class="card-glass p-5 rounded-2xl border-t-4 border-rose-500 anim-item anim-delay-1">
-          <div class="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center font-black text-base mb-3 mono-font">01</div>
-          <h3 class="text-base font-bold text-white mb-2">Rekod Berselerak</h3>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Data kehadiran, catatan disiplin, dan keberadaan guru dicatat dalam pelbagai buku log atau kertas berasingan yang sukar dirujuk silang.
-          </p>
-          <div class="mt-4 pt-3 border-t border-white/5 text-[11px] text-rose-300 font-semibold flex items-center gap-1">
-            <span>⚠️</span> Data sukar dikesan pantas
+      <div class="grid grid-cols-4 gap-4 my-auto">
+        <!-- Isu 1: WhatsApp -->
+        <div class="card-glass p-5 rounded-2xl border-t-4 border-rose-500 flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center font-black text-base mb-3 mono-font">01</div>
+            <h3 class="text-base font-bold text-white mb-1.5">Kehadiran WhatsApp Berterabur</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Guru mengisi kehadiran dalam grup WhatsApp. Memang nampak siapa belum isi, <b>tetapi rekod berterabur</b>, mesej tenggelam, dan pentadbir terpaksa mengira peratusan secara manual setiap pagi.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-white/5 text-[11px] text-rose-300 font-semibold">
+            ⚠️ Mesej tenggelam & data hilang
           </div>
         </div>
 
-        <div class="card-glass p-5 rounded-2xl border-t-4 border-amber-500 anim-item anim-delay-2">
-          <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-black text-base mb-3 mono-font">02</div>
-          <h3 class="text-base font-bold text-white mb-2">Kelewatan Masa Kutipan</h3>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Guru bertugas terpaksa berjalan mengutip slip kehadiran dari kelas ke kelas. Mengambil masa 30 hingga 45 minit setiap pagi.
-          </p>
-          <div class="mt-4 pt-3 border-t border-white/5 text-[11px] text-amber-300 font-semibold flex items-center gap-1">
-            <span>⏱️</span> Membazir waktu PdP guru
+        <!-- Isu 2: Buku Disiplin Dikoyak -->
+        <div class="card-glass p-5 rounded-2xl border-t-4 border-amber-500 flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-black text-base mb-3 mono-font">02</div>
+            <h3 class="text-base font-bold text-white mb-1.5">Buku Disiplin Pernah Dikoyak!</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Sebelum ini menggunakan buku rekod fizikal. Terdapat insiden <b>buku disiplin dikoyak</b> sehingga rekod salah laku hilang dan siasatan murid tidak dapat dibuktikan dengan kukuh.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-white/5 text-[11px] text-amber-300 font-semibold">
+            🔥 Rekod fizikal terdedah sabotaj
           </div>
         </div>
 
-        <div class="card-glass p-5 rounded-2xl border-t-4 border-purple-500 anim-item anim-delay-3">
-          <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-black text-base mb-3 mono-font">03</div>
-          <h3 class="text-base font-bold text-white mb-2">Titik Buta Pentadbir</h3>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Pentadbir tidak dapat mengetahui kelas mana yang belum menghantar kehadiran secara langsung. Tiada amaran masa nyata.
-          </p>
-          <div class="mt-4 pt-3 border-t border-white/5 text-[11px] text-purple-300 font-semibold flex items-center gap-1">
-            <span>🔍</span> Intervensi murid lambat
+        <!-- Isu 3: Telegram Bercampur -->
+        <div class="card-glass p-5 rounded-2xl border-t-4 border-purple-500 flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-black text-base mb-3 mono-font">03</div>
+            <h3 class="text-base font-bold text-white mb-1.5">Laporan Telegram Bercampur</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Laporan pemantauan dan foto Amalan Guru Penyayang dihantar ke Telegram. <b>Bercampur dengan urusan lain</b>, gambar tertimbun dan sukar dijana menjadi laporan OPR rasmi.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-white/5 text-[11px] text-purple-300 font-semibold">
+            📁 Laporan tidak berstruktur
           </div>
         </div>
 
-        <div class="card-glass p-5 rounded-2xl border-t-4 border-sky-500 anim-item anim-delay-4">
-          <div class="w-10 h-10 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center font-black text-base mb-3 mono-font">04</div>
-          <h3 class="text-base font-bold text-white mb-2">Integriti & Audit Lemah</h3>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Sukar mengesahkan siapa guru yang membuat catatan dan pada jam berapa. Laporan bergambar tiada sistem arkib awan teratur.
-          </p>
-          <div class="mt-4 pt-3 border-t border-white/5 text-[11px] text-sky-300 font-semibold flex items-center gap-1">
-            <span>📁</span> Ketiadaan bukti digital sah
+        <!-- Isu 4: Surat-Menyurat Berselerak -->
+        <div class="card-glass p-5 rounded-2xl border-t-4 border-sky-500 flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center font-black text-base mb-3 mono-font">04</div>
+            <h3 class="text-base font-bold text-white mb-1.5">Surat-Menyurat Tidak Terpusat</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Surat amaran ketidakhadiran dan dokumen HEM disimpan dalam telefon masing-masing tanpa arkib terpusat di Google Drive Penolong Kanan HEM.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-white/5 text-[11px] text-sky-300 font-semibold">
+            📂 Sukar pengauditan fail HEM
           </div>
         </div>
       </div>
 
-      <div class="gold-glass p-3.5 rounded-xl flex items-center justify-between text-xs text-amber-200 anim-item anim-delay-4">
+      <div class="gold-glass p-3.5 rounded-xl flex items-center justify-between text-xs text-amber-200">
         <span class="font-bold flex items-center gap-1.5">
-          <span>💡</span> Impak Masalah:
+          <span>💡</span> Rumusan Jurang:
         </span>
-        <span>Pengurusan manual menyebabkan pentadbir bertindak secara REAKTIF dan bukannya PROAKTIF berasaskan data tepat.</span>
+        <span>Sistem lama di WhatsApp & Telegram menyebabkan rekod berterabur, manakala buku fizikal mudah rosak dan hilang bukti.</span>
       </div>
     </section>
 
-    <!-- ==========================================
-         SLAID 3: OBJEKTIF (SMART GOALS)
-         ========================================== -->
+    <!-- ==================== SLAID 3: OBJEKTIF AMALAN TERBAIK ==================== -->
     <section class="slide" data-slide="3">
-      <div class="anim-item">
+      <div>
         <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 mb-1 inline-block">
-          03. Matlamat & Sasaran Inovasi
+          03. Objektif & Sasaran Amalan Terbaik
         </span>
         <h2 class="text-4xl font-black heading-font text-white">Objektif Pelaksanaan HEM SmartTrack</h2>
-        <p class="text-slate-400 text-sm mt-0.5">Menjawab terus kepada isu operasi dengan sasaran boleh ukur (SMART).</p>
+        <p class="text-slate-400 text-sm mt-0.5">Menyelesaikan punca masalah secara tuntas melalui penyelesaian digital bersepadu.</p>
       </div>
 
       <div class="grid grid-cols-2 gap-5 my-auto">
-        <div class="card-glass p-5 rounded-2xl flex items-start gap-4 border-l-4 border-sky-400 anim-item anim-delay-1">
-          <div class="w-12 h-12 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center font-black text-xl shrink-0 mono-font">01</div>
-          <div>
-            <h3 class="text-base font-bold text-white">Pemusatan Ekosistem Tunggal</h3>
-            <p class="text-xs text-slate-300 mt-1 leading-relaxed">
-              Mengintegrasikan kehadiran harian kelas, keberadaan guru/AKP, rekod disiplin, dan laporan keselamatan dalam satu pangkalan data awan terpusat tanpa pertindihan borang.
-            </p>
+        <div class="card-glass p-5 rounded-2xl border-l-4 border-sky-400">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-9 h-9 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold mono-font">01</div>
+            <h3 class="text-base font-bold text-white">Pemusatan Rekod Kehadiran (Ganti WhatsApp)</h3>
           </div>
+          <p class="text-xs text-slate-300 leading-relaxed pl-12">
+            Menggantikan pengisian kehadiran di grup WhatsApp dengan papan pemuka digital yang memaparkan status selesai/belum selesai secara automatik serta pengiraan KPI 96% tanpa kiraan manual.
+          </p>
         </div>
 
-        <div class="card-glass p-5 rounded-2xl flex items-start gap-4 border-l-4 border-emerald-400 anim-item anim-delay-2">
-          <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-black text-xl shrink-0 mono-font">02</div>
-          <div>
-            <h3 class="text-base font-bold text-white">Pemantauan Masa Nyata (Real-Time)</h3>
-            <p class="text-xs text-slate-300 mt-1 leading-relaxed">
-              Memaparkan status langsung "Selesai" (Hijau) dan "Belum Selesai" (Merah) secara dinamik bagi memendekkan tempoh semakan kehadiran daripada 45 minit kepada bawah 10 minit.
-            </p>
+        <div class="card-glass p-5 rounded-2xl border-l-4 border-amber-400">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-9 h-9 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold mono-font">02</div>
+            <h3 class="text-base font-bold text-white">Sistem Disiplin Kalis Sabotaj (Cegah Buku Koyak)</h3>
           </div>
+          <p class="text-xs text-slate-300 leading-relaxed pl-12">
+            Mewujudkan rekod digital yang kekal dan selamat melalui aliran telus: <b>Guru Pelapor ➔ Guru Disiplin ➔ Pentadbir</b> lengkap dengan muat naik foto bukti salah laku/tindakan.
+          </p>
         </div>
 
-        <div class="card-glass p-5 rounded-2xl flex items-start gap-4 border-l-4 border-purple-400 anim-item anim-delay-3">
-          <div class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-black text-xl shrink-0 mono-font">03</div>
-          <div>
-            <h3 class="text-base font-bold text-white">Akauntabiliti & Integriti Rekod</h3>
-            <p class="text-xs text-slate-300 mt-1 leading-relaxed">
-              Merekodkan cap masa (*timestamp*) dan nama pengisi secara automatik bagi setiap transaksi maklumat untuk semakan audit pengurusan sekolah.
-            </p>
+        <div class="card-glass p-5 rounded-2xl border-l-4 border-purple-400">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-9 h-9 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold mono-font">03</div>
+            <h3 class="text-base font-bold text-white">Penjanaan OPR Pemantauan Guru Penyayang</h3>
           </div>
+          <p class="text-xs text-slate-300 leading-relaxed pl-12">
+            Menyediakan butang muat naik gambar aktiviti Guru Penyayang di pintu pagar dan rondaan sekeliling sekolah untuk menjana <i>One-Page Report</i> (OPR) bergambar secara automatik.
+          </p>
         </div>
 
-        <div class="card-glass p-5 rounded-2xl flex items-start gap-4 border-l-4 border-amber-400 anim-item anim-delay-4">
-          <div class="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-black text-xl shrink-0 mono-font">04</div>
-          <div>
-            <h3 class="text-base font-bold text-white">Analisis Pintar & Arkib Automatik</h3>
-            <p class="text-xs text-slate-300 mt-1 leading-relaxed">
-              Menghapuskan pengiraan manual KPI 96% kehadiran KPM serta menjana laporan bergambar (OPR) yang tersimpan kemas dalam folder Google Drive rasmi sekolah.
-            </p>
+        <div class="card-glass p-5 rounded-2xl border-l-4 border-emerald-400">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-9 h-9 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold mono-font">04</div>
+            <h3 class="text-base font-bold text-white">Arkib Surat Rasmi di Drive PK HEM</h3>
           </div>
+          <p class="text-xs text-slate-300 leading-relaxed pl-12">
+            Memusatkan pemfailan surat-menyurat dan dokumen HEM terus ke dalam <b>Google Drive Penolong Kanan HEM, Puan Komala Joseph</b> bagi memastikan integriti arkib pentadbiran sekolah.
+          </p>
         </div>
       </div>
 
-      <div class="border-t border-white/10 pt-3 flex items-center justify-between text-xs text-slate-400 anim-item anim-delay-4">
-        <span class="text-sky-300">🎯 Sasaran Utama: Pematuhan pengisian kehadiran 100% sebelum jam 8:30 pagi setiap hari persekolahan.</span>
-        <span class="text-emerald-400 font-bold">Kemenjadian Murid Bermula Daripada Pengurusan Tuntas</span>
+      <div class="border-t border-white/10 pt-3 flex items-center justify-between text-xs text-slate-400">
+        <span class="text-amber-300 font-semibold">🎯 Sasaran: 100% rekod HEM disimpan selamat tanpa risiko hilang, koyak atau tenggelam dalam sembang media sosial.</span>
+        <span class="text-emerald-400 font-bold">Penyelesaian Digital Berintegriti</span>
       </div>
     </section>
 
-    <!-- ==========================================
-         SLAID 4: KUMPULAN SASARAN
-         ========================================== -->
+    <!-- ==================== SLAID 4: KUMPULAN SASARAN & RANTAIAN ==================== -->
     <section class="slide" data-slide="4">
-      <div class="anim-item">
+      <div>
         <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-purple-500/15 text-purple-400 border border-purple-500/30 mb-1 inline-block">
-          04. Pemegang Taruh & Penerima Manfaat
+          04. Rantaian Pengurusan Warga Sekolah
         </span>
-        <h2 class="text-4xl font-black heading-font text-white">Kumpulan Sasaran Amalan Terbaik</h2>
-        <p class="text-slate-400 text-sm mt-0.5">Pendekatan menyeluruh melibatkan seluruh warga sekolah ke arah satu matlamat.</p>
+        <h2 class="text-4xl font-black heading-font text-white">Kumpulan Sasaran & Peranan Pelaksana</h2>
+        <p class="text-slate-400 text-sm mt-0.5">Menghubungkan setiap lapisan warga SK Ranggu dalam satu ekosistem pengurusan HEM.</p>
       </div>
 
       <div class="grid grid-cols-3 gap-5 my-auto">
-        <div class="card-glass p-5 rounded-2xl border-t-2 border-sky-400 anim-item anim-delay-1">
-          <div class="text-sky-400 font-bold text-xs tracking-wider uppercase mb-1 mono-font">01. Pentadbir Sekolah</div>
-          <h3 class="text-base font-bold text-white mb-2">Guru Besar & PK HEM</h3>
+        <div class="card-glass p-5 rounded-2xl border-t-2 border-amber-400">
+          <div class="text-amber-400 font-bold text-xs tracking-wider uppercase mb-1 mono-font">01. Pentadbir & Pemilik Drive</div>
+          <h3 class="text-base font-bold text-white mb-2">Guru Besar & PK HEM (Pn. Komala)</h3>
           <ul class="text-xs text-slate-300 space-y-2">
-            <li class="flex items-start gap-2"><span>•</span> Papan pemuka masa nyata kehadiran & disiplin murid.</li>
-            <li class="flex items-start gap-2"><span>•</span> Membuat keputusan berasaskan data harian yang sahih.</li>
-            <li class="flex items-start gap-2"><span>•</span> Menjana laporan sedia cetak untuk semakan PPD dan JPN.</li>
+            <li>• Pemilik akaun Google Drive utama pengurusan HEM.</li>
+            <li>• Pantau status kehadiran dan laporan disiplin murid.</li>
+            <li>• Mengesahkan surat-menyurat dan OPR bertugas.</li>
           </ul>
         </div>
 
-        <div class="card-glass p-5 rounded-2xl border-t-2 border-emerald-400 anim-item anim-delay-2">
-          <div class="text-emerald-400 font-bold text-xs tracking-wider uppercase mb-1 mono-font">02. Barisan Pelaksana</div>
+        <div class="card-glass p-5 rounded-2xl border-t-2 border-sky-400">
+          <div class="text-sky-400 font-bold text-xs tracking-wider uppercase mb-1 mono-font">02. Barisan Pelaksana Harian</div>
           <h3 class="text-base font-bold text-white mb-2">Guru Bertugas & Guru Kelas</h3>
           <ul class="text-xs text-slate-300 space-y-2">
-            <li class="flex items-start gap-2"><span>•</span> Pengisian pantas di telefon pintar dalam tempoh 1 minit.</li>
-            <li class="flex items-start gap-2"><span>•</span> Tiada lagi pengisian borang kertas berulang kali.</li>
-            <li class="flex items-start gap-2"><span>•</span> Mengenal pasti murid ponteng sebelum sesi PdP bermula.</li>
+            <li>• Pengisian kehadiran kelas pantas sebelum jam 8:30 pagi.</li>
+            <li>• Pelaksanaan Guru Penyayang dan rondaan kawasan.</li>
+            <li>• Ambil foto laporan terus dari telefon pintar.</li>
           </ul>
         </div>
 
-        <div class="card-glass p-5 rounded-2xl border-t-2 border-amber-400 anim-item anim-delay-3">
-          <div class="text-amber-400 font-bold text-xs tracking-wider uppercase mb-1 mono-font">03. Sokongan Operasi</div>
-          <h3 class="text-base font-bold text-white mb-2">Guru Kaunseling & AKP</h3>
+        <div class="card-glass p-5 rounded-2xl border-t-2 border-emerald-400">
+          <div class="text-emerald-400 font-bold text-xs tracking-wider uppercase mb-1 mono-font">03. Pasukan Disiplin & Bimbingan</div>
+          <h3 class="text-base font-bold text-white mb-2">Guru Pelapor, Disiplin & Kaunseling</h3>
           <ul class="text-xs text-slate-300 space-y-2">
-            <li class="flex items-start gap-2"><span>•</span> Amaran murid tidak hadir berturut-turut untuk sesi bimbingan.</li>
-            <li class="flex items-start gap-2"><span>•</span> Log kehadiran staf sokongan & keselamatan blok sekolah.</li>
-            <li class="flex items-start gap-2"><span>•</span> Pencegahan awal sebelum berlakunya keciciran murid.</li>
+            <li>• Guru Pelapor lapor kes salah laku dengan bukti gambar.</li>
+            <li>• Guru Disiplin ambil tindakan tanpa bimbang buku koyak.</li>
+            <li>• Intervensi kaunseling segera untuk murid berisiko.</li>
           </ul>
         </div>
       </div>
 
-      <div class="gold-glass p-4 rounded-2xl flex items-center justify-between anim-item anim-delay-4">
+      <div class="gold-glass p-4 rounded-2xl flex items-center justify-between">
         <div class="flex items-center gap-4">
           <div class="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center text-2xl font-black">🎓</div>
           <div>
-            <div class="text-xs font-bold uppercase text-amber-400 tracking-wider">Penerima Manfaat Terbesar:</div>
-            <h4 class="text-lg font-bold text-white">Semua Murid Sekolah Rendah</h4>
-            <p class="text-xs text-slate-300">Kebajikan murid terjaga, keselamatan terpelihara, dan hak pembelajaran dijamin.</p>
+            <div class="text-xs font-bold uppercase text-amber-400 tracking-wider">Penerima Manfaat Utama:</div>
+            <h4 class="text-lg font-bold text-white">Semua Murid SK Ranggu</h4>
+            <p class="text-xs text-slate-300">Disiplin terbimbing, kebajikan terpelihara, dan persekitaran sekolah selamat dan penyayang.</p>
           </div>
         </div>
         <div class="text-right mono-font">
@@ -490,373 +432,373 @@
       </div>
     </section>
 
-    <!-- ==========================================
-         SLAID 5: PERANCANGAN & STRATEGI (PDCA)
-         ========================================== -->
+    <!-- ==================== SLAID 5: PERANCANGAN & STRATEGI ==================== -->
     <section class="slide" data-slide="5">
-      <div class="anim-item">
+      <div>
         <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-sky-500/15 text-sky-400 border border-sky-500/30 mb-1 inline-block">
           05. Metodologi Pelaksanaan
         </span>
-        <h2 class="text-4xl font-black heading-font text-white">Perancangan & Strategi (Kitaran PDCA)</h2>
-        <p class="text-slate-400 text-sm mt-0.5">Pendekatan berperingkat memastikan kelancaran adopsi teknologi tanpa membebankan guru.</p>
+        <h2 class="text-4xl font-black heading-font text-white">Perancangan & Strategi Pembangunan (PDCA)</h2>
+        <p class="text-slate-400 text-sm mt-0.5">Menyusun peralihan daripada amalan manual dan media sosial ke portal terpusat.</p>
       </div>
 
       <div class="grid grid-cols-4 gap-4 my-auto">
-        <div class="card-glass p-5 rounded-2xl border-t-4 border-sky-400 anim-item anim-delay-1">
+        <div class="card-glass p-5 rounded-2xl border-t-4 border-sky-400">
           <span class="px-2.5 py-0.5 rounded text-[11px] font-bold bg-sky-500/20 text-sky-300 mb-2 inline-block mono-font">FASA 1: PLAN</span>
-          <h3 class="text-base font-bold text-white mb-2">Analisis & Reka Bentuk</h3>
+          <h3 class="text-base font-bold text-white mb-2">Audit Isu Sebenar</h3>
           <ul class="text-xs text-slate-300 space-y-1.5">
-            <li>• Temu bual PK HEM & guru bertugas.</li>
-            <li>• Analisis aliran kerja borang manual.</li>
-            <li>• Pemetaan struktur pangkalan data.</li>
+            <li>• Analisis kelemahan grup WhatsApp kehadiran.</li>
+            <li>• Mengkaji insiden buku disiplin fizikal dikoyak.</li>
+            <li>• Perbincangan bersama PK HEM Pn. Komala Joseph.</li>
           </ul>
         </div>
 
-        <div class="card-glass p-5 rounded-2xl border-t-4 border-emerald-400 anim-item anim-delay-2">
+        <div class="card-glass p-5 rounded-2xl border-t-4 border-emerald-400">
           <span class="px-2.5 py-0.5 rounded text-[11px] font-bold bg-emerald-500/20 text-emerald-300 mb-2 inline-block mono-font">FASA 2: DO</span>
-          <h3 class="text-base font-bold text-white mb-2">Pembangunan & Rintis</h3>
+          <h3 class="text-base font-bold text-white mb-2">Pembangunan Sistem</h3>
           <ul class="text-xs text-slate-300 space-y-1.5">
-            <li>• Pembangunan antara muka mesra telefon (PWA).</li>
-            <li>• Ujian rintis bersama 6 kelas terpilih.</li>
-            <li>• Pautan arkib automatik Google Drive.</li>
+            <li>• Reka bentuk aplikasi mudah alih (PWA) SK Ranggu.</li>
+            <li>• Pembinaan modul SmartDisiplin kalis sabotaj.</li>
+            <li>• Integrasi arkib automatik Google Drive PK HEM.</li>
           </ul>
         </div>
 
-        <div class="card-glass p-5 rounded-2xl border-t-4 border-amber-400 anim-item anim-delay-3">
+        <div class="card-glass p-5 rounded-2xl border-t-4 border-amber-400">
           <span class="px-2.5 py-0.5 rounded text-[11px] font-bold bg-amber-500/20 text-amber-300 mb-2 inline-block mono-font">FASA 3: CHECK</span>
-          <h3 class="text-base font-bold text-white mb-2">Ujian & Penambahbaikan</h3>
+          <h3 class="text-base font-bold text-white mb-2">Ujian Aliran Kerja</h3>
           <ul class="text-xs text-slate-300 space-y-1.5">
-            <li>• Kutip maklum balas kemudahan guru.</li>
-            <li>• Uji kestabilan pelbagai jenis peranti.</li>
-            <li>• Optimumkan masa muat turun sistem.</li>
+            <li>• Uji aliran Guru Pelapor ➔ Disiplin ➔ Pentadbir.</li>
+            <li>• Uji butang gambar OPR Guru Penyayang.</li>
+            <li>• Audit keselamatan fail dalam Drive Pn. Komala.</li>
           </ul>
         </div>
 
-        <div class="card-glass p-5 rounded-2xl border-t-4 border-purple-400 anim-item anim-delay-4">
+        <div class="card-glass p-5 rounded-2xl border-t-4 border-purple-400">
           <span class="px-2.5 py-0.5 rounded text-[11px] font-bold bg-purple-500/20 text-purple-300 mb-2 inline-block mono-font">FASA 4: ACT</span>
-          <h3 class="text-base font-bold text-white mb-2">Pelaksanaan Menyeluruh</h3>
+          <h3 class="text-base font-bold text-white mb-2">Pelaksanaan Rasmi</h3>
           <ul class="text-xs text-slate-300 space-y-1.5">
-            <li>• Bengkel penataran warga sekolah.</li>
-            <li>• Pelancaran rasmi 100% kelas & staf.</li>
-            <li>• Pemantauan harian oleh pentadbir.</li>
+            <li>• Taklimat dan penataran kepada semua guru.</li>
+            <li>• Hentikan pengisian kehadiran dalam WhatsApp.</li>
+            <li>• Penggunaan 100% portal HEM SmartTrack.</li>
           </ul>
         </div>
       </div>
 
-      <div class="border-t border-white/10 pt-3 flex items-center justify-between text-xs text-slate-400 anim-item anim-delay-4">
-        <span>Faktor Kejayaan: Penglibatan aktif guru dalam reka bentuk mengelakkan tentangan terhadap teknologi.</span>
-        <span class="text-sky-400 mono-font font-bold">Pantas • Telus • Mesra Pengguna</span>
+      <div class="border-t border-white/10 pt-3 flex items-center justify-between text-xs text-slate-400">
+        <span>Sistem dibangunkan sendiri oleh guru SK Ranggu berasaskan keperluan dan masalah harian sebenar.</span>
+        <span class="text-amber-300 mono-font font-bold">Inovasi Akar Umbi • Hasil Maksimum</span>
       </div>
     </section>
 
-    <!-- ==========================================
-         SLAID 6: PELAKSANAAN & SIMULASI INTERAKTIF
-         ========================================== -->
+    <!-- ==================== SLAID 6: MODUL KEHADIRAN (GANTI WHATSAPP) ==================== -->
     <section class="slide" data-slide="6">
-      <div class="flex items-center justify-between anim-item">
-        <div>
-          <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-indigo-500/15 text-indigo-400 border border-indigo-500/30 mb-1 inline-block">
-            06. Seni Bina Sistem & Modul Utama
-          </span>
-          <h2 class="text-4xl font-black heading-font text-white">Pelaksanaan Modul HEM SmartTrack</h2>
-          <p class="text-slate-400 text-sm mt-0.5">Satu aplikasi merangkumi keseluruhan keperluan pengurusan harian hal ehwal murid.</p>
-        </div>
-
-        <!-- Live Interactive Simulation Button for Judge -->
-        <button onclick="simulateSubmission()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-black text-xs hover:from-emerald-400 hover:to-teal-400 transition shadow-lg shadow-emerald-500/20 flex items-center gap-2">
-          <span>⚡</span>
-          <span>Klik Uji Simulasi Pengisian</span>
-        </button>
-      </div>
-
-      <div class="grid grid-cols-3 gap-4 my-auto">
-        <!-- Modul 1 with Dynamic Status Badge -->
-        <div class="card-glass p-4 rounded-xl border border-emerald-500/40 anim-item anim-delay-1" id="modulKehadiranCard">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-bold text-emerald-400 mono-font">MODUL 01</span>
-            <span id="simStatusBadge" class="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded font-black flex items-center gap-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot"></span> Selesai (98.5%)
-            </span>
-          </div>
-          <h4 class="text-sm font-bold text-white mb-1">Kehadiran & Status Kelas</h4>
-          <p class="text-xs text-slate-300">Penunjuk warna dinamik: Hijau (*Selesai*) dan Merah (*Belum Selesai*) untuk tindakan pantas pentadbir.</p>
-        </div>
-
-        <div class="card-glass p-4 rounded-xl border border-sky-500/30 anim-item anim-delay-1">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-bold text-sky-400 mono-font">MODUL 02</span>
-            <span class="text-[10px] bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded font-bold">Automatik</span>
-          </div>
-          <h4 class="text-sm font-bold text-white mb-1">Analisis KPI Kehadiran 96%</h4>
-          <p class="text-xs text-slate-300">Graf dinamik menunjukkan peratusan kehadiran kelas berbanding standard KPI KPM tanpa pengiraan manual.</p>
-        </div>
-
-        <div class="card-glass p-4 rounded-xl border border-purple-500/30 anim-item anim-delay-2">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-bold text-purple-400 mono-font">MODUL 03</span>
-            <span class="text-[10px] bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded font-bold">Operasi</span>
-          </div>
-          <h4 class="text-sm font-bold text-white mb-1">Keberadaan Guru & AKP</h4>
-          <p class="text-xs text-slate-300">Log kehadiran staf sokongan dan guru untuk memudahkan penyusunan jadual guru ganti dan operasi pejabat.</p>
-        </div>
-
-        <div class="card-glass p-4 rounded-xl border border-amber-500/30 anim-item anim-delay-2">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-bold text-amber-400 mono-font">MODUL 04</span>
-            <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded font-bold">Disiplin</span>
-          </div>
-          <h4 class="text-sm font-bold text-white mb-1">HEM SmartDisiplin</h4>
-          <p class="text-xs text-slate-300">Catatan amalan baik dan salah laku murid untuk rujukan segera Guru Bimbingan & Kaunseling.</p>
-        </div>
-
-        <div class="card-glass p-4 rounded-xl border border-rose-500/30 anim-item anim-delay-3">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-bold text-rose-400 mono-font">MODUL 05</span>
-            <span class="text-[10px] bg-rose-500/20 text-rose-300 px-2 py-0.5 rounded font-bold">Fasiliti</span>
-          </div>
-          <h4 class="text-sm font-bold text-white mb-1">Keselamatan & Kebersihan Blok</h4>
-          <p class="text-xs text-slate-300">Laporan kerosakan fizikal blok dan kebersihan tandas/kantin dengan muat naik foto terus dari telefon.</p>
-        </div>
-
-        <div class="card-glass p-4 rounded-xl border border-indigo-500/30 anim-item anim-delay-3">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-bold text-indigo-400 mono-font">MODUL 06</span>
-            <span class="text-[10px] bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded font-bold">Arkib Awan</span>
-          </div>
-          <h4 class="text-sm font-bold text-white mb-1">Laporan OPR & Google Drive</h4>
-          <p class="text-xs text-slate-300">Penjanaan *One-Page Report* (OPR) bergambar automatik yang terus tersusun dalam folder Google Drive sekolah.</p>
-        </div>
-      </div>
-
-      <div class="gold-glass p-3 rounded-xl flex items-center justify-between text-xs text-slate-200 anim-item anim-delay-4">
-        <span class="flex items-center gap-2">
-          <span>📱</span> Progressive Web App (PWA): Boleh dibuka terus pada pelayar telefon guru tanpa perlu muat turun aplikasi berat.
-        </span>
-        <span class="text-emerald-400 font-bold mono-font">Responsif • Sifar Pemasangan</span>
-      </div>
-    </section>
-
-    <!-- ==========================================
-         SLAID 7: ELEMEN TS25 & PAK21
-         ========================================== -->
-    <section class="slide" data-slide="7">
-      <div class="anim-item">
-        <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-amber-500/15 text-amber-400 border border-amber-500/30 mb-1 inline-block">
-          07. Penjajaran Inisiatif Kementerian
-        </span>
-        <h2 class="text-4xl font-black heading-font text-white">Pemugaran Elemen TS25 & PAK21</h2>
-        <p class="text-slate-400 text-sm mt-0.5">Memperkasa budaya kerja digital berkualiti dan persekitaran pembelajaran bermakna.</p>
-      </div>
-
-      <div class="grid grid-cols-3 gap-6 my-auto">
-        <div class="card-glass p-6 rounded-2xl border-t-4 border-sky-400 anim-item anim-delay-1">
-          <div class="w-12 h-12 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center font-black text-lg mb-3 mono-font">TS25</div>
-          <h3 class="text-base font-bold text-white mb-2">Kepimpinan Berkesan</h3>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Pentadbir mengamalkan kepimpinan berasaskan data (*Data-Driven Leadership*). Tindakan pembetulan ke atas ketidakhadiran murid dapat diputuskan dalam masa nyata sebelum sesi PdP bermula.
-          </p>
-          <div class="mt-4 pt-3 border-t border-white/5 text-[11px] text-sky-300 font-semibold">Teras 2 TS25: Pemimpin Berkesan</div>
-        </div>
-
-        <div class="card-glass p-6 rounded-2xl border-t-4 border-emerald-400 anim-item anim-delay-2">
-          <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-black text-lg mb-3 mono-font">4K1N</div>
-          <h3 class="text-base font-bold text-white mb-2">Komunikasi & Kolaborasi</h3>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Menghubungkan guru bertugas, guru kelas, guru kaunseling, dan pentadbir dalam satu saluran maklumat tanpa jurang komunikasi (*zero communication gap*).
-          </p>
-          <div class="mt-4 pt-3 border-t border-white/5 text-[11px] text-emerald-300 font-semibold">Teras 3 TS25: Guru Berkualiti</div>
-        </div>
-
-        <div class="card-glass p-6 rounded-2xl border-t-4 border-purple-400 anim-item anim-delay-3">
-          <div class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-black text-lg mb-3 mono-font">IKLIM</div>
-          <h3 class="text-base font-bold text-white mb-2">Persekitaran Pembelajaran Positif</h3>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Laporan keselamatan fizikal dan kebersihan yang pantas mewujudkan ekosistem sekolah yang selamat, kondusif, dan menyokong kemenjadian menyeluruh murid.
-          </p>
-          <div class="mt-4 pt-3 border-t border-white/5 text-[11px] text-purple-300 font-semibold">Teras 4 TS25: Persekitaran Positif</div>
-        </div>
-      </div>
-
-      <div class="border-t border-white/10 pt-3 flex items-center justify-between text-xs text-slate-400 anim-item anim-delay-4">
-        <span>Selaras dengan Dasar Pendidikan Digital KPM & Naratif Amalan Terbaik Sekolah Rendah.</span>
-        <span class="text-amber-400 font-bold mono-font">Transformasi Budaya Kerja Guru</span>
-      </div>
-    </section>
-
-    <!-- ==========================================
-         SLAID 8: EVIDENS PENGGUNAAN SEBENAR
-         ========================================== -->
-    <section class="slide" data-slide="8">
-      <div class="anim-item">
+      <div>
         <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 mb-1 inline-block">
-          08. Bukti Pelaksanaan Sebenar
+          06. Modul 1: Pengurusan Kehadiran & Status Harian
         </span>
-        <h2 class="text-4xl font-black heading-font text-white">Evidens Pengoperasian & Integriti Data</h2>
-        <p class="text-slate-400 text-sm mt-0.5">Sistem ini telah diguna pakai secara menyeluruh di sekolah — bukan sekadar konsep teori.</p>
+        <h2 class="text-4xl font-black heading-font text-white">Transformasi Kehadiran: Daripada WhatsApp ke Portal Pintar</h2>
+        <p class="text-slate-400 text-sm mt-0.5">Menghapuskan data kehadiran yang berterabur dalam perbualan mesej telefon.</p>
       </div>
 
-      <div class="grid grid-cols-3 gap-6 my-auto">
-        <div class="card-glass p-5 rounded-2xl anim-item anim-delay-1">
-          <h3 class="text-sm font-bold text-white mb-3 flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 pulse-dot"></span> Tangkap Layar Sistem Sebenar
-          </h3>
-          <div class="bg-black/50 rounded-xl p-4 border border-white/10 text-center text-xs text-slate-300 min-h-[170px] flex flex-col justify-center items-center">
-            <div class="text-4xl mb-2">📱</div>
-            <div class="font-bold text-white text-sm">Papan Pemuka Interaktif</div>
-            <div class="text-[11px] text-slate-400 mt-1">Status Selesai Kelas • Cap Masa Guru • Analisis KPI</div>
-            <div class="mt-3 px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] mono-font">Online & Berfungsi</div>
+      <div class="grid grid-cols-12 gap-6 my-auto items-center">
+        <!-- Left Comparison -->
+        <div class="col-span-7 space-y-4">
+          <div class="card-glass p-4 rounded-xl border-l-4 border-rose-500">
+            <div class="text-xs font-bold text-rose-400 uppercase">Dahulu: Grup WhatsApp Sekolah</div>
+            <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+              Guru hantar teks: <i>"6 Cemerlang hadir 28/30"</i>. Walaupun nampak siapa belum isi, <b>rekod berterabur</b> ditenggelami pelbagai perbualan lain. Pentadbir terpaksa menyemak satu per satu dan mengira peratusan kehadiran secara manual.
+            </p>
           </div>
-          <p class="text-[11px] text-slate-400 mt-3 text-center">Boleh diakses secara langsung oleh juri melalui kod QR.</p>
+
+          <div class="card-glass p-4 rounded-xl border-l-4 border-emerald-500">
+            <div class="text-xs font-bold text-emerald-400 uppercase">Kini: Portal HEM SmartTrack SK Ranggu</div>
+            <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+              Satu paparan masa nyata! Status kelas dipaparkan secara langsung dengan kod warna: <b>HIJAU (Selesai)</b> dan <b>MERAH (Belum Selesai)</b>. Cap masa pengisian dicatat secara automatik, dan graf KPI 96% kehadiran KPM dijana serta-merta tanpa kiraan manual.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 pt-1">
+            <div class="gold-glass p-3 rounded-lg text-center">
+              <div class="text-[10px] text-slate-400 font-bold uppercase">Masa Pengumpulan</div>
+              <div class="text-lg font-black text-emerald-400 mt-0.5">45 Min ➔ 8 Minit</div>
+              <div class="text-[10px] text-slate-400">Penjimatan masa 82%</div>
+            </div>
+            <div class="gold-glass p-3 rounded-lg text-center">
+              <div class="text-[10px] text-slate-400 font-bold uppercase">Pematuhan Pengisian</div>
+              <div class="text-lg font-black text-sky-400 mt-0.5">72% ➔ 98.5%</div>
+              <div class="text-[10px] text-slate-400">Sebelum jam 8:30 pagi</div>
+            </div>
+          </div>
         </div>
 
-        <div class="card-glass p-5 rounded-2xl anim-item anim-delay-2">
-          <h3 class="text-sm font-bold text-white mb-3 flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-sky-400 pulse-dot"></span> Log Audit Trail Sahih
-          </h3>
-          <div class="space-y-2 text-xs" id="auditTrailList">
-            <div class="p-2.5 rounded-lg bg-white/5 border border-white/5 flex justify-between items-center">
-              <div>
-                <div class="font-semibold text-white">Kehadiran 6 Cemerlang</div>
-                <div class="text-[10px] text-slate-400">Oleh: Guru Kelas</div>
-              </div>
-              <span class="mono-font text-emerald-400 text-[11px] font-bold">07:28 AM</span>
+        <!-- Right: Mobile Mockup Picture -->
+        <div class="col-span-5 flex flex-col items-center justify-center">
+          <div class="card-glass p-3 rounded-3xl border-2 border-emerald-400/40 shadow-2xl max-w-[260px] text-center">
+            <div class="rounded-2xl overflow-hidden border border-white/10 mb-2 bg-slate-900">
+              <img src="data:image/png;base64,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" alt="Antara Muka HEM SmartTrack SK Ranggu" class="w-full h-auto object-cover">
             </div>
-            <div class="p-2.5 rounded-lg bg-white/5 border border-white/5 flex justify-between items-center">
-              <div>
-                <div class="font-semibold text-white">Laporan Kebersihan Kantin</div>
-                <div class="text-[10px] text-slate-400">Oleh: Guru Bertugas</div>
-              </div>
-              <span class="mono-font text-emerald-400 text-[11px] font-bold">08:15 AM</span>
-            </div>
-            <div class="p-2.5 rounded-lg bg-white/5 border border-white/5 flex justify-between items-center">
-              <div>
-                <div class="font-semibold text-white">Log Keberadaan AKP</div>
-                <div class="text-[10px] text-slate-400">Oleh: Staf Pejabat</div>
-              </div>
-              <span class="mono-font text-emerald-400 text-[11px] font-bold">08:30 AM</span>
-            </div>
+            <div class="text-xs font-bold text-white">Paparan Telefon Pintar Guru</div>
+            <div class="text-[10px] text-emerald-300">Pengisian mudah tanpa pasang apps berat</div>
           </div>
-          <p class="text-[11px] text-slate-400 mt-3 text-center">Setiap rekod mempunyai cap masa & identiti pengisi.</p>
-        </div>
-
-        <div class="card-glass p-5 rounded-2xl anim-item anim-delay-3">
-          <h3 class="text-sm font-bold text-white mb-3 flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-purple-400 pulse-dot"></span> Keterlibatan Guru & Warga
-          </h3>
-          <div class="bg-black/50 rounded-xl p-4 border border-white/10 text-center text-xs text-slate-300 min-h-[170px] flex flex-col justify-center items-center">
-            <div class="text-4xl mb-2">👥</div>
-            <div class="font-bold text-white text-sm">100% Penglibatan Guru</div>
-            <div class="text-[11px] text-slate-400 mt-1">Sesi Penataran Guru • Manual 1 Halaman Disediakan</div>
-            <div class="mt-3 px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 text-[10px] mono-font">Disahkan Pentadbir</div>
-          </div>
-          <p class="text-[11px] text-slate-400 mt-3 text-center">Disokong dengan surat kebenaran Guru Besar.</p>
         </div>
       </div>
 
-      <div class="gold-glass p-3 rounded-xl flex items-center justify-between text-xs text-amber-200 anim-item anim-delay-4">
-        <span>Semua data disimpan selamat dalam Google Drive rasmi sekolah mengikut pekeliling keselamatan ICT KPM.</span>
-        <span class="mono-font text-amber-300 font-bold">> 1,200 Transaksi Direkodkan</span>
+      <div class="border-t border-white/10 pt-3 flex items-center justify-between text-xs text-slate-400">
+        <span>Pentadbir dapat mengesan kelas yang belum menghantar kehadiran sebelum waktu rehat pertama.</span>
+        <span class="text-emerald-400 font-bold mono-font">Pantas • Tepat • Tiada Data Berterabur</span>
       </div>
     </section>
 
-    <!-- ==========================================
-         SLAID 9: IMPAK & DAPATAN (50 MARKAH)
-         ========================================== -->
-    <section class="slide" data-slide="9">
-      <div class="anim-item">
-        <span class="px-3 py-1 rounded-full text-xs font-black uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 mb-1 inline-block">
-          ⭐ 09. Keberkesanan & Impak (Pemberat 50 Markah)
+    <!-- ==================== SLAID 7: MODUL DISIPLIN (KALIS SABOTAJ) ==================== -->
+    <section class="slide" data-slide="7">
+      <div>
+        <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-amber-500/15 text-amber-400 border border-amber-500/30 mb-1 inline-block">
+          07. Modul 2: HEM SmartDisiplin
         </span>
-        <h2 class="text-4xl font-black heading-font text-white">Dapatan Impak: Sebelum vs Selepas</h2>
-        <p class="text-slate-400 text-sm mt-0.5">Bukti empirikal yang membuktikan lonjakan kecekapan operasi pengurusan sekolah.</p>
+        <h2 class="text-4xl font-black heading-font text-white">SmartDisiplin: Sistem Kalis Sabotaj (Cegah Isu Buku Dikoyak)</h2>
+        <p class="text-slate-400 text-sm mt-0.5">Aliran kerja digital berperingkat lengkap dengan bukti bergambar dan tindakan susulan.</p>
       </div>
 
-      <div class="grid grid-cols-3 gap-6 my-auto">
-        <div class="card-glass p-6 rounded-2xl text-center border-t-4 border-emerald-400 anim-item anim-delay-1">
-          <div class="text-xs uppercase tracking-wider text-slate-400 font-bold mb-2">Masa Pengumpulan Kehadiran</div>
-          <div class="flex items-center justify-center gap-3 my-2">
-            <span class="text-xl font-bold text-rose-400 line-through">45 Min</span>
-            <span class="text-slate-400 font-bold">➔</span>
-            <span class="text-4xl font-black text-emerald-400 heading-font"><span class="counter-num" data-target="8">0</span> Minit</span>
+      <div class="my-auto space-y-4">
+        <!-- Problem & Solution Box -->
+        <div class="gold-glass p-4 rounded-xl border border-amber-400/50 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">🛡️</span>
+            <div>
+              <div class="text-xs font-black text-amber-300 uppercase tracking-wider">Isu Lampau Selesai Sepenuhnya:</div>
+              <div class="text-xs text-slate-200 mt-0.5">Sebelum ini ada buku rekod disiplin fizikal yang <b>dikoyak</b> sehingga rekod salah laku lenyap. Melalui SmartDisiplin, setiap laporan disahkan secara digital dalam awan dan mustahil dimusnahkan.</div>
+            </div>
           </div>
-          <div class="text-xs text-emerald-300 font-bold">Penjimatan Masa 82%</div>
-          <p class="text-[11px] text-slate-400 mt-2">Data sedia disemak sebelum jam 8:30 pagi setiap hari.</p>
+          <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-bold text-xs mono-font shrink-0 ml-4">100% Kalis Sabotaj</span>
         </div>
 
-        <div class="card-glass p-6 rounded-2xl text-center border-t-4 border-sky-400 anim-item anim-delay-2">
-          <div class="text-xs uppercase tracking-wider text-slate-400 font-bold mb-2">Pematuhan Pengisian Guru</div>
-          <div class="flex items-center justify-center gap-3 my-2">
-            <span class="text-xl font-bold text-rose-400 line-through">72.0%</span>
-            <span class="text-slate-400 font-bold">➔</span>
-            <span class="text-4xl font-black text-sky-400 heading-font"><span class="counter-num" data-target="98.5" data-decimals="1">0</span>%</span>
+        <!-- 3-Step Workflow -->
+        <div class="grid grid-cols-3 gap-5">
+          <!-- Step 1 -->
+          <div class="card-glass p-5 rounded-2xl border-t-4 border-sky-400">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-sky-400 mono-font">LANGKAH 01</span>
+              <span class="text-[10px] bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded font-bold">Lapor Kes</span>
+            </div>
+            <h3 class="text-base font-bold text-white mb-2">Guru Pelapor</h3>
+            <ul class="text-xs text-slate-300 space-y-1.5 leading-relaxed">
+              <li>• Guru subjek / guru bertugas kesan salah laku atau amalan baik murid.</li>
+              <li>• Masukkan maklumat kes dalam telefon pintar.</li>
+              <li>• <b>Muat naik foto bukti</b> kejadian terus ke sistem.</li>
+            </ul>
           </div>
-          <div class="text-xs text-sky-300 font-bold">Peningkatan Ketara +26.5%</div>
-          <p class="text-[11px] text-slate-400 mt-2">Kelas belum mengisi dikesan dan diingatkan serta-merta.</p>
-        </div>
 
-        <div class="gold-glass p-6 rounded-2xl text-center border-t-4 border-amber-400 anim-item anim-delay-3">
-          <div class="text-xs uppercase tracking-wider text-amber-200 font-bold mb-2">Tahap Kepuasan Guru & Staf</div>
-          <div class="flex items-center justify-center gap-3 my-2">
-            <span class="text-4xl font-black text-amber-300 heading-font"><span class="counter-num" data-target="4.88" data-decimals="2">0</span> / 5.0</span>
+          <!-- Step 2 -->
+          <div class="card-glass p-5 rounded-2xl border-t-4 border-amber-400">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-amber-400 mono-font">LANGKAH 02</span>
+              <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded font-bold">Siasatan</span>
+            </div>
+            <h3 class="text-base font-bold text-white mb-2">Guru Disiplin</h3>
+            <ul class="text-xs text-slate-300 space-y-1.5 leading-relaxed">
+              <li>• Terima makluman kes masa nyata dalam sistem.</li>
+              <li>• Jalankan siasatan murid & sesi soal siasat.</li>
+              <li>• Rekodkan tindakan pembetulan / nasihat / hukuman yang diambil ke dalam portal.</li>
+            </ul>
           </div>
-          <div class="text-xs text-amber-200 font-bold">Skor Min Penilaian Sangat Tinggi</div>
-          <p class="text-[11px] text-slate-300 mt-2">Berdasarkan soal selidik impak melibatkan 25 orang guru.</p>
+
+          <!-- Step 3 -->
+          <div class="card-glass p-5 rounded-2xl border-t-4 border-emerald-400">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-emerald-400 mono-font">LANGKAH 03</span>
+              <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded font-bold">Pengesahan</span>
+            </div>
+            <h3 class="text-base font-bold text-white mb-2">Pentadbir Sekolah</h3>
+            <ul class="text-xs text-slate-300 space-y-1.5 leading-relaxed">
+              <li>• Guru Besar & PK HEM semak laporan lengkap.</li>
+              <li>• Laporan lengkap berserta gambar bukti disimpan dalam arkib awan rasmi.</li>
+              <li>• Rujukan mudah jika perjumpaan bersama ibu bapa.</li>
+            </ul>
+          </div>
         </div>
       </div>
 
-      <div class="gold-glass p-4 rounded-xl border border-amber-400/40 flex items-center justify-between text-xs anim-item anim-delay-4">
+      <div class="border-t border-white/10 pt-3 flex items-center justify-between text-xs text-slate-400">
+        <span>Setiap rekod mempunyai cap masa, identiti guru pelapor, dan gambar bukti yang sah di sisi pengurusan.</span>
+        <span class="text-amber-400 font-bold">Integriti Disiplin Terpelihara</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLAID 8: MODUL PEMANTAUAN & DRIVE PK HEM ==================== -->
+    <section class="slide" data-slide="8">
+      <div>
+        <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-purple-500/15 text-purple-400 border border-purple-500/30 mb-1 inline-block">
+          08. Modul 3: Laporan Pemantauan, Guru Penyayang & Surat HEM
+        </span>
+        <h2 class="text-4xl font-black heading-font text-white">Pemantauan Bergambar & Google Drive PK HEM</h2>
+        <p class="text-slate-400 text-sm mt-0.5">Menyusun gambar Guru Penyayang dan surat rasmi daripada Telegram ke arkib teratur.</p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6 my-auto">
+        <!-- Feature 1: Guru Penyayang & OPR -->
+        <div class="card-glass p-6 rounded-2xl border-t-4 border-purple-400 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold text-purple-300 mono-font">CIRI KHAS</span>
+              <span class="text-[10px] bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded font-bold">Butang Gambar</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2">Laporan Pemantauan & Guru Penyayang</h3>
+            <p class="text-xs text-slate-300 leading-relaxed mb-3">
+              Sebelum ini gambar aktiviti Amalan Guru Penyayang menyambut murid di pintu pagar dan pemantauan tandas/kantin dihantar dalam Telegram dan bercampur dengan sembang lain.
+            </p>
+            <div class="p-3 rounded-xl bg-white/5 border border-white/5 space-y-1.5 text-xs text-slate-200">
+              <div class="flex items-center gap-2">
+                <span class="text-emerald-400 font-bold">📸</span>
+                <span><b>Butang Gambar di Sekeliling Sekolah:</b> Guru bertugas ambil foto terus di telefon.</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-sky-400 font-bold">📄</span>
+                <span><b>Penjanaan OPR Automatik:</b> <i>One-Page Report</i> bergambar dijana siap tanpa suntingan manual.</span>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-white/5 text-[11px] text-purple-300 font-semibold">
+            ✨ Laporan mingguan siap difailkan serta-merta
+          </div>
+        </div>
+
+        <!-- Feature 2: Drive PK HEM Puan Komala Joseph -->
+        <div class="card-glass p-6 rounded-2xl border-t-4 border-amber-400 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold text-amber-300 mono-font">ARKIB RASMI AWAN</span>
+              <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded font-bold">Google Drive Terpusat</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2">Pengurusan Surat-Menyurat Rasmi HEM</h3>
+            <p class="text-xs text-slate-300 leading-relaxed mb-3">
+              Surat-menyurat amaran ponteng, surat kebajikan murid, dan minit mesyuarat HEM disusun rapi dalam folder khas awan sekolah.
+            </p>
+            <div class="gold-glass p-3.5 rounded-xl text-xs space-y-1.5 border border-amber-400/40">
+              <div class="font-bold text-amber-300 flex items-center gap-1.5">
+                <span>📂</span> Pemilik Storan Awan HEM:
+              </div>
+              <div class="text-sm font-black text-white pl-5">Google Drive PK HEM (Puan Komala Joseph)</div>
+              <div class="text-[11px] text-slate-300 pl-5">Dokumen tersusun mengikut modul: Fail Kehadiran, Fail SmartDisiplin, Fail OPR, dan Fail Surat-Menyurat.</div>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-white/5 text-[11px] text-amber-300 font-semibold">
+            🔒 Hak milik data rasmi sekolah terjamin selamat
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-white/10 pt-3 flex items-center justify-between text-xs text-slate-400">
+        <span>Tiada lagi lambakan gambar dan dokumen berselerak dalam Telegram atau telefon guru.</span>
+        <span class="text-sky-300 font-bold mono-font">Storan Tersusun • Mudah Dicapai Bila-Bila Masa</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLAID 9: IMPAK & DAPATAN (50 MARKAH) ==================== -->
+    <section class="slide" data-slide="9">
+      <div>
+        <span class="px-3 py-1 rounded-full text-xs font-black uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 mb-1 inline-block">
+          ⭐ 09. Impak & Keberkesanan Nyata (Pemberat 50 Markah)
+        </span>
+        <h2 class="text-4xl font-black heading-font text-white">Dapatan Impak: Sebelum vs Selepas Pelaksanaan</h2>
+        <p class="text-slate-400 text-sm mt-0.5">Bukti empirikal perubahan amalan kerja di Sekolah Kebangsaan Ranggu.</p>
+      </div>
+
+      <div class="grid grid-cols-4 gap-4 my-auto">
+        <!-- Impak 1: Masa Kehadiran -->
+        <div class="card-glass p-5 rounded-2xl text-center border-t-4 border-sky-400">
+          <div class="text-[10px] uppercase tracking-wider text-slate-400 font-bold mb-1.5">Masa Semakan Kehadiran</div>
+          <div class="my-2">
+            <div class="text-xs text-rose-400 line-through">WhatsApp: 45 Min</div>
+            <div class="text-3xl font-black text-sky-400 heading-font"><span class="counter-num" data-target="8">0</span> Minit</div>
+          </div>
+          <div class="text-xs text-sky-300 font-bold">Penjimatan 82%</div>
+          <p class="text-[10px] text-slate-400 mt-1">Data selesai sebelum jam 8:30 pagi setiap hari.</p>
+        </div>
+
+        <!-- Impak 2: Disiplin Kalis Sabotaj -->
+        <div class="card-glass p-5 rounded-2xl text-center border-t-4 border-amber-400">
+          <div class="text-[10px] uppercase tracking-wider text-slate-400 font-bold mb-1.5">Integriti Rekod Disiplin</div>
+          <div class="my-2">
+            <div class="text-xs text-rose-400 line-through">Buku Pernah Dikoyak</div>
+            <div class="text-3xl font-black text-amber-300 heading-font">0% Rekod Hilang</div>
+          </div>
+          <div class="text-xs text-amber-300 font-bold">100% Kalis Sabotaj</div>
+          <p class="text-[10px] text-slate-400 mt-1">Semua kes ada foto bukti & audit trail kekal.</p>
+        </div>
+
+        <!-- Impak 3: OPR & Surat Drive -->
+        <div class="card-glass p-5 rounded-2xl text-center border-t-4 border-purple-400">
+          <div class="text-[10px] uppercase tracking-wider text-slate-400 font-bold mb-1.5">Laporan OPR & Surat</div>
+          <div class="my-2">
+            <div class="text-xs text-rose-400 line-through">Telegram: Berselerak</div>
+            <div class="text-3xl font-black text-purple-300 heading-font">100% Teratur</div>
+          </div>
+          <div class="text-xs text-purple-300 font-bold">Automatik Dalam Drive</div>
+          <p class="text-[10px] text-slate-400 mt-1">Tersimpan dalam Drive PK HEM Pn. Komala.</p>
+        </div>
+
+        <!-- Impak 4: Kepuasan Guru -->
+        <div class="gold-glass p-5 rounded-2xl text-center border-t-4 border-emerald-400">
+          <div class="text-[10px] uppercase tracking-wider text-amber-200 font-bold mb-1.5">Kepuasan Guru & Staf</div>
+          <div class="my-2">
+            <div class="text-xs text-slate-400">Skor Kaji Selidik Impak</div>
+            <div class="text-3xl font-black text-emerald-400 heading-font"><span class="counter-num" data-target="4.88" data-decimals="2">0</span> / 5.0</div>
+          </div>
+          <div class="text-xs text-emerald-300 font-bold">Tahap Sangat Tinggi</div>
+          <p class="text-[10px] text-slate-300 mt-1">Bebas tekanan mencari maklumat dalam chat.</p>
+        </div>
+      </div>
+
+      <div class="gold-glass p-4 rounded-xl border border-amber-400/40 flex items-center justify-between text-xs">
         <div class="flex items-center gap-3">
           <span class="text-2xl">💬</span>
-          <p class="text-slate-200 italic font-medium">"Kini pihak pentadbir boleh mengesan kelas berisiko ponteng sebelum waktu rehat pertama tanpa perlu menunggu kutipan borang petang." — Pentadbir Sekolah</p>
+          <p class="text-slate-200 italic font-medium">"Kini pihak pentadbir boleh mengesan ketidakhadiran murid dan kes disiplin secara serta-merta tanpa perlu risau rekod hilang atau fail rosak." — Penolong Kanan HEM SK Ranggu</p>
         </div>
-        <span class="text-amber-300 font-bold shrink-0 ml-4 mono-font">Buktian Sah & Boleh Ukur</span>
+        <span class="text-amber-300 font-bold shrink-0 ml-4 mono-font">Impak Nyata & Terbukti</span>
       </div>
     </section>
 
-    <!-- ==========================================
-         SLAID 10: KELESTARIAN & REPLIKASI
-         ========================================== -->
+    <!-- ==================== SLAID 10: KELESTARIAN & REPLIKASI ==================== -->
     <section class="slide" data-slide="10">
-      <div class="anim-item">
+      <div>
         <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-sky-500/15 text-sky-400 border border-sky-500/30 mb-1 inline-block">
           10. Kelestarian & Potensi Penanda Arasan
         </span>
-        <h2 class="text-4xl font-black heading-font text-white">Kelestarian & Potensi Sebaran Luas</h2>
-        <p class="text-slate-400 text-sm mt-0.5">Sedia diguna pakai oleh sekolah lain dengan kos sifar dan usaha konfigurasi minima.</p>
+        <h2 class="text-4xl font-black heading-font text-white">Kelestarian & Potensi Replikasi ke Sekolah Lain</h2>
+        <p class="text-slate-400 text-sm mt-0.5">Inovasi ini sedia dijadikan model amalan terbaik untuk sekolah rendah di seluruh negara.</p>
       </div>
 
       <div class="grid grid-cols-3 gap-6 my-auto">
-        <div class="card-glass p-6 rounded-2xl border-t-2 border-emerald-400 anim-item anim-delay-1">
+        <div class="card-glass p-6 rounded-2xl border-t-2 border-emerald-400">
           <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-black text-xl mb-3 mono-font">RM 0</div>
           <h3 class="text-base font-bold text-white mb-2">Kos Sifar (Zero Cost)</h3>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Tidak memerlukan pelayan (*server*) luar yang mahal atau langganan perisian berbayar. Mengoptimumkan 100% infrastruktur awan Google KPM sedia ada.
+            Mengoptimumkan 100% Google Workspace KPM sedia ada tanpa langganan pelayan berbayar. Boleh digunakan setiap tahun dengan hanya mengemas kini senarai kelas.
           </p>
         </div>
 
-        <div class="card-glass p-6 rounded-2xl border-t-2 border-sky-400 anim-item anim-delay-2">
+        <div class="card-glass p-6 rounded-2xl border-t-2 border-sky-400">
           <div class="w-12 h-12 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center font-black text-xl mb-3 mono-font">1-JAM</div>
-          <h3 class="text-base font-bold text-white mb-2">Replikasi Siap Guna</h3>
+          <h3 class="text-base font-bold text-white mb-2">Templat Sedia Gandakan</h3>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Disediakan sebagai *Turnkey Template*. Mana-mana sekolah boleh menyalin templat dan memasukkan senarai nama kelas mereka dalam masa kurang 1 jam.
+            Dibina sebagai <i>Turnkey Template</i>. Mana-mana sekolah lain boleh membuat salinan Google Drive dan memulakan operasi mereka dalam tempoh kurang daripada 1 jam.
           </p>
         </div>
 
-        <div class="card-glass p-6 rounded-2xl border-t-2 border-purple-400 anim-item anim-delay-3">
+        <div class="card-glass p-6 rounded-2xl border-t-2 border-purple-400">
           <div class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-black text-xl mb-3 mono-font">PWA</div>
-          <h3 class="text-base font-bold text-white mb-2">Pelbagai Peranti & Ringan</h3>
+          <h3 class="text-base font-bold text-white mb-2">Sokongan Pelbagai Peranti</h3>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Sistem berfungsi licin di iOS, Android, Windows, dan Chromebook tanpa perlu muat turun aplikasi berat dari App Store atau Google Play.
+            Boleh dicapai di telefon pintar guru (Android & iOS) serta komputer riba pentadbir tanpa memerlukan pemasangan perisian rumit.
           </p>
         </div>
       </div>
 
-      <div class="gold-glass p-5 rounded-2xl flex items-center justify-between anim-item anim-delay-4">
+      <div class="gold-glass p-5 rounded-2xl flex items-center justify-between">
         <div>
-          <span class="badge-gold px-3 py-0.5 rounded-full text-xs font-bold mb-1 inline-block">Pautan & Kod QR Demo Juri</span>
-          <h4 class="text-xl font-bold text-white">Imbas & Teroka Sendiri HEM SmartTrack</h4>
-          <p class="text-xs text-slate-300 mt-0.5">Juri dan penilai dialu-alukan meneroka papan pemuka interaktif dan mencuba aliran sistem.</p>
+          <span class="px-3 py-0.5 rounded-full text-xs font-bold mb-1 inline-block bg-amber-500/20 text-amber-300 border border-amber-400/40">Pautan & Kod QR Demo Juri</span>
+          <h4 class="text-xl font-bold text-white">Imbas & Uji Sendiri HEM SmartTrack</h4>
+          <p class="text-xs text-slate-300 mt-0.5">Juri dialu-alukan meneroka papan pemuka kehadiran, SmartDisiplin, dan sistem pemfailan Google Drive.</p>
         </div>
         <div class="flex items-center gap-4">
           <div class="w-20 h-20 bg-white rounded-xl p-1.5 flex items-center justify-center shadow-xl">
@@ -870,19 +812,8 @@
 
   </main>
 
-  <!-- ==================== INTERACTIVE TOAST ALERT ==================== -->
-  <div id="toastBox" class="fixed top-16 right-8 z-50 transform translate-y-[-100px] opacity-0 transition-all duration-300 pointer-events-none">
-    <div class="gold-glass px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 border border-amber-400">
-      <span class="text-xl">✅</span>
-      <div>
-        <div class="text-xs font-bold text-white">Simulasi Berjaya!</div>
-        <div class="text-[10px] text-slate-300">Data Kehadiran Kelas 6 Cemerlang direkodkan ke Google Drive.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== PRESENTER NOTES DRAWER ==================== -->
-  <aside id="notesDrawer" class="hidden fixed bottom-14 left-8 right-8 z-40 bg-[#0F172A]/95 border border-amber-400/40 backdrop-blur-xl rounded-2xl p-5 shadow-2xl transition-all duration-300 no-print">
+  <!-- Presenter Notes Teleprompter -->
+  <aside id="notesDrawer" class="hidden fixed bottom-14 left-8 right-8 z-40 bg-[#0F172A]/95 border border-amber-400/40 backdrop-blur-xl rounded-2xl p-5 shadow-2xl transition-all duration-300">
     <div class="flex items-center justify-between border-b border-white/10 pb-2 mb-3">
       <div class="flex items-center gap-2">
         <span class="text-sm font-black text-amber-400">🎙️ SKRIP PEMBENTANG (BACAAN VIDEO 10 MINIT)</span>
@@ -893,8 +824,8 @@
     <div id="noteContent" class="text-sm text-slate-200 leading-relaxed max-h-36 overflow-y-auto font-medium"></div>
   </aside>
 
-  <!-- ==================== FOOTER NAVIGASI ==================== -->
-  <footer class="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-2.5 bg-[#060913]/90 backdrop-blur-md border-t border-white/10 no-print">
+  <!-- Footer Navigasi -->
+  <footer class="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-2.5 bg-[#070B16]/90 backdrop-blur-md border-t border-white/10">
     <div class="text-xs text-slate-400 flex items-center gap-2">
       <span>Gunakan</span>
       <kbd class="px-1.5 py-0.5 bg-white/10 rounded text-[11px] text-slate-300">←</kbd>
@@ -902,7 +833,7 @@
       <span>atau</span>
       <kbd class="px-1.5 py-0.5 bg-white/10 rounded text-[11px] text-slate-300">Space</kbd>
       <span class="text-slate-500">|</span>
-      <span>Tekan <kbd class="px-1.5 py-0.5 bg-white/10 rounded text-[11px] text-slate-300">N</kbd> untuk Skrip</span>
+      <span>Tekan <kbd class="px-1.5 py-0.5 bg-white/10 rounded text-[11px] text-slate-300">N</kbd> untuk Skrip Pembentang</span>
     </div>
 
     <!-- Quick Thumbnails Filmstrip -->
@@ -930,7 +861,6 @@
     </div>
   </footer>
 
-  <!-- ==================== SOUND SYNTHESIZER & ANIMATION SCRIPT ==================== -->
   <script>
     let currentSlide = 1;
     const totalSlides = 10;
@@ -941,7 +871,7 @@
     const noteSlideTag = document.getElementById('noteSlideTag');
     let soundEnabled = true;
 
-    // Web Audio Synthesizer (Zero external dependencies)
+    // Web Audio Synthesizer
     let audioCtx = null;
     function playTone(freq, type, duration) {
       if (!soundEnabled) return;
@@ -951,7 +881,7 @@
         const gain = audioCtx.createGain();
         osc.type = type;
         osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
         osc.connect(gain);
         gain.connect(audioCtx.destination);
@@ -965,21 +895,20 @@
       document.getElementById('soundBtn').innerText = soundEnabled ? "🔊 On" : "🔇 Off";
     }
 
-    // Speaker Script
+    // Accurate Spoken Script
     const speakerNotes = {
-      1: "Bismillahirahmanirrahim. Assalamualaikum warahmatullahi wabarakatuh dan salam sejahtera kepada barisan panel juri penilai yang dihormati. Saya mewakili Pasukan Inovasi HEM Sekolah Rendah ingin membentangkan amalan terbaik bertajuk: HEM SmartTrack: Pendigitalan Pengurusan HEM Bersepadu Berasaskan Data Masa Nyata. Inovasi ini mengubah kaedah kerja manual kepada ekosistem awan yang pantas, telus dan menyokong Teras Transformasi Sekolah TS25.",
-      2: "Tuan-tuan dan puan-puan juri sekalian, apakah isu sebenar sebelum inovasi ini wujud? Kami kenal pasti 4 isu kritikal: Pertama, rekod bertaburan dalam pelbagai buku log berasingan. Kedua, guru bertugas terpaksa mengambil masa 30 hingga 45 minit setiap pagi mengutip slip kehadiran fizikal, mengganggu masa PdP. Ketiga, pihak pentadbir berada dalam keadaan 'titik buta' kerana tidak mengetahui kelas mana yang belum mengisi. Dan keempat, tiada audit trail yang sah untuk mengesahkan identiti dan masa sebenar catatan dibuat.",
-      3: "Bagi menyelesaikan isu tersebut, kami merangka 4 objektif SMART: Memusatkan semua rekod HEM dalam satu portal awan tunggal; memendekkan semakan kehadiran harian daripada 45 minit kepada bawah 10 minit; memastikan akauntabiliti guru dengan log masa automatik; dan menjana laporan visual tanpa kiraan manual. Matlamat utama kami ialah pematuhan pengisian 100% sebelum jam 8:30 pagi setiap hari.",
-      4: "Kumpulan sasaran inovasi ini merangkumi keseluruhan komuniti sekolah: Pentadbir menggunakan papan pemuka masa nyata untuk intervensi awal; Guru bertugas dan guru kelas mengisi data pantas di telefon kurang daripada satu minit; Guru Kaunseling dan AKP memantau isu ketidakhadiran berulang dan keberadaan staf; dan yang paling penting ialah Murid sebagai penerima manfaat utama di mana kebajikan dan hak pembelajaran mereka terpelihara.",
-      5: "Strategi pelaksanaan kami berasaskan kitaran PDCA bermula daripada analisis borang manual, pembangunan antara muka mesra telefon (PWA), ujian rintis bersama 6 kelas, penambahbaikan sistem berasaskan maklum balas guru, sehinggalah kepada bengkel penataran warga sekolah dan pelancaran rasmi 100% kelas.",
-      6: "Seni bina HEM SmartTrack menggabungkan 6 modul saling berhubung: Modul Kehadiran Pintar dengan status warna hijau dan merah; Modul Analisis KPI 96% kehadiran KPM; Modul Keberadaan Guru dan AKP; HEM SmartDisiplin; Laporan Keselamatan & Kebersihan Blok; serta Arkib Google Drive automatik. Dibina sebagai Progressive Web App, guru boleh buka di telefon tanpa pasang aplikasi rumit.",
-      7: "Inovasi ini memugarkan elemen penting TS25 dan PAK21: Teras 2 TS25 iaitu Kepimpinan Berkesan diperkasa melalui pembuatan keputusan berasaskan data masa nyata. Teras 3 TS25 dan elemen 4K1N dipupuk melalui komunikasi dan kolaborasi telus antara guru kelas dan guru bertugas tanpa sebarang jurang komunikasi.",
-      8: "Inovasi ini telah beroperasi sepenuhnya dengan lebih 1,200 transaksi pengisian sebenar telah direkodkan lengkap dengan cap masa dan nama pengisi. Kami turut menyediakan tangkap layar sistem, laporan bergambar yang dijana automatik, serta disokong oleh surat kebenaran dan pengesahan Guru Besar.",
-      9: "Bagi rubrik impak yang membawa 50 markah: Kami membuktikan masa pengumpulan kehadiran berjaya dipendekkan daripada 45 minit kepada bawah 8 minit — penjimatan masa sebanyak 82%! Kadar pematuhan pengisian guru melonjak daripada 72% kepada 98.5%. Dan kaji selidik impak guru merekodkan skor min 4.88 daripada 5.0, membuktikan sistem ini sangat meringankan beban kerja guru.",
-      10: "Dari sudut kelestarian dan potensi replikasi: HEM SmartTrack beroperasi dengan KOS SIFAR (RM 0.00) menggunakan ekosistem Google Workspace sekolah sedia ada. Ia bersifat Turnkey Template yang boleh disalin dan diguna pakai oleh mana-mana sekolah dalam masa 1 jam sahaja. Juri dialu-alukan mengimbas kod QR di skrin untuk mencuba sendiri sistem ini. Sekian, terima kasih!"
+      1: "Bismillahirahmanirrahim. Assalamualaikum warahmatullahi wabarakatuh dan salam sejahtera kepada barisan panel juri penilai yang dihormati. Saya pembangun sistem HEM SmartTrack dari SK Ranggu, Tawau. Hari ini saya berbesar hati membentangkan amalan terbaik sekolah kami bertajuk: HEM SmartTrack: Pendigitalan Pengurusan HEM Bersepadu Berasaskan Data Masa Nyata. Inovasi ini dibangunkan untuk menyelesaikan isu pengurusan hal ehwal murid sebenar di sekolah kami di bawah naungan Penolong Kanan HEM kami, Puan Komala Joseph.",
+      2: "Tuan-tuan dan puan-puan, apakah isu sebenar yang berlaku sebelum ini? Dulu, guru-guru mengisi kehadiran menggunakan grup WhatsApp. Memang kita boleh nampak siapa belum isi, tetapi masalahnya data itu berterabur, mesej tenggelam, dan pentadbir sukar mengumpul rekod harian. Isu kedua yang sangat kritikal adalah berkenaan disiplin. Sebelum ini kita guna buku rekod disiplin fizikal, dan pernah berlaku insiden di mana buku rekod tersebut dikoyak! Bila buku dikoyak, rekod salah laku hilang begitu sahaja. Ketiga, laporan pemantauan dan foto Guru Penyayang dihantar ke Telegram — bercampur dengan urusan lain dan gambar tenggelam. Begitu juga surat-menyurat yang bertaburan tanpa fail awan yang teratur.",
+      3: "Maka, HEM SmartTrack dirangka dengan objektif yang jelas: Pertama, memindahkan rekod kehadiran daripada WhatsApp ke portal awan masa nyata; Kedua, mencegah kehilangan rekod disiplin dengan sistem SmartDisiplin yang kalis sabotaj — tiada lagi buku boleh dikoyak; Ketiga, mengautomasikan laporan bergambar Guru Penyayang dan OPR sekeliling sekolah; dan Keempat, memfailkan semua surat-menyurat rasmi terus ke dalam Google Drive Penolong Kanan HEM, Puan Komala Joseph.",
+      4: "Kumpulan sasaran inovasi ini merangkumi pentadbir — iaitu Guru Besar dan PK HEM Puan Komala Joseph sebagai pemilik storan Google Drive; guru kelas dan guru bertugas sebagai pelaksana; guru pelapor dan guru disiplin yang bertindak; serta murid SK Ranggu sebagai penerima manfaat utama demi keselamatan dan kebajikan mereka.",
+      5: "Strategi pembangunan sistem berpandukan kitaran PDCA. Kami mulakan dengan menganalisis isu sebenar di WhatsApp, Telegram, dan insiden buku disiplin dikoyak. Seterusnya membina portal mudah alih PWA yang disambungkan ke pangkalan data awan Google Drive PK HEM. Selepas ujian rintis dijalankan, sistem ini dilancarkan secara rasmi untuk 100% kelas di SK Ranggu.",
+      6: "Di Slaid 6, ini transformasi kehadiran kita. Daripada lambakan mesej dalam WhatsApp yang berterabur, kini guru hanya membuka portal HEM SmartTrack di telefon pintar masing-masing. Papan pemuka pentadbir menunjukkan status masa nyata — HIJAU untuk kelas selesai, MERAH untuk belum selesai, lengkap dengan cap masa guru pengisi dan pengiraan KPI 96% kehadiran KPM secara automatik tanpa kiraan manual.",
+      7: "Di Slaid 7, ini modul yang sangat penting: HEM SmartDisiplin! Mengapa penting? Kerana ia mencegah isu buku fizikal dikoyak. Aliran kerjanya sangat teratur: Guru Pelapor lapor kes salah laku atau amalan baik di telefon beserta foto bukti. Guru Disiplin terima makluman serta-merta dan laksana tindakan. Kemudian, laporan tindakan digital lengkap berserta gambar dihantar kepada Pentadbir. Rekod ini kekal dalam awan dan mustahil dimusnahkan!",
+      8: "Seterusnya, Modul Laporan Pemantauan, Guru Penyayang dan Surat-Menyurat. Dalam portal ini ada butang khas untuk memuat naik gambar aktiviti Guru Penyayang di pintu pagar dan sekeliling kawasan sekolah. Sistem terus menjana One-Page Report (OPR) bergambar tanpa perlu cikgu sunting secara manual. Semua surat-menyurat rasmi pula terus difailkan ke Google Drive Penolong Kanan HEM, Puan Komala Joseph, tanpa lagi berselerak dalam Telegram.",
+      9: "Panel juri sekalian, impak yang dicapai adalah sangat membanggakan: Masa semakan kehadiran dipendekkan daripada 45 minit dalam WhatsApp kepada hanya 8 minit — jimat 82%! Rekod disiplin kini 100% selamat dengan sifar rekod hilang. Laporan OPR bergambar dijana siap serta-merta, dan tahap kepuasan guru mencapai skor min 4.88 daripada 5.0 kerana bebas daripada tekanan mencari fail dalam sembang media sosial.",
+      10: "Akhir sekali, dari sudut kelestarian: HEM SmartTrack beroperasi dengan KOS SIFAR (RM 0.00) menggunakan ekosistem Google Workspace sekolah sedia ada. Sistem ini sedia direplikasi sebagai templat kosong bagi mana-mana sekolah lain dalam masa kurang 1 jam. Juri dialu-alukan mengimbas kod QR di skrin untuk menguji sendiri portal HEM SmartTrack SK Ranggu. Sekian, terima kasih!"
     };
 
-    // Animated Numbers Counter
     function triggerCounters(slideEl) {
       const counters = slideEl.querySelectorAll('.counter-num');
       counters.forEach(counter => {
@@ -992,7 +921,6 @@
         function updateCount(currentTime) {
           const elapsed = currentTime - startTime;
           const progress = Math.min(elapsed / duration, 1);
-          // Easing: easeOutExpo
           const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
           const currentVal = start + (target - start) * ease;
           counter.innerText = currentVal.toFixed(decimals);
@@ -1012,7 +940,7 @@
       if (index > totalSlides) index = totalSlides;
       currentSlide = index;
 
-      playTone(480, 'sine', 0.08);
+      playTone(520, 'sine', 0.08);
 
       slides.forEach((slide) => {
         slide.classList.remove('active');
@@ -1024,7 +952,6 @@
 
       counter.innerText = `${currentSlide.toString().padStart(2, '0')} / ${totalSlides.toString().padStart(2, '0')}`;
 
-      // Update filmstrip dots
       for (let i = 1; i <= totalSlides; i++) {
         const dot = document.getElementById(`dot-${i}`);
         if (dot) {
@@ -1043,15 +970,12 @@
     function nextSlide() {
       if (currentSlide < totalSlides) showSlide(currentSlide + 1);
     }
-
     function prevSlide() {
       if (currentSlide > 1) showSlide(currentSlide - 1);
     }
-
     function toggleNotes() {
       notesDrawer.classList.toggle('hidden');
     }
-
     function toggleFullScreen() {
       if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen().catch(err => {});
@@ -1060,24 +984,6 @@
       }
     }
 
-    // Live interactive simulation
-    function simulateSubmission() {
-      playTone(880, 'triangle', 0.2);
-      const toast = document.getElementById('toastBox');
-      toast.style.transform = 'translateY(0)';
-      toast.style.opacity = '1';
-
-      const badge = document.getElementById('simStatusBadge');
-      badge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot"></span> Selesai (100%)';
-      badge.className = 'text-[10px] bg-emerald-500/30 text-emerald-200 border border-emerald-400 px-2 py-0.5 rounded font-black flex items-center gap-1 shadow-md shadow-emerald-500/20';
-
-      setTimeout(() => {
-        toast.style.transform = 'translateY(-100px)';
-        toast.style.opacity = '0';
-      }, 3500);
-    }
-
-    // Stop-watch timer for 10-minute speech
     let timerRunning = false;
     let timerSeconds = 0;
     let timerInterval = null;
@@ -1106,7 +1012,6 @@
       }
     }
 
-    // Keyboard controls
     document.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
         nextSlide();
@@ -1121,48 +1026,6 @@
       }
     });
 
-    // Particle canvas background
-    const canvas = document.getElementById('particleCanvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    for (let i = 0; i < 40; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        r: Math.random() * 1.5 + 0.5,
-        alpha: Math.random() * 0.4 + 0.1
-      });
-    }
-
-    function animateParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0) p.x = canvas.width;
-        if (p.x > canvas.width) p.x = 0;
-        if (p.y < 0) p.y = canvas.height;
-        if (p.y > canvas.height) p.y = 0;
-        ctx.fillStyle = `rgba(253, 230, 138, ${p.alpha})`;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fill();
-      });
-      requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
-
-    // Init
     showSlide(1);
   </script>
 </body>
