@@ -20,10 +20,12 @@ TEXT_MUTED = RGBColor(148, 163, 184)
 EMERALD_GREEN = RGBColor(16, 185, 129)
 RED_ALERT = RGBColor(239, 68, 68)
 
-BASE_DIR = "/Users/momon/Desktop/BAHAN_PEMBENTANGAN_HEM_SMARTTRACK_2026"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 LOGO_KPM = os.path.join(BASE_DIR, "logo-kpm-cutout.png")
 LOGO_SKRG = os.path.join(BASE_DIR, "logo-skrg-cutout.png")
-LOGO_HEM = os.path.join(BASE_DIR, "logo_rasmi_hem_smarttrack.jpg")
+LOGO_HEM = os.path.join(BASE_DIR, "logo_rasmi_hem_smarttrack_cutout.png")
+if not os.path.exists(LOGO_HEM):
+    LOGO_HEM = os.path.join(BASE_DIR, "logo_rasmi_hem_smarttrack.png")
 ASSETS_DIR = os.path.join(BASE_DIR, "assets")
 
 def add_base_header(slide, title_kicker="MONTAJ PEMBUKAAN RASMI • PENANDA ARASAN AMALAN TERBAIK 2026"):
@@ -111,7 +113,7 @@ p_desc.alignment = PP_ALIGN.CENTER
 b_box = slide1.shapes.add_textbox(Inches(1.5), Inches(6.1), Inches(10.333), Inches(0.9))
 btf = b_box.text_frame
 bp = btf.paragraphs[0]
-bp.text = "Pembangun & Inovator: MOHAMMAD FIKREY BIN ABDUL GAPAR  |  SK Ranggu, Tawau, Sabah  |  Status: 100% Aktif Digunakan"
+bp.text = "Pembangun & Inovator: MOHAMMAD FIKREY BIN ABDUL GAPAR  |  SK Ranggu, Tawau  |  48 Guru, 3 AKP, 5 Pentadbir (Termasuk PK Petang)"
 bp.font.size = Pt(12)
 bp.font.bold = True
 bp.font.color.rgb = TEXT_MUTED
@@ -226,7 +228,7 @@ p4_h.font.bold = True
 p4_h.font.color.rgb = GOLD_ACCENT
 
 p4_b = tf4.add_paragraph()
-p4_b.text = "01 e-JKM (Kehadiran 24 Kelas)  •  02 Keberadaan 58 Guru/AKP  •  03 Guru Bertugas Harian  •  04 HEM SmartDisiplin (Kalis Koyak)\n05 Guru Bertugas RMT  •  06 Rekod Kalendar Audit  •  07 Pemantauan 29 Zon Sekolah  •  08 Analisis KPI 96%  •  09 Template OPR Google Drive"
+p4_b.text = "01 e-JKM (Kehadiran 24 Kelas)  •  02 Keberadaan 48 Guru & 3 AKP  •  03 Guru Bertugas Harian  •  04 HEM SmartDisiplin (Kalis Koyak)\n05 Guru Bertugas RMT  •  06 Rekod Kalendar Audit  •  07 Pemantauan 29 Zon Sekolah  •  08 Analisis KPI 96%  •  09 Template OPR Google Drive"
 p4_b.font.size = Pt(12)
 p4_b.font.color.rgb = TEXT_WHITE
 
@@ -277,7 +279,7 @@ impacts = [
     ("⏱️ 89% PENJIMATAN MASA", "45 Minit ➔ 5 Minit", "Pengumpulan dan pengesahan kehadiran siap dalam masa 5 minit setiap pagi seawal 7:30."),
     ("🛡️ SIFAR REKOD HILANG", "0 Kes Sabotaj", "Isu helaian buku disiplin dikoyak dihapuskan sepenuhnya. 100% data salah laku direkod telus."),
     ("📈 96.4% KEHADIRAN", "Melepasi Sasaran 96%", "Pengesanan pantas murid ponteng membolehkan kaunseling awal, mengekalkan KPI cemerlang."),
-    ("🌟 98.4% KEPUASAN GURU", "58 Orang Guru Bersetuju", "Sistem sangat mesra pengguna, mengurangkan tekanan perkeranian dan menjimatkan masa PdP.")
+    ("🌟 98.4% KEPUASAN GURU", "48 Orang Guru Bersetuju", "Sistem sangat mesra pengguna, memudahkan 48 guru & 5 pentadbir (termasuk PK Petang).")
 ]
 
 card_w6 = Inches(2.6)

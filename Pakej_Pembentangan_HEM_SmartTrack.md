@@ -41,7 +41,7 @@ Montaj pembukaan video berdurasi 60 saat yang menyuntik elemen dramatik dan keya
 * **Sekolah:** SK Ranggu, Tawau, Sabah (XBA3037)
 * **Kategori:** Guru Sekolah Rendah (Hal Ehwal Murid & Kemenjadian Murid)
 * **Pautan:** `https://fikreyxcode.github.io/sistemkehadiranskrg/?v=20#e-jkm`
-* **Status:** 100% Aktif Digunakan di SK Ranggu untuk 24 kelas, 58 guru & 3 AKP.
+* **Status:** 100% Aktif Digunakan di SK Ranggu untuk 24 kelas (dua sidang: Pagi & Petang), 48 guru, 3 AKP, dan 5 orang pentadbir sekolah (Guru Besar & 4 Penolong Kanan termasuk PK Petang).
 
 ### Slaid 2: Latar Belakang & 3 Isu Kritikal Sebenar
 1. **Kehadiran WhatsApp Berselerak:** Mesej bertindan ratusan baris, sukar mengenal pasti kelas yang tercicir, pengiraan peratus harian manual dengan kalkulator mengambil masa 45 minit.
@@ -55,8 +55,8 @@ Montaj pembukaan video berdurasi 60 saat yang menyuntik elemen dramatik dan keya
 4. Mengautomasikan penjanaan One-Page Report (OPR) bergambar dan memfailkannya terus ke Google Drive Pengurusan HEM.
 
 ### Slaid 4: Kumpulan Sasaran & Penerima Manfaat
-* **Pentadbir (Guru Besar & PK HEM):** Pemantauan eksekutif masa nyata tanpa perlu menunggu mesyuarat.
-* **58 Guru & 3 AKP:** Pengisian rekod kehadiran dan pelaporan hanya 1 minit di telefon pintar.
+* **5 Orang Pentadbir Sekolah (Guru Besar & 4 Penolong Kanan termasuk PK Petang):** Pemantauan eksekutif masa nyata tanpa perlu menunggu mesyuarat atau laporan bercetak (Guru Besar, PK Pentadbiran, PK HEM, PK Kokurikulum & PK Petang).
+* **48 Guru & 3 AKP:** Pengisian rekod kehadiran dan pelaporan hanya 1 minit di telefon pintar merangkumi guru sidang pagi dan sidang petang.
 * **Unit Disiplin & Guru Kaunseling:** Pengurusan kes tersusun, telus, dan mempunyai jejak masa rasmi.
 * **800+ Murid (24 Kelas) SK Ranggu:** Kebajikan terjaga (RMT), pintu pagar selamat, amalan sahsiah positif dipupuk.
 
@@ -70,7 +70,7 @@ Montaj pembukaan video berdurasi 60 saat yang menyuntik elemen dramatik dan keya
 
 ### Slaid 6: Pelaksanaan 9 Modul Bersepadu HEM SmartTrack
 * **01 e-JKM:** Kehadiran murid 24 kelas (Tahun 1-6), penjejakan kelas belum selesai & kalkulator KPI 96%.
-* **02 Keberadaan Guru & AKP:** Rekod 58 guru & 3 AKP tiada di sekolah (kursus, mesyuarat, CRK, MC).
+* **02 Keberadaan Guru & AKP:** Rekod 48 guru & 3 AKP tiada di sekolah (kursus, mesyuarat, CRK, MC) untuk rujukan 5 pentadbir sekolah.
 * **03 Guru Bertugas Harian:** Senarai guru bertugas pagi & petang, catatan perhimpunan dan tinjauan.
 * **04 HEM SmartDisiplin:** Aliran digital salah laku (Guru Pelapor -> Guru Disiplin -> Pentadbir) kalis koyak.
 * **05 Guru Bertugas RMT:** Pemantauan makanan murid B40 dan pautan portal RMT KPM.
@@ -111,7 +111,7 @@ Montaj pembukaan video berdurasi 60 saat yang menyuntik elemen dramatik dan keya
 * **Minit 0:00 - 01:00 (Slaid 1):** Salam pembuka kata, memperkenalkan diri sebagai Mohammad Fikrey bin Abdul Gapar, Guru Inovasi SK Ranggu, dan membentangkan tajuk HEM SmartTrack.
 * **Minit 01:00 - 02:00 (Slaid 2):** Menghuraikan 3 isu sebenar: kelemahan WhatsApp kehadiran, insiden buku disiplin dikoyak, dan gambar Telegram bercampur.
 * **Minit 02:00 - 03:00 (Slaid 3):** Menerangkan 4 objektif transformasi digital dan prinsip reka bentuk pintar.
-* **Minit 03:00 - 04:00 (Slaid 4):** Memperincikan manfaat kepada pentadbir, 58 guru, 3 AKP, unit disiplin dan 800+ murid SK Ranggu.
+* **Minit 03:00 - 04:00 (Slaid 4):** Memperincikan manfaat kepada 5 pentadbir (Guru Besar & 4 Penolong Kanan termasuk PK Petang), 48 guru, 3 AKP, unit disiplin dan 800+ murid SK Ranggu.
 * **Minit 04:00 - 05:00 (Slaid 5):** Menjelaskan kronologi ADDIE/PDCA dan pendekatan pembangunan oleh guru sendiri tanpa kos luar.
 * **Minit 05:00 - 06:30 (Slaid 6):** Melawat 9 modul utama HEM SmartTrack, menegaskan keunikan HEM SmartDisiplin kalis koyak.
 * **Minit 06:30 - 07:30 (Slaid 7):** Menghubungkan inovasi dengan TS25, PAK21, dan skor SKPM Kualiti@Sekolah.
