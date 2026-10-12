@@ -1,0 +1,1341 @@
+import os
+
+HTML_CONTENT = """<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HEM SmartTrack - Pembentangan Penanda Arasan Amalan Terbaik 2026</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #070D1E;
+      --card-bg: rgba(13, 23, 49, 0.88);
+      --border-line: rgba(59, 130, 246, 0.25);
+      --gold-accent: #F59E0B;
+      --cyan-accent: #06B6D4;
+      --emerald-accent: #10B981;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-dark);
+      color: #F8FAFC;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    .heading-font { font-family: 'Space Grotesk', sans-serif; }
+    .mono-font { font-family: 'JetBrains Mono', monospace; }
+
+    /* Subtle ambient pattern */
+    .bg-grid {
+      background-image: radial-gradient(rgba(59, 130, 246, 0.12) 1px, transparent 1px),
+                        radial-gradient(rgba(245, 158, 11, 0.05) 1px, transparent 1px);
+      background-size: 28px 28px;
+      background-position: 0 0, 14px 14px;
+    }
+
+    .ambient-glow {
+      position: absolute;
+      width: 750px;
+      height: 750px;
+      border-radius: 50%;
+      filter: blur(160px);
+      opacity: 0.14;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Executive Glass Panels */
+    .exec-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--border-line);
+      box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.7);
+      border-radius: 16px;
+    }
+
+    .gold-card {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(15, 23, 42, 0.9));
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      box-shadow: 0 15px 35px -10px rgba(245, 158, 11, 0.2);
+      border-radius: 16px;
+    }
+
+    /* Interactive image zoom frame */
+    .screenshot-frame {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.8);
+      transition: all 0.25s ease;
+      cursor: zoom-in;
+    }
+    .screenshot-frame:hover {
+      border-color: #38BDF8;
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px -5px rgba(56, 189, 248, 0.3);
+    }
+    .screenshot-frame .zoom-badge {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      color: #38BDF8;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .screenshot-frame:hover .zoom-badge {
+      opacity: 1;
+    }
+
+    /* Slide Navigation Pill */
+    .progress-pill {
+      transition: all 0.2s ease;
+    }
+    .progress-pill.active {
+      background: linear-gradient(90deg, #F59E0B, #FBBF24);
+      color: #0F172A;
+      font-weight: 900;
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.6);
+      transform: scale(1.08);
+    }
+
+    /* Print Optimizations */
+    @media print {
+      body {
+        overflow: visible !important;
+        background: #ffffff !important;
+        color: #0f172a !important;
+      }
+      .no-print { display: none !important; }
+      .exec-card, .gold-card {
+        background: #f8fafc !important;
+        border: 1px solid #cbd5e1 !important;
+        color: #0f172a !important;
+        box-shadow: none !important;
+      }
+      .text-white { color: #0f172a !important; }
+      .text-slate-300, .text-slate-400 { color: #334155 !important; }
+    }
+  </style>
+</head>
+<body class="bg-[#070D1E] text-slate-100 flex flex-col h-screen select-none bg-grid relative">
+
+  <!-- Ambient Lights -->
+  <div class="ambient-glow bg-blue-600 top-[-100px] left-[-100px]"></div>
+  <div class="ambient-glow bg-amber-500 bottom-[-150px] right-[-100px]"></div>
+
+  <!-- ==========================================
+       PERSISTENT MASTER HEADER (EXECUTIVE ONLY)
+       ========================================== -->
+  <header class="no-print z-30 bg-[#091228]/95 backdrop-blur-md border-b border-blue-900/40 px-6 py-2.5 flex items-center justify-between shadow-2xl flex-shrink-0">
+    <!-- Clean Logo Trio + School Identity -->
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2.5 bg-slate-900/70 p-1.5 px-3 rounded-xl border border-slate-700/60 shadow-inner">
+        <!-- 1. Logo KPM -->
+        <img src="./logo-kpm-cutout.png" alt="Kementerian Pendidikan Malaysia" class="h-9 w-auto object-contain drop-shadow" title="Kementerian Pendidikan Malaysia">
+        <div class="w-[1px] h-6 bg-slate-700"></div>
+        <!-- 2. Logo SK Ranggu -->
+        <img src="./logo-skrg-cutout.png" alt="Sekolah Kebangsaan Ranggu" class="h-9 w-auto object-contain drop-shadow" title="SK Ranggu, Tawau">
+        <div class="w-[1px] h-6 bg-slate-700"></div>
+        <!-- 3. Logo Rasmi HEM SmartTrack -->
+        <img src="./logo_rasmi_hem_smarttrack.jpg" alt="Logo Rasmi HEM SmartTrack" class="h-9 w-9 rounded-lg object-contain shadow-md border border-cyan-400/40" title="Logo Rasmi HEM SmartTrack SK Ranggu">
+      </div>
+
+      <div class="flex flex-col">
+        <div class="flex items-center gap-2">
+          <span class="text-[10px] font-bold tracking-widest text-amber-400 uppercase bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">Amalan Terbaik 2026</span>
+          <span class="text-[11px] font-medium text-slate-400">SK Ranggu, Tawau (XBA3037)</span>
+        </div>
+        <h1 class="text-sm font-bold text-white tracking-tight flex items-center gap-2">
+          HEM SmartTrack <span class="text-slate-500 font-normal">|</span> <span class="text-blue-300 font-semibold text-xs">Pendigitalan Pengurusan HEM Bersepadu</span>
+        </h1>
+      </div>
+    </div>
+
+    <!-- Center Slide Navigator Pills -->
+    <div class="flex items-center gap-1.5 bg-slate-950/80 p-1 rounded-xl border border-blue-900/50 shadow-inner">
+      <div id="slidePillsContainer" class="flex items-center gap-1"></div>
+    </div>
+
+    <!-- Right Quick Controls (Presenter-focused, NO SCRIPT on screen!) -->
+    <div class="flex items-center gap-2.5">
+      <!-- Fast-Paced Dynamic Teaser Montage Button -->
+      <button onclick="toggleMontageModal()" class="flex items-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 text-xs font-black px-3.5 py-1.5 rounded-lg shadow-lg shadow-amber-500/25 transition-all transform hover:scale-105 active:scale-95">
+        <span>⚡</span>
+        <span>Montaj Teaser (20s)</span>
+      </button>
+
+      <!-- Print / PDF Button -->
+      <button onclick="window.print()" class="flex items-center gap-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium px-2.5 py-1.5 rounded-lg transition-all" title="Cetak / Simpan PDF Slaid">
+        <span>🖨️</span>
+        <span class="hidden sm:inline">PDF</span>
+      </button>
+
+      <!-- Fullscreen Button -->
+      <button onclick="toggleFullscreen()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium p-1.5 rounded-lg transition-all" title="Skrin Penuh (F)">
+        ⛶
+      </button>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       MAIN PRESENTATION SLIDE STAGE
+       ========================================== -->
+  <main class="flex-1 relative overflow-hidden flex items-center justify-center p-3 md:p-5 z-10">
+    <div id="slideContent" class="w-full max-w-6xl h-full flex flex-col justify-between">
+      <!-- Injected dynamically via JS based on current slide -->
+    </div>
+  </main>
+
+  <!-- ==========================================
+       FOOTER CONTROLS & TIMELINE
+       ========================================== -->
+  <footer class="no-print z-30 bg-[#091228]/95 backdrop-blur-md border-t border-blue-900/40 px-6 py-2.5 flex items-center justify-between text-xs text-slate-400 flex-shrink-0">
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-1.5 text-slate-300 font-medium">
+        <span class="text-blue-400">Pembangun Sistem:</span>
+        <strong class="text-white bg-blue-500/20 px-2 py-0.5 rounded border border-blue-500/30">MOHAMMAD FIKREY BIN ABDUL GAPAR</strong>
+      </div>
+      <div class="hidden lg:flex items-center gap-2 text-slate-400">
+        <span>•</span>
+        <span>Pertandingan Penanda Arasan Amalan Terbaik Sekolah 2026</span>
+        <span>•</span>
+        <a href="https://fikreyxcode.github.io/sistemkehadiranskrg/?v=20#e-jkm" target="_blank" class="text-sky-400 hover:underline flex items-center gap-1 font-semibold">
+          <span>Portal Langsung: sistemkehadiranskrg</span> ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="flex items-center gap-3">
+      <div class="mono-font text-xs font-bold text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded border border-amber-400/20">
+        <span id="currentSlideNumber">1</span> / 10
+      </div>
+
+      <button id="btnPrev" onclick="prevSlide()" class="flex items-center gap-1 bg-slate-800 hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed text-white px-3 py-1.5 rounded-lg font-bold transition-all">
+        ‹ Sebelumnya
+      </button>
+
+      <button id="btnNext" onclick="nextSlide()" class="flex items-center gap-1 bg-blue-600 hover:bg-blue-500 text-white px-4 py-1.5 rounded-lg font-bold shadow-md shadow-blue-600/30 transition-all">
+        Seterusnya ›
+      </button>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       MODAL 1: MONTAJ TEASER PANTAS & DINAMIK (20 SAAT)
+       ========================================== -->
+  <div id="montageModal" class="fixed inset-0 bg-black/95 backdrop-blur-2xl z-50 hidden flex items-center justify-center p-4">
+    <div class="exec-card max-w-4xl w-full border-amber-500/50 p-6 flex flex-col gap-4 relative shadow-2xl">
+      <button onclick="toggleMontageModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl p-2 z-20">✕</button>
+
+      <div class="flex items-center justify-between border-b border-slate-700/60 pb-3">
+        <div class="flex items-center gap-3">
+          <span class="text-2xl animate-bounce">⚡</span>
+          <div>
+            <h2 class="text-lg font-extrabold text-white heading-font tracking-wide">MONTAJ TEASER GIMIK (PANTAS & BERTENAGA)</h2>
+            <p class="text-xs text-amber-400">Transformasi 20 Saat: Dari Krisis Manual ke Kuasa HEM SmartTrack</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <span id="montageTimerDisplay" class="mono-font text-xs font-bold text-amber-400 bg-slate-950 px-2.5 py-1 rounded border border-slate-800">00 / 20s</span>
+        </div>
+      </div>
+
+      <!-- Montage Dynamic Screen -->
+      <div id="montageScreen" class="w-full h-80 rounded-2xl bg-gradient-to-br from-slate-950 via-[#070D1E] to-blue-950 border border-blue-500/30 relative overflow-hidden flex flex-col items-center justify-center p-6 text-center shadow-inner">
+        <!-- Content injected by JS -->
+        <div id="montageContentArea" class="z-10 w-full max-w-2xl transition-all duration-300"></div>
+
+        <!-- Ambient animated ring -->
+        <div class="absolute inset-0 bg-radial from-cyan-500/10 via-transparent to-transparent pointer-events-none animate-pulse"></div>
+
+        <!-- Progress bar -->
+        <div class="absolute bottom-0 left-0 right-0 h-1.5 bg-slate-800">
+          <div id="montageProgressLine" class="h-full bg-gradient-to-r from-amber-500 via-cyan-400 to-blue-500 w-0 transition-all duration-200"></div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex items-center justify-between pt-1">
+        <div class="flex items-center gap-3">
+          <button id="btnPlayMontage" onclick="startFastMontage()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-black px-5 py-2 rounded-xl text-xs shadow-lg shadow-amber-500/20 transition-all flex items-center gap-2">
+            ▶ Mainkan Teaser Pantas (20s)
+          </button>
+          <button onclick="stopFastMontage(); toggleMontageModal(); goToSlide(1);" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded-xl text-xs">
+            Langkau & Terus Ke Slaid ➔
+          </button>
+        </div>
+        <div class="text-xs text-slate-400">
+          Inovator: <strong class="text-white">Mohammad Fikrey bin Abdul Gapar</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 2: LIGHTBOX SCREENSHOT ZOOM (4K FULLSCREEN)
+       ========================================== -->
+  <div id="lightboxModal" class="fixed inset-0 bg-black/95 backdrop-blur-2xl z-50 hidden flex items-center justify-center p-4" onclick="closeLightbox()">
+    <div class="relative max-w-6xl w-full flex flex-col items-center gap-3" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between w-full px-2 text-xs text-slate-300">
+        <span id="lightboxCaption" class="font-bold text-sky-400 text-sm"></span>
+        <button onclick="closeLightbox()" class="bg-slate-800 hover:bg-slate-700 text-white px-3 py-1.5 rounded-lg text-xs font-bold border border-slate-600">
+          Tutup [ESC] ✕
+        </button>
+      </div>
+      <div class="rounded-xl overflow-hidden border-2 border-sky-500/60 shadow-2xl bg-slate-950 w-full max-h-[82vh] flex items-center justify-center">
+        <img id="lightboxImg" src="" alt="Tangkap Layar Penuh" class="max-w-full max-h-[80vh] object-contain">
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       SLIDE DATA WITH REAL ATTACHMENTS & SCREENSHOTS
+       ========================================== -->
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 10;
+    let montageActive = false;
+    let montageTimer = null;
+    let montageSec = 0;
+
+    const slidesData = [
+      // ----------------------------------------------------
+      // SLAID 1: TAJUK & PROFIL
+      // ----------------------------------------------------
+      {
+        id: 1,
+        title: "Tajuk Amalan Terbaik & Profil Inovator",
+        kicker: "01. PENGENALAN & PENANDA ARASAN AMALAN TERBAIK",
+        render: () => `
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 h-full items-center">
+            <div class="lg:col-span-7 flex flex-col justify-center gap-3">
+              <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-full w-max">
+                <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Kategori Guru Sekolah Rendah: Hal Ehwal Murid</span>
+              </div>
+              
+              <!-- Official Emblem + Title -->
+              <div class="flex items-center gap-4 my-1">
+                <img src="./logo_rasmi_hem_smarttrack.jpg" alt="Logo Rasmi HEM SmartTrack" class="w-20 h-20 md:w-24 md:h-24 rounded-2xl shadow-2xl border-2 border-cyan-400/60 object-cover flex-shrink-0">
+                <div>
+                  <h1 class="text-3xl md:text-5xl font-black heading-font text-white leading-tight tracking-tight">
+                    HEM SmartTrack
+                  </h1>
+                  <p class="text-base md:text-xl text-blue-300 font-semibold leading-snug">
+                    Pendigitalan Pengurusan HEM Bersepadu Berasaskan Data Masa Nyata
+                  </p>
+                </div>
+              </div>
+
+              <p class="text-xs md:text-sm text-slate-300 leading-relaxed">
+                Transformasi pengurusan Hal Ehwal Murid SK Ranggu: mengalihkan rekod kehadiran WhatsApp berselerak kepada portal awan masa nyata, menggantikan buku disiplin fizikal yang berisiko disabotaj dengan sistem kalis manipulasi, serta menjana laporan One-Page Report (OPR) secara automatik terus ke Google Drive sekolah.
+              </p>
+
+              <!-- Live Badges -->
+              <div class="flex flex-wrap items-center gap-2.5 pt-1">
+                <div class="flex items-center gap-2 bg-slate-900/80 px-3 py-1.5 rounded-xl border border-slate-700 text-xs">
+                  <span class="text-emerald-400 text-base">⚡</span>
+                  <div>
+                    <span class="text-slate-400 block text-[10px]">Status Operasi:</span>
+                    <strong class="text-emerald-400">100% Aktif Digunakan di SK Ranggu</strong>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-2 bg-slate-900/80 px-3 py-1.5 rounded-xl border border-slate-700 text-xs">
+                  <span class="text-cyan-400 text-base">🌐</span>
+                  <div>
+                    <span class="text-slate-400 block text-[10px]">Portal Langsung:</span>
+                    <strong class="text-sky-300 font-mono">fikreyxcode.github.io/sistemkehadiranskrg</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Profile & Live Portal Card -->
+            <div class="lg:col-span-5 flex flex-col gap-3">
+              <!-- Live Screenshot Preview of Portal -->
+              <div class="screenshot-frame bg-slate-950" onclick="openLightbox('./assets/portal_utama_skrg.png', 'Laman Utama Portal HEM SmartTrack SK Ranggu')">
+                <img src="./assets/portal_utama_skrg.png" alt="Portal Utama SK Ranggu" class="w-full h-36 object-cover object-top opacity-90 hover:opacity-100 transition-all">
+                <div class="zoom-badge">🔍 Zum Penuh</div>
+                <div class="absolute top-2 left-2 bg-slate-950/80 text-[10px] text-cyan-300 font-bold px-2 py-0.5 rounded border border-cyan-500/30">
+                  Antaramuka Sebenar Portal SK Ranggu
+                </div>
+              </div>
+
+              <!-- Innovator Profile Box -->
+              <div class="gold-card p-4 flex flex-col gap-2.5">
+                <div class="flex items-center justify-between border-b border-amber-500/20 pb-2">
+                  <span class="text-[10px] font-bold text-amber-400 tracking-wider uppercase">Inovator & Pembangun Sistem</span>
+                  <span class="text-[11px] bg-amber-400 text-slate-950 px-2 py-0.2 rounded font-black">SK RANGGU</span>
+                </div>
+
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-blue-600 to-amber-500 flex items-center justify-center text-white text-lg font-black shadow-lg">
+                    MF
+                  </div>
+                  <div>
+                    <h3 class="text-sm font-extrabold text-white">MOHAMMAD FIKREY BIN ABDUL GAPAR</h3>
+                    <p class="text-xs text-amber-300 font-medium">Guru Inovasi & Pembangun HEM SmartTrack</p>
+                    <p class="text-[10px] text-slate-400">SK Ranggu, Tawau, Sabah (Kod: XBA3037)</p>
+                  </div>
+                </div>
+
+                <div class="bg-slate-950/70 p-2.5 rounded-xl border border-slate-800 text-[11px] grid grid-cols-3 gap-2 text-center">
+                  <div>
+                    <span class="text-slate-400 block text-[10px]">Warga Kerja</span>
+                    <strong class="text-white">58 Guru + 3 AKP</strong>
+                  </div>
+                  <div>
+                    <span class="text-slate-400 block text-[10px]">Kapasiti</span>
+                    <strong class="text-white">24 Kelas Perdana</strong>
+                  </div>
+                  <div>
+                    <span class="text-slate-400 block text-[10px]">Enrolmen</span>
+                    <strong class="text-cyan-300">800+ Murid</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+      },
+
+      // ----------------------------------------------------
+      // SLAID 2: LATAR BELAKANG & ISU SEBENAR (DENGAN GAMBAR RAJAH)
+      // ----------------------------------------------------
+      {
+        id: 2,
+        title: "Latar Belakang & 3 Isu Kritikal Sebenar",
+        kicker: "02. GAMBAR RAJAH PERBANDINGAN: SEBELUM VS SELEPAS",
+        render: () => `
+          <div class="flex flex-col h-full justify-between gap-3">
+            <div>
+              <h2 class="text-xl md:text-2xl font-extrabold text-white heading-font">3 Isu Kritikal Sebenar di SK Ranggu Sebelum Inovasi</h2>
+              <p class="text-xs text-slate-300">Perbandingan autentik kaedah konvensional berisiko berbanding ekosistem digital HEM SmartTrack:</p>
+            </div>
+
+            <!-- Visual Diagram Comparison Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 my-auto">
+              <!-- Issue 1 -->
+              <div class="exec-card p-4 border-red-500/40 flex flex-col justify-between gap-2.5">
+                <div class="flex items-center justify-between border-b border-red-500/30 pb-1.5">
+                  <div class="flex items-center gap-1.5 text-red-400 font-bold text-xs">
+                    <span>📱</span> <span>Isu 1: Kehadiran WhatsApp</span>
+                  </div>
+                  <span class="text-[10px] bg-red-950 text-red-300 px-1.5 py-0.5 rounded font-mono">SEBELUM</span>
+                </div>
+                
+                <!-- Visual simulation box -->
+                <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-[11px] space-y-1 text-slate-300">
+                  <div class="bg-red-950/40 p-1.5 rounded text-red-300 border border-red-900/50">
+                    ❌ Mesej WhatsApp bertindan ratusan baris setiap pagi.
+                  </div>
+                  <div class="bg-red-950/40 p-1.5 rounded text-red-300 border border-red-900/50">
+                    ❌ Sukar tahu kelas mana belum isi kehadiran.
+                  </div>
+                  <div class="bg-red-950/40 p-1.5 rounded text-red-300 border border-red-900/50">
+                    ❌ Kira peratus manual dengan kalkulator (45 minit).
+                  </div>
+                </div>
+
+                <div class="bg-emerald-950/40 p-2 rounded border border-emerald-500/30 text-[11px] text-emerald-300">
+                  <b>Penyelesaian HEM SmartTrack:</b> Indikator hijau/merah automatik masa nyata & peratusan siap dalam <b>5 minit</b>.
+                </div>
+              </div>
+
+              <!-- Issue 2 (Discipline Book Torn) -->
+              <div class="exec-card p-4 border-amber-500/40 flex flex-col justify-between gap-2.5">
+                <div class="flex items-center justify-between border-b border-amber-500/30 pb-1.5">
+                  <div class="flex items-center gap-1.5 text-amber-400 font-bold text-xs">
+                    <span>📖</span> <span>Isu 2: Buku Disiplin Dikoyak!</span>
+                  </div>
+                  <span class="text-[10px] bg-amber-950 text-amber-300 px-1.5 py-0.5 rounded font-mono">RISIKO KRITIKAL</span>
+                </div>
+
+                <!-- Visual simulation box -->
+                <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-[11px] space-y-1 text-slate-300">
+                  <div class="bg-amber-950/40 p-1.5 rounded text-amber-200 border border-amber-900/50">
+                    ⚠️ Buku rekod fizikal pernah <b>dikoyak / disabotaj</b>.
+                  </div>
+                  <div class="bg-amber-950/40 p-1.5 rounded text-amber-200 border border-amber-900/50">
+                    ⚠️ Rekod salah laku murid hilang tanpa bukti.
+                  </div>
+                  <div class="bg-amber-950/40 p-1.5 rounded text-amber-200 border border-amber-900/50">
+                    ⚠️ Tindakan susulan kaunseling terbantut.
+                  </div>
+                </div>
+
+                <div class="bg-emerald-950/40 p-2 rounded border border-emerald-500/30 text-[11px] text-emerald-300">
+                  <b>Penyelesaian SmartDisiplin:</b> Pangkalan data awan kalis manipulasi, ada nombor kes (#ID) dan jejak masa sah.
+                </div>
+              </div>
+
+              <!-- Issue 3 (Telegram photos lost) -->
+              <div class="exec-card p-4 border-sky-500/40 flex flex-col justify-between gap-2.5">
+                <div class="flex items-center justify-between border-b border-sky-500/30 pb-1.5">
+                  <div class="flex items-center gap-1.5 text-sky-400 font-bold text-xs">
+                    <span>📸</span> <span>Isu 3: Foto Telegram Berselerak</span>
+                  </div>
+                  <span class="text-[10px] bg-sky-950 text-sky-300 px-1.5 py-0.5 rounded font-mono">SEBELUM</span>
+                </div>
+
+                <!-- Visual simulation box -->
+                <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-[11px] space-y-1 text-slate-300">
+                  <div class="bg-sky-950/40 p-1.5 rounded text-sky-200 border border-sky-900/50">
+                    📁 Foto rondaan & Guru Penyayang dalam Telegram hilang.
+                  </div>
+                  <div class="bg-sky-950/40 p-1.5 rounded text-sky-200 border border-sky-900/50">
+                    📁 Tiada format One-Page Report (OPR) standard.
+                  </div>
+                  <div class="bg-sky-950/40 p-1.5 rounded text-sky-200 border border-sky-900/50">
+                    📁 Sukar menyediakan evidens audit SKPMg2 / TS25.
+                  </div>
+                </div>
+
+                <div class="bg-emerald-950/40 p-2 rounded border border-emerald-500/30 text-[11px] text-emerald-300">
+                  <b>Penyelesaian OPR Drive:</b> Butang muat naik gambar di telefon, auto-jana OPR dan terus simpan ke Google Drive.
+                </div>
+              </div>
+            </div>
+
+            <div class="gold-card p-2.5 flex items-center justify-between text-xs">
+              <span class="text-amber-300 font-bold">Impak Transformasi:</span>
+              <span class="text-white">Menyelamatkan integriti data sekolah, mengelakkan salah laku disabotaj, dan menjimatkan ratusan jam kerja guru.</span>
+            </div>
+          </div>
+        `
+      },
+
+      // ----------------------------------------------------
+      // SLAID 3: OBJEKTIF & MATLAMAT INOVASI
+      // ----------------------------------------------------
+      {
+        id: 3,
+        title: "Objektif & Matlamat Transformasi HEM",
+        kicker: "03. HALA TUJU STRATEGIK INOVASI",
+        render: () => `
+          <div class="flex flex-col h-full justify-between gap-3">
+            <div>
+              <h2 class="text-xl md:text-2xl font-extrabold text-white heading-font">4 Objektif Utama HEM SmartTrack</h2>
+              <p class="text-xs text-slate-300">Menyelesaikan punca masalah secara tuntas melalui teknologi pintar:</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 my-auto">
+              <div class="exec-card p-4 border-blue-500/30 flex items-start gap-3">
+                <div class="w-10 h-10 rounded-xl bg-blue-600/20 text-blue-400 flex items-center justify-center font-black text-lg flex-shrink-0 border border-blue-500/30">01</div>
+                <div>
+                  <h3 class="text-sm font-bold text-white mb-0.5">Pemusatan 9 Modul Pengurusan HEM</h3>
+                  <p class="text-xs text-slate-300 leading-relaxed">Menyatukan kehadiran murid, rekod keberadaan guru/AKP, catatan bertugas, RMT, dan keselamatan dalam satu portal web tunggal yang boleh dicapai pada bila-bila masa.</p>
+                </div>
+              </div>
+
+              <div class="exec-card p-4 border-emerald-500/30 flex items-start gap-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center font-black text-lg flex-shrink-0 border border-emerald-500/30">02</div>
+                <div>
+                  <h3 class="text-sm font-bold text-white mb-0.5">Pemantauan Masa Nyata & KPI 96%</h3>
+                  <p class="text-xs text-slate-300 leading-relaxed">Mengautomasikan status selesai/belum selesai kehadiran serta mengira peratusan harian secara automatik mengikut sasaran KPI 96% tanpa kiraan manual.</p>
+                </div>
+              </div>
+
+              <div class="exec-card p-4 border-amber-500/30 flex items-start gap-3">
+                <div class="w-10 h-10 rounded-xl bg-amber-600/20 text-amber-400 flex items-center justify-center font-black text-lg flex-shrink-0 border border-amber-500/30">03</div>
+                <div>
+                  <h3 class="text-sm font-bold text-white mb-0.5">Sistem HEM SmartDisiplin Kalis Sabotaj</h3>
+                  <p class="text-xs text-slate-300 leading-relaxed">Menghapuskan risiko buku dikoyak dengan aliran digital: Guru Pelapor lapor kes ➔ Guru Disiplin ambil tindakan ➔ Pentadbir sahkan tindakan secara masa nyata.</p>
+                </div>
+              </div>
+
+              <div class="exec-card p-4 border-purple-500/30 flex items-start gap-3">
+                <div class="w-10 h-10 rounded-xl bg-purple-600/20 text-purple-400 flex items-center justify-center font-black text-lg flex-shrink-0 border border-purple-500/30">04</div>
+                <div>
+                  <h3 class="text-sm font-bold text-white mb-0.5">Automasi OPR & Arkib Google Drive</h3>
+                  <p class="text-xs text-slate-300 leading-relaxed">Menyediakan butang muat naik gambar aktiviti Guru Penyayang di telefon dan menjana One-Page Report (OPR) 4 foto secara automatik ke Google Drive HEM.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="gold-card p-2.5 flex items-center justify-between text-xs">
+              <span class="text-amber-300 font-bold">Prinsip Reka Bentuk:</span>
+              <span class="text-white">"Ringkas untuk guru mengisi di telefon, berkuasa tinggi untuk pentadbir menganalisis data."</span>
+            </div>
+          </div>
+        `
+      },
+
+      // ----------------------------------------------------
+      // SLAID 4: KUMPULAN SASARAN & PENERIMA MANFAAT
+      // ----------------------------------------------------
+      {
+        id: 4,
+        title: "Kumpulan Sasaran & Penerima Manfaat",
+        kicker: "04. EKOSISTEM KOMUNITI SEKOLAH",
+        render: () => `
+          <div class="flex flex-col h-full justify-between gap-3">
+            <div>
+              <h2 class="text-xl md:text-2xl font-extrabold text-white heading-font">Menyeluruh Merangkumi Seluruh Warga SK Ranggu</h2>
+              <p class="text-xs text-slate-300">Setiap pemegang taruh menikmati impak positif secara langsung:</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-3 my-auto">
+              <div class="exec-card p-3.5 border-blue-500/30 flex flex-col justify-between">
+                <div>
+                  <div class="text-2xl mb-1">🏛️</div>
+                  <h3 class="text-xs font-bold text-white">Pentadbir Sekolah</h3>
+                  <span class="text-[10px] text-blue-300 font-semibold block mb-1">Guru Besar & Barisan PK</span>
+                  <p class="text-[11px] text-slate-300">Papan pemuka eksekutif masa nyata untuk memantau kehadiran murid dan pengoperasian sekolah secara serta-merta.</p>
+                </div>
+                <div class="mt-2 text-[9px] text-slate-400 bg-slate-900 p-1 rounded">Akses: Pemantauan Eksekutif</div>
+              </div>
+
+              <div class="exec-card p-3.5 border-emerald-500/30 flex flex-col justify-between">
+                <div>
+                  <div class="text-2xl mb-1">👨‍🏫</div>
+                  <h3 class="text-xs font-bold text-white">58 Guru & 3 AKP</h3>
+                  <span class="text-[10px] text-emerald-300 font-semibold block mb-1">Guru Kelas & Bertugas</span>
+                  <p class="text-[11px] text-slate-300">Pengisian kehadiran kelas hanya 1 minit di telefon pintar; tiada lagi taip teks panjang dalam WhatsApp.</p>
+                </div>
+                <div class="mt-2 text-[9px] text-slate-400 bg-slate-900 p-1 rounded">Akses: Pengisian Pantas PWA</div>
+              </div>
+
+              <div class="exec-card p-3.5 border-amber-500/30 flex flex-col justify-between">
+                <div>
+                  <div class="text-2xl mb-1">⚖️</div>
+                  <h3 class="text-xs font-bold text-white">Guru Disiplin & UBK</h3>
+                  <span class="text-[10px] text-amber-300 font-semibold block mb-1">Unit Kaunseling & Disiplin</span>
+                  <p class="text-[11px] text-slate-300">Menerima laporan salah laku murid dengan rekod bukti sahih digital tanpa risiko fail hilang atau disabotaj.</p>
+                </div>
+                <div class="mt-2 text-[9px] text-slate-400 bg-slate-900 p-1 rounded">Akses: HEM SmartDisiplin</div>
+              </div>
+
+              <div class="exec-card p-3.5 border-purple-500/30 flex flex-col justify-between">
+                <div>
+                  <div class="text-2xl mb-1">🎓</div>
+                  <h3 class="text-xs font-bold text-white">800+ Murid SK Ranggu</h3>
+                  <span class="text-[10px] text-purple-300 font-semibold block mb-1">24 Kelas Perdana</span>
+                  <p class="text-[11px] text-slate-300">Penerima manfaat utama — keselamatan terjamin (pintu pagar), pemakanan RMT dipantau, dan sahsiah positif dipupuk.</p>
+                </div>
+                <div class="mt-2 text-[9px] text-slate-400 bg-slate-900 p-1 rounded">Manfaat: Kemenjadian Murid</div>
+              </div>
+            </div>
+
+            <div class="bg-blue-950/40 p-2.5 rounded-xl border border-blue-500/30 flex items-center justify-between text-xs">
+              <span class="text-blue-300 font-bold">Keluasan Liputan:</span>
+              <span class="text-slate-200">Melibatkan 100% warga sekolah secara bersepadu tanpa ada kelas atau guru yang tercicir.</span>
+            </div>
+          </div>
+        `
+      },
+
+      // ----------------------------------------------------
+      // SLAID 5: SENI BINA & ALIRAN DATA SISTEM (FLOWCHART)
+      // ----------------------------------------------------
+      {
+        id: 5,
+        title: "Perancangan, Kronologi & Seni Bina Sistem",
+        kicker: "05. CARTA ALIR DATA (SYSTEM ARCHITECTURE DIAGRAM)",
+        render: () => `
+          <div class="flex flex-col h-full justify-between gap-3">
+            <div>
+              <h2 class="text-xl md:text-2xl font-extrabold text-white heading-font">Gambar Rajah Aliran Kerja Digital HEM SmartTrack</h2>
+              <p class="text-xs text-slate-300">Bagaimana data mengalir secara automatik, selamat dan kalis kehilangan:</p>
+            </div>
+
+            <!-- Flowchart Diagram -->
+            <div class="exec-card p-4 border-cyan-500/40 my-auto">
+              <div class="grid grid-cols-1 md:grid-cols-4 gap-3 relative">
+                <!-- Step 1 -->
+                <div class="bg-slate-950 p-3 rounded-xl border border-blue-500/30 flex flex-col justify-between">
+                  <div class="flex items-center justify-between text-blue-400 font-bold text-xs mb-1">
+                    <span>1. PENGISIAN</span>
+                    <span>📱</span>
+                  </div>
+                  <p class="text-[11px] text-white font-semibold">Guru Kelas & Guru Bertugas</p>
+                  <p class="text-[10px] text-slate-300 mt-1">Mengisi bilangan ketidakhadiran & muat naik gambar rondaan melalui PWA di telefon (&lt;1 minit).</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-slate-950 p-3 rounded-xl border border-cyan-500/40 flex flex-col justify-between">
+                  <div class="flex items-center justify-between text-cyan-400 font-bold text-xs mb-1">
+                    <span>2. PEMPROSESAN</span>
+                    <span>⚡</span>
+                  </div>
+                  <p class="text-[11px] text-white font-semibold">Enjin Awan HEM SmartTrack</p>
+                  <p class="text-[10px] text-slate-300 mt-1">Mengemas kini status kelas (Hijau/Merah), mengira peratusan kehadiran, & menjejaki KPI 96% automatik.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-slate-950 p-3 rounded-xl border border-amber-500/40 flex flex-col justify-between">
+                  <div class="flex items-center justify-between text-amber-400 font-bold text-xs mb-1">
+                    <span>3. TINDAKAN</span>
+                    <span>⚖️</span>
+                  </div>
+                  <p class="text-[11px] text-white font-semibold">Disiplin & Pentadbiran</p>
+                  <p class="text-[10px] text-slate-300 mt-1">Kes salah laku disiasat oleh Guru Disiplin, murid dikaunseling, dan disahkan oleh Pentadbir secara langsung.</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="bg-slate-950 p-3 rounded-xl border border-emerald-500/40 flex flex-col justify-between">
+                  <div class="flex items-center justify-between text-emerald-400 font-bold text-xs mb-1">
+                    <span>4. ARKIB AWAN</span>
+                    <span>☁️</span>
+                  </div>
+                  <p class="text-[11px] text-white font-semibold">Google Drive HEM & PPD</p>
+                  <p class="text-[10px] text-slate-300 mt-1">Jana OPR satu muka surat automatik dan failkan ke Google Drive pengurusan HEM sekolah.</p>
+                </div>
+              </div>
+
+              <!-- Connecting flow text -->
+              <div class="mt-3 pt-2 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400">
+                <span class="text-cyan-300 font-bold">Kitaran Pantas Masa Nyata:</span>
+                <span>Tiada pertindihan mesej • Tiada buku fizikal boleh dikoyak • 100% jejak masa digital sah</span>
+              </div>
+            </div>
+
+            <!-- Methodology Footnote -->
+            <div class="grid grid-cols-5 gap-2 text-center text-[10px]">
+              <div class="bg-slate-900/80 p-1.5 rounded border border-slate-800"><span class="text-amber-400 font-bold">Fasa 1:</span> Analisis Isu</div>
+              <div class="bg-slate-900/80 p-1.5 rounded border border-slate-800"><span class="text-blue-400 font-bold">Fasa 2:</span> Reka Bentuk</div>
+              <div class="bg-slate-900/80 p-1.5 rounded border border-slate-800"><span class="text-cyan-400 font-bold">Fasa 3:</span> Pembangunan</div>
+              <div class="bg-slate-900/80 p-1.5 rounded border border-slate-800"><span class="text-emerald-400 font-bold">Fasa 4:</span> Ujian Rintis</div>
+              <div class="bg-slate-900/80 p-1.5 rounded border border-slate-800"><span class="text-purple-400 font-bold">Fasa 5:</span> Pelaksanaan Penuh</div>
+            </div>
+          </div>
+        `
+      },
+
+      // ----------------------------------------------------
+      // SLAID 6: PELAKSANAAN 9 MODUL DENGAN TANGKAP LAYAR SEBENAR
+      // ----------------------------------------------------
+      {
+        id: 6,
+        title: "Pelaksanaan 9 Modul Bersepadu HEM SmartTrack",
+        kicker: "06. CIRI-CIRI MODUL & TANGKAP LAYAR SISTEM SEBENAR",
+        render: () => `
+          <div class="flex flex-col h-full justify-between gap-3">
+            <div class="flex items-center justify-between">
+              <div>
+                <h2 class="text-xl md:text-2xl font-extrabold text-white heading-font">Pelaksanaan 9 Modul Sebenar di SK Ranggu</h2>
+                <p class="text-xs text-slate-300">Klik mana-mana tangkap layar untuk melihat paparan sebenar sistem:</p>
+              </div>
+              <span class="text-xs bg-cyan-400/10 text-cyan-300 border border-cyan-400/30 px-2.5 py-1 rounded font-bold">9 Modul Aktif</span>
+            </div>
+
+            <!-- Grid of Modules with Actual Screenshot Previews -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 my-auto">
+              <!-- Module 1 -->
+              <div class="exec-card p-3 border-blue-500/30 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-1.5">
+                    <span class="text-xs font-bold text-white">01. e-JKM Kehadiran Murid</span>
+                    <span class="text-[9px] bg-blue-900 text-blue-200 px-1.5 py-0.5 rounded font-mono">24 Kelas</span>
+                  </div>
+                  <div class="screenshot-frame bg-slate-950 mb-2" onclick="openLightbox('./assets/modul_01_ejkm.png', 'Modul 01: e-JKM Rekod Kehadiran Murid SK Ranggu')">
+                    <img src="./assets/modul_01_ejkm.png" class="w-full h-20 object-cover object-top" alt="e-JKM">
+                    <div class="zoom-badge">🔍 Zum</div>
+                  </div>
+                  <p class="text-[10px] text-slate-300">Semakan masa nyata status selesai (hijau) vs belum selesai (merah) & kiraan KPI 96%.</p>
+                </div>
+              </div>
+
+              <!-- Module 4: HEM SmartDisiplin (High Impact) -->
+              <div class="gold-card p-3 flex flex-col justify-between border-amber-500/50">
+                <div>
+                  <div class="flex items-center justify-between mb-1.5">
+                    <span class="text-xs font-bold text-amber-300">04. HEM SmartDisiplin</span>
+                    <span class="text-[9px] bg-amber-400 text-slate-950 px-1.5 py-0.5 rounded font-black">KALIS KOYAK</span>
+                  </div>
+                  <div class="screenshot-frame bg-slate-950 mb-2" onclick="openLightbox('./assets/modul_04_smartdisiplin_utama.png', 'Modul 04: HEM SmartDisiplin SK Ranggu')">
+                    <img src="./assets/modul_04_smartdisiplin_utama.png" class="w-full h-20 object-cover object-top" alt="SmartDisiplin">
+                    <div class="zoom-badge">🔍 Zum</div>
+                  </div>
+                  <p class="text-[10px] text-slate-200">Aliran salah laku digital: Pelaporan ➔ Tindakan Kaunselor ➔ Pengesahan Pentadbir.</p>
+                </div>
+              </div>
+
+              <!-- Module 7: Pemantauan Sekolah -->
+              <div class="exec-card p-3 border-sky-500/30 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-1.5">
+                    <span class="text-xs font-bold text-white">07. Pemantauan 29 Lokasi</span>
+                    <span class="text-[9px] bg-sky-900 text-sky-200 px-1.5 py-0.5 rounded font-mono">Foto Kamera</span>
+                  </div>
+                  <div class="screenshot-frame bg-slate-950 mb-2" onclick="openLightbox('./assets/modul_07_pemantauan_sekolah.png', 'Modul 07: Laporan Pemantauan Sekolah & Guru Penyayang')">
+                    <img src="./assets/modul_07_pemantauan_sekolah.png" class="w-full h-20 object-cover object-top" alt="Pemantauan">
+                    <div class="zoom-badge">🔍 Zum</div>
+                  </div>
+                  <p class="text-[10px] text-slate-300">Rondaan 29 zon dan Amalan Guru Penyayang di pintu pagar dengan butang muat naik terus.</p>
+                </div>
+              </div>
+
+              <!-- Module 8: Analisis Kehadiran -->
+              <div class="exec-card p-3 border-emerald-500/30 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-1.5">
+                    <span class="text-xs font-bold text-white">08. Analisis Kehadiran</span>
+                    <span class="text-[9px] bg-emerald-900 text-emerald-200 px-1.5 py-0.5 rounded font-mono">KPI 96%</span>
+                  </div>
+                  <div class="screenshot-frame bg-slate-950 mb-2" onclick="openLightbox('./assets/modul_08_analisis_kehadiran.png', 'Modul 08: Analisis Kehadiran & Graf KPI SK Ranggu')">
+                    <img src="./assets/modul_08_analisis_kehadiran.png" class="w-full h-20 object-cover object-top" alt="Analisis">
+                    <div class="zoom-badge">🔍 Zum</div>
+                  </div>
+                  <p class="text-[10px] text-slate-300">Graf dinamik mingguan/bulanan dan senarai kelas peratus tertinggi untuk intervensi awal.</p>
+                </div>
+              </div>
+
+              <!-- Module 9: Template OPR HEM -->
+              <div class="exec-card p-3 border-purple-500/30 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-1.5">
+                    <span class="text-xs font-bold text-white">09. Template OPR HEM</span>
+                    <span class="text-[9px] bg-purple-900 text-purple-200 px-1.5 py-0.5 rounded font-mono">Drive Cloud</span>
+                  </div>
+                  <div class="screenshot-frame bg-slate-950 mb-2" onclick="openLightbox('./assets/modul_09_template_opr.png', 'Modul 09: Template OPR HEM (One-Page Report Bergambar)')">
+                    <img src="./assets/modul_09_template_opr.png" class="w-full h-20 object-cover object-top" alt="OPR">
+                    <div class="zoom-badge">🔍 Zum</div>
+                  </div>
+                  <p class="text-[10px] text-slate-300">Auto-jana laporan 4 foto aktiviti dan simpan terus ke Google Drive HEM sekolah.</p>
+                </div>
+              </div>
+
+              <!-- Module 2: Keberadaan Guru -->
+              <div class="exec-card p-3 border-slate-700 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-1.5">
+                    <span class="text-xs font-bold text-white">02. Keberadaan Guru/AKP</span>
+                    <span class="text-[9px] bg-slate-800 text-slate-300 px-1.5 py-0.5 rounded font-mono">58 Guru</span>
+                  </div>
+                  <div class="screenshot-frame bg-slate-950 mb-2" onclick="openLightbox('./assets/modul_02_keberadaan_guru.png', 'Modul 02: Rekod Keberadaan Guru & AKP')">
+                    <img src="./assets/modul_02_keberadaan_guru.png" class="w-full h-20 object-cover object-top" alt="Keberadaan">
+                    <div class="zoom-badge">🔍 Zum</div>
+                  </div>
+                  <p class="text-[10px] text-slate-300">Rekod rasmi staf tiada di sekolah (kursus, mesyuarat, CRK, cuti sakit) untuk rujukan pentadbir.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-slate-900/80 p-2 rounded-xl border border-slate-700/60 flex items-center justify-between text-xs">
+              <span class="text-slate-400">Modul Tambahan:</span>
+              <span class="text-sky-300 font-semibold">03 Guru Bertugas Harian • 05 Guru Bertugas RMT • 06 Rekod Kalendar Audit</span>
+            </div>
+          </div>
+        `
+      },
+
+      // ----------------------------------------------------
+      // SLAID 7: PENJAJARAN TS25 & PAK21
+      // ----------------------------------------------------
+      {
+        id: 7,
+        title: "Penjajaran Program TS25 & Aspirasi PAK21",
+        kicker: "07. TRANSFORMASI PENDIDIKAN & KEMENJADIAN MURID",
+        render: () => `
+          <div class="flex flex-col h-full justify-between gap-3">
+            <div>
+              <h2 class="text-xl md:text-2xl font-extrabold text-white heading-font">Menyokong Mandat Program Transformasi Sekolah 2025 (TS25)</h2>
+              <p class="text-xs text-slate-300">Impak kepada kemenjadian murid dan kualiti kepimpinan instruksional:</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 my-auto">
+              <div class="exec-card p-4 border-blue-500/30 flex items-start gap-3">
+                <div class="text-2xl">💬</div>
+                <div>
+                  <h3 class="text-sm font-bold text-white mb-0.5">Komunikasi Berkesan & Ketelusan Data</h3>
+                  <p class="text-xs text-slate-300 leading-relaxed">Menghapuskan kelambatan maklumat. Data kehadiran dan insiden keselamatan sampai kepada Guru Besar dan barisan PK dalam beberapa saat sahaja.</p>
+                </div>
+              </div>
+
+              <div class="exec-card p-4 border-emerald-500/30 flex items-start gap-3">
+                <div class="text-2xl">🤝</div>
+                <div>
+                  <h3 class="text-sm font-bold text-white mb-0.5">Kolaborasi Kolaboratif Pelbagai Peranan</h3>
+                  <p class="text-xs text-slate-300 leading-relaxed">Menyatukan guru kelas, guru bertugas harian, warden disiplin dan pentadbir dalam satu ekosistem data yang telus dan harmoni.</p>
+                </div>
+              </div>
+
+              <div class="exec-card p-4 border-amber-500/30 flex items-start gap-3">
+                <div class="text-2xl">📊</div>
+                <div>
+                  <h3 class="text-sm font-bold text-white mb-0.5">Pemikiran Kritis Berasaskan Data</h3>
+                  <p class="text-xs text-slate-300 leading-relaxed">Kaunselor dan guru disiplin menganalisis corak keciciran murid secara saintifik; intervensi segera digerakkan sebelum murid cicir berpanjangan.</p>
+                </div>
+              </div>
+
+              <div class="exec-card p-4 border-purple-500/30 flex items-start gap-3">
+                <div class="text-2xl">👑</div>
+                <div>
+                  <h3 class="text-sm font-bold text-white mb-0.5">Kepimpinan Instruksional Berprestasi</h3>
+                  <p class="text-xs text-slate-300 leading-relaxed">Pentadbir memimpin berasaskan data masa nyata, melonjakkan skor Standard Kualiti Pendidikan SKPM Kualiti@Sekolah Standard 2 dan Standard 3.2.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-blue-950/40 p-2.5 rounded-xl border border-blue-500/30 flex items-center justify-between text-xs">
+              <span class="text-blue-300 font-bold">Hasil Kemenjadian Murid:</span>
+              <span class="text-slate-200">Persekitaran sekolah selamat, amalan guru penyayang konsisten, dan kebajikan murid terbela.</span>
+            </div>
+          </div>
+        `
+      },
+
+      // ----------------------------------------------------
+      // SLAID 8: EVIDENS DIGITAL & TANGKAP LAYAR SEBENAR (HIGH IMPACT)
+      // ----------------------------------------------------
+      {
+        id: 8,
+        title: "Evidens Digital & Data Penggunaan Sebenar",
+        kicker: "08. BUKTI LANGSUNG TANGKAP LAYAR SISTEM (EVIDENS AUTENTIK)",
+        render: () => `
+          <div class="flex flex-col h-full justify-between gap-3">
+            <div class="flex items-center justify-between">
+              <div>
+                <h2 class="text-xl md:text-2xl font-extrabold text-white heading-font">Evidens Tangkap Layar Sebenar HEM SmartTrack</h2>
+                <p class="text-xs text-slate-300">Klik mana-mana imej di bawah untuk membesarkan tangkap layar secara penuh:</p>
+              </div>
+              <span class="text-xs bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-3 py-1 rounded font-bold">
+                ✓ Disahkan Digunakan di SK Ranggu
+              </span>
+            </div>
+
+            <!-- 4 Major Screenshot Showcase with Lightbox on click -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 my-auto">
+              <!-- Evidens 1: e-JKM Real Screenshot -->
+              <div class="exec-card p-3 border-blue-500/40">
+                <div class="flex items-center justify-between mb-1 text-xs">
+                  <span class="font-bold text-sky-400">1. Tangkap Layar e-JKM (24 Kelas & Status Selesai)</span>
+                  <span class="text-[10px] bg-slate-900 text-slate-300 px-2 py-0.5 rounded font-mono">APDM XBA3037</span>
+                </div>
+                <div class="screenshot-frame bg-slate-950" onclick="openLightbox('./assets/modul_01_ejkm.png', 'Evidens 1: Tangkap Layar Sebenar Modul e-JKM SK Ranggu')">
+                  <img src="./assets/modul_01_ejkm.png" class="w-full h-32 object-cover object-top" alt="e-JKM Screenshot">
+                  <div class="zoom-badge">🔍 Klik Zum Penuh</div>
+                </div>
+                <p class="text-[10px] text-slate-300 mt-1">Status hijau "SELESAI" dan merah "BELUM SELESAI" membolehkan pemantauan pantas seawal 7:30 pagi.</p>
+              </div>
+
+              <!-- Evidens 2: HEM SmartDisiplin Real Screenshot -->
+              <div class="exec-card p-3 border-amber-500/40">
+                <div class="flex items-center justify-between mb-1 text-xs">
+                  <span class="font-bold text-amber-400">2. Tangkap Layar HEM SmartDisiplin (Kalis Koyak)</span>
+                  <span class="text-[10px] bg-amber-950 text-amber-300 px-2 py-0.5 rounded font-mono">Audit Disiplin</span>
+                </div>
+                <div class="screenshot-frame bg-slate-950" onclick="openLightbox('./assets/modul_04_smartdisiplin_utama.png', 'Evidens 2: Tangkap Layar Sebenar Portal HEM SmartDisiplin SK Ranggu')">
+                  <img src="./assets/modul_04_smartdisiplin_utama.png" class="w-full h-32 object-cover object-top" alt="SmartDisiplin Screenshot">
+                  <div class="zoom-badge">🔍 Klik Zum Penuh</div>
+                </div>
+                <p class="text-[10px] text-slate-300 mt-1">Setiap salah laku direkodkan dalam pangkalan data awan dengan nombor rujukan kes dan jejak masa sah.</p>
+              </div>
+
+              <!-- Evidens 3: Analisis Kehadiran & KPI 96% Real Screenshot -->
+              <div class="exec-card p-3 border-emerald-500/40">
+                <div class="flex items-center justify-between mb-1 text-xs">
+                  <span class="font-bold text-emerald-400">3. Tangkap Layar Analisis Graf & Pencapaian KPI 96%</span>
+                  <span class="text-[10px] bg-slate-900 text-slate-300 px-2 py-0.5 rounded font-mono">Graf Mingguan</span>
+                </div>
+                <div class="screenshot-frame bg-slate-950" onclick="openLightbox('./assets/modul_08_analisis_kehadiran.png', 'Evidens 3: Tangkap Layar Sebenar Analisis Kehadiran SK Ranggu')">
+                  <img src="./assets/modul_08_analisis_kehadiran.png" class="w-full h-32 object-cover object-top" alt="Analisis Screenshot">
+                  <div class="zoom-badge">🔍 Klik Zum Penuh</div>
+                </div>
+                <p class="text-[10px] text-slate-300 mt-1">Graf perbandingan kelas terbaik dan analisis trend bulanan dijana secara automatik tanpa kalkulator.</p>
+              </div>
+
+              <!-- Evidens 4: Template OPR Real Screenshot -->
+              <div class="exec-card p-3 border-purple-500/40">
+                <div class="flex items-center justify-between mb-1 text-xs">
+                  <span class="font-bold text-purple-400">4. Tangkap Layar Template OPR HEM (Google Drive)</span>
+                  <span class="text-[10px] bg-slate-900 text-slate-300 px-2 py-0.5 rounded font-mono">4 Gambar Auto</span>
+                </div>
+                <div class="screenshot-frame bg-slate-950" onclick="openLightbox('./assets/modul_09_template_opr.png', 'Evidens 4: Tangkap Layar Sebenar Template OPR HEM')">
+                  <img src="./assets/modul_09_template_opr.png" class="w-full h-32 object-cover object-top" alt="OPR Screenshot">
+                  <div class="zoom-badge">🔍 Klik Zum Penuh</div>
+                </div>
+                <p class="text-[10px] text-slate-300 mt-1">Gambar aktiviti Guru Penyayang terus disusun kemas 4 foto dan difailkan ke Google Drive pengurusan HEM.</p>
+              </div>
+            </div>
+
+            <div class="gold-card p-2 text-center text-xs">
+              <span class="text-amber-300 font-bold">Integriti Evidens:</span>
+              <span class="text-white">Semua tangkap layar di atas adalah paparan operasi harian sebenar SK Ranggu yang telah merekodkan lebih 14,000 capaian warga sekolah.</span>
+            </div>
+          </div>
+        `
+      },
+
+      // ----------------------------------------------------
+      // SLAID 9: IMPAK & DAPATAN KEBERKESANAN (50 MARKAH)
+      // ----------------------------------------------------
+      {
+        id: 9,
+        title: "Impak & Keberkesanan Terbukti (50 Markah)",
+        kicker: "09. DAPATAN KUANTITATIF & KUALITATIF (50 MARKAH PENJURIAN)",
+        render: () => `
+          <div class="flex flex-col h-full justify-between gap-3">
+            <div>
+              <h2 class="text-xl md:text-2xl font-extrabold text-white heading-font">Dapatan Empirikal & Impak Keberkesanan Sebenar</h2>
+              <p class="text-xs text-slate-300">Data keberkesanan di SK Ranggu bagi komponen terbesar rubrik penjurian (50 Markah):</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-3 my-auto">
+              <!-- Metric 1 -->
+              <div class="exec-card p-4 border-emerald-500/40 flex flex-col justify-between">
+                <div>
+                  <div class="text-2xl md:text-3xl font-black text-emerald-400 heading-font mb-1">89%</div>
+                  <h3 class="text-xs font-bold text-white mb-0.5">Penjimatan Masa Kehadiran</h3>
+                  <p class="text-[11px] text-slate-300">Masa pengumpulan kehadiran dipendekkan daripada <b>45 minit</b> (WhatsApp manual) kepada hanya <b>5 minit</b> setiap pagi.</p>
+                </div>
+                <div class="mt-2.5 bg-emerald-950/40 p-1.5 rounded text-[10px] text-emerald-300 border border-emerald-900/40">Sebelum: 45m ➔ Selepas: 5m</div>
+              </div>
+
+              <!-- Metric 2 -->
+              <div class="exec-card p-4 border-amber-500/40 flex flex-col justify-between">
+                <div>
+                  <div class="text-2xl md:text-3xl font-black text-amber-400 heading-font mb-1">0 Kes</div>
+                  <h3 class="text-xs font-bold text-white mb-0.5">Sifar Rekod Disiplin Hilang</h3>
+                  <p class="text-[11px] text-slate-300">Isu helaian buku dikoyak dihapuskan sepenuhnya. 100% data salah laku direkod dalam pangkalan data awan kalis manipulasi.</p>
+                </div>
+                <div class="mt-2.5 bg-amber-950/40 p-1.5 rounded text-[10px] text-amber-300 border border-amber-900/40">Integriti Rekod: 100% Terpelihara</div>
+              </div>
+
+              <!-- Metric 3 -->
+              <div class="exec-card p-4 border-cyan-500/40 flex flex-col justify-between">
+                <div>
+                  <div class="text-2xl md:text-3xl font-black text-cyan-400 heading-font mb-1">96.4%</div>
+                  <h3 class="text-xs font-bold text-white mb-0.5">Konsistensi KPI Kehadiran</h3>
+                  <p class="text-[11px] text-slate-300">Pengesanan murid ponteng serta-merta membolehkan intervensi awal dibuat, mengekalkan kehadiran melepasi sasaran KPI 96%.</p>
+                </div>
+                <div class="mt-2.5 bg-cyan-950/40 p-1.5 rounded text-[10px] text-cyan-300 border border-cyan-900/40">Sasaran: 96% ➔ Sebenar: 96.4%</div>
+              </div>
+
+              <!-- Metric 4 -->
+              <div class="exec-card p-4 border-purple-500/40 flex flex-col justify-between">
+                <div>
+                  <div class="text-2xl md:text-3xl font-black text-purple-400 heading-font mb-1">98.4%</div>
+                  <h3 class="text-xs font-bold text-white mb-0.5">Skor Kepuasan Warga Guru</h3>
+                  <p class="text-[11px] text-slate-300">Berdasarkan soal selidik 58 guru SK Ranggu — sistem terbukti memudahkan tugas, menjimatkan masa, dan mengurangkan stres perkeranian.</p>
+                </div>
+                <div class="mt-2.5 bg-purple-950/40 p-1.5 rounded text-[10px] text-purple-300 border border-purple-900/40">Maklum Balas: Amat Positif</div>
+              </div>
+            </div>
+
+            <div class="gold-card p-2.5 flex items-center justify-between text-xs">
+              <span class="text-amber-300 font-bold">Impak Terbesar:</span>
+              <span class="text-white">Beban tugas perkeranian guru berkurangan secara mendadak, manakala pentadbir memperoleh data sahih untuk dilaporkan kepada PPD Tawau secara tepat pada masanya.</span>
+            </div>
+          </div>
+        `
+      },
+
+      // ----------------------------------------------------
+      // SLAID 10: KELESTARIAN & POTENSI REPLIKASI
+      // ----------------------------------------------------
+      {
+        id: 10,
+        title: "Kelestarian, PWA Multi-Peranti & Potensi Replikasi",
+        kicker: "10. KEMAMPANAN, REPLIKASI & MASA DEPAN INOVASI",
+        render: () => `
+          <div class="flex flex-col h-full justify-between gap-3">
+            <div>
+              <h2 class="text-xl md:text-2xl font-extrabold text-white heading-font">Mampan, Kos Sifar & Sedia Direplikasi ke Sekolah Lain</h2>
+              <p class="text-xs text-slate-300">Faktor kejayaan jangka panjang dan potensi peluasan amalan terbaik:</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 my-auto">
+              <div class="exec-card p-4 border-blue-500/30 flex flex-col justify-between">
+                <div>
+                  <div class="text-2xl mb-1">💰</div>
+                  <h3 class="text-sm font-bold text-white mb-1">Sifar Kos Pengekalan (RM0)</h3>
+                  <p class="text-xs text-slate-300 leading-relaxed">Dibangunkan menggunakan teknologi web moden (HTML5, Tailwind CSS, JavaScript PWA) dan dihoskan secara percuma melalui infrastruktur awan GitHub Pages. Tiada yuran langganan bulanan yang membebankan peruntukan sekolah.</p>
+                </div>
+                <div class="mt-3 bg-slate-900 p-1.5 rounded text-[11px] text-blue-300 border border-slate-800">Status: Bebas Kos Lesen 100%</div>
+              </div>
+
+              <div class="exec-card p-4 border-emerald-500/30 flex flex-col justify-between">
+                <div>
+                  <div class="text-2xl mb-1">📱</div>
+                  <h3 class="text-sm font-bold text-white mb-1">Akses PWA Rentas Peranti</h3>
+                  <p class="text-xs text-slate-300 leading-relaxed">Menyokong Progressive Web App (PWA) — boleh disimpan sebagai ikon aplikasi pada telefon pintar guru (Android & iOS), tablet mahupun PC tanpa perlu memuat turun fail APK berat atau melalui kedai aplikasi yang menyukarkan guru.</p>
+                </div>
+                <div class="mt-3 bg-slate-900 p-1.5 rounded text-[11px] text-emerald-300 border border-slate-800">Keserasian: Android, iOS, Windows, Mac</div>
+              </div>
+
+              <div class="gold-card p-4 border-amber-500/40 flex flex-col justify-between">
+                <div>
+                  <div class="text-2xl mb-1">🔄</div>
+                  <h3 class="text-sm font-bold text-amber-300 mb-1">Potensi Replikasi Tinggi</h3>
+                  <p class="text-xs text-slate-200 leading-relaxed">Sistem direka bentuk secara modular. Mana-mana sekolah rendah atau menengah di Daerah Tawau, Sabah, atau seluruh Malaysia boleh mengguna pakai sistem ini dengan hanya mengemas kini senarai kelas dan pautan Google Drive masing-masing.</p>
+                </div>
+                <div class="mt-3 bg-slate-950 p-1.5 rounded text-[11px] text-amber-300 border border-slate-800">Templat Modular Sedia Pakai</div>
+              </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-blue-950 to-slate-900 p-3 rounded-xl border border-blue-500/40 flex flex-col md:flex-row items-center justify-between gap-2 text-xs">
+              <div class="flex items-center gap-2">
+                <span class="text-xl">🚀</span>
+                <div>
+                  <strong class="text-white block text-xs">Visi Masa Hadapan:</strong>
+                  <span class="text-slate-300 text-[11px]">Integrasi bot notifikasi Telegram/WhatsApp automatik kepada ibu bapa dan modul kecerdasan buatan (AI) ramalan keciciran murid.</span>
+                </div>
+              </div>
+              <span class="text-xs bg-amber-400 text-slate-950 font-black px-3 py-1 rounded">SK RANGGU TERBILANG</span>
+            </div>
+          </div>
+        `
+      }
+    ];
+
+    // ==========================================
+    // FAST-PACED ENERGETIC 20-SECOND MONTAGE SCENARIO
+    // ==========================================
+    const fastMontageScenes = [
+      {
+        start: 0,
+        end: 4,
+        html: `
+          <div class="space-y-3 animate-fade-in">
+            <span class="text-4xl text-red-500">⚠️</span>
+            <div class="text-xs font-bold uppercase tracking-widest text-red-400 bg-red-950/80 px-3 py-1 rounded-full border border-red-500/40 w-max mx-auto">KRISIS PENGURUSAN KONVENSIONAL</div>
+            <h3 class="text-2xl md:text-3xl font-black text-white heading-font leading-tight">Mesej WhatsApp Berselerak...<br><span class="text-red-400">Buku Disiplin Pernah Dikoyak!</span></h3>
+            <p class="text-xs text-slate-300 max-w-md mx-auto">45 minit terbuang mengira peratus kehadiran manual. Rekod salah laku fizikal hilang tanpa bukti.</p>
+          </div>
+        `
+      },
+      {
+        start: 4,
+        end: 8,
+        html: `
+          <div class="space-y-2 animate-fade-in">
+            <div class="flex items-center justify-center gap-3">
+              <img src="./logo-kpm-cutout.png" class="h-10 w-auto" alt="KPM">
+              <img src="./logo-skrg-cutout.png" class="h-10 w-auto" alt="SK Ranggu">
+              <img src="./logo_rasmi_hem_smarttrack.jpg" class="h-14 w-14 rounded-2xl shadow-2xl border-2 border-cyan-400" alt="HEM SmartTrack">
+            </div>
+            <div class="text-xs font-bold uppercase tracking-widest text-cyan-400">SATU INOVASI TULEN SK RANGGU</div>
+            <h3 class="text-3xl font-black text-amber-400 heading-font">HEM SMARTTRACK LAHIR!</h3>
+            <p class="text-xs text-slate-200">Dibangunkan oleh <b class="text-white">MOHAMMAD FIKREY BIN ABDUL GAPAR</b></p>
+          </div>
+        `
+      },
+      {
+        start: 8,
+        end: 15,
+        html: `
+          <div class="space-y-2 animate-fade-in">
+            <div class="text-xs font-bold uppercase tracking-widest text-cyan-400">9 MODUL PINTAR BERASASKAN DATA MASA NYATA</div>
+            <div class="grid grid-cols-3 gap-2 text-[10px] max-w-lg mx-auto text-left font-bold pt-1">
+              <div class="bg-slate-900/90 p-1.5 rounded border border-blue-500/40 flex items-center gap-1.5 text-blue-300"><span>✓</span> 01 e-JKM (24 Kelas)</div>
+              <div class="bg-slate-900/90 p-1.5 rounded border border-blue-500/40 flex items-center gap-1.5 text-blue-300"><span>✓</span> 02 Keberadaan Staf</div>
+              <div class="bg-amber-950/80 p-1.5 rounded border border-amber-500/60 flex items-center gap-1.5 text-amber-300"><span>★</span> 04 SmartDisiplin Kalis Koyak</div>
+              <div class="bg-slate-900/90 p-1.5 rounded border border-blue-500/40 flex items-center gap-1.5 text-blue-300"><span>✓</span> 05 Guru RMT</div>
+              <div class="bg-slate-900/90 p-1.5 rounded border border-blue-500/40 flex items-center gap-1.5 text-blue-300"><span>✓</span> 07 Pemantauan 29 Zon</div>
+              <div class="bg-emerald-950/80 p-1.5 rounded border border-emerald-500/60 flex items-center gap-1.5 text-emerald-300"><span>✓</span> 08 KPI Kehadiran 96%</div>
+            </div>
+            <p class="text-[11px] text-slate-300 pt-1">Satu portal awan, sifar kehilangan rekod, mesra sebarang telefon bimbit!</p>
+          </div>
+        `
+      },
+      {
+        start: 15,
+        end: 20,
+        html: `
+          <div class="space-y-2.5 animate-fade-in">
+            <span class="text-4xl text-amber-400">🏆</span>
+            <h3 class="text-2xl font-black text-amber-400 heading-font">PENJIMATAN MASA 89% • SIFAR REKOD HILANG</h3>
+            <p class="text-xs text-slate-100 font-semibold">SK Ranggu Sedia Membentangkan Penanda Arasan Amalan Terbaik 2026!</p>
+            <div class="pt-1">
+              <button onclick="stopFastMontage(); toggleMontageModal(); goToSlide(1);" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-black px-5 py-2 rounded-xl text-xs shadow-xl shadow-amber-500/30 transition-all">
+                Sila Teruskan Ke Slaid Pembentangan ➔
+              </button>
+            </div>
+          </div>
+        `
+      }
+    ];
+
+    // ==========================================
+    // CORE APP CONTROLS
+    // ==========================================
+    function initPills() {
+      const container = document.getElementById('slidePillsContainer');
+      container.innerHTML = '';
+      for (let i = 1; i <= totalSlides; i++) {
+        const btn = document.createElement('button');
+        btn.className = `progress-pill text-xs w-7 h-7 rounded-lg font-bold flex items-center justify-center transition-all ${
+          i === currentSlide ? 'active' : 'text-slate-400 hover:text-white bg-slate-900 hover:bg-slate-800'
+        }`;
+        btn.textContent = i;
+        btn.title = `Slaid ${i}: ${slidesData[i-1].title}`;
+        btn.onclick = () => goToSlide(i);
+        container.appendChild(btn);
+      }
+    }
+
+    function renderSlide(slideNumber) {
+      const slide = slidesData[slideNumber - 1];
+      const stage = document.getElementById('slideContent');
+      stage.innerHTML = `
+        <div class="flex items-center justify-between mb-2.5 border-b border-blue-900/40 pb-2">
+          <div class="flex items-center gap-2">
+            <span class="mono-font text-xs font-bold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">
+              SLAID ${slide.id} / ${totalSlides}
+            </span>
+            <span class="text-xs font-semibold text-blue-300 tracking-wider uppercase">${slide.kicker}</span>
+          </div>
+          <span class="text-xs text-slate-400 hidden sm:inline">SK Ranggu, Tawau | Amalan Terbaik Guru Rendah</span>
+        </div>
+
+        <div class="flex-1 flex flex-col justify-center min-h-0">
+          ${slide.render()}
+        </div>
+      `;
+
+      document.getElementById('currentSlideNumber').textContent = slideNumber;
+      document.getElementById('btnPrev').disabled = (slideNumber === 1);
+      document.getElementById('btnNext').disabled = (slideNumber === totalSlides);
+      
+      initPills();
+    }
+
+    function goToSlide(num) {
+      if (num < 1 || num > totalSlides) return;
+      currentSlide = num;
+      renderSlide(currentSlide);
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        currentSlide++;
+        renderSlide(currentSlide);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        currentSlide--;
+        renderSlide(currentSlide);
+      }
+    }
+
+    // Lightbox for Screenshots
+    function openLightbox(src, caption) {
+      const modal = document.getElementById('lightboxModal');
+      const img = document.getElementById('lightboxImg');
+      const cap = document.getElementById('lightboxCaption');
+      img.src = src;
+      cap.textContent = caption || 'Tangkap Layar Sebenar HEM SmartTrack';
+      modal.classList.remove('hidden');
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById('lightboxModal');
+      modal.classList.add('hidden');
+    }
+
+    // Fullscreen
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => console.log(err));
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    }
+
+    // Fast-Paced Montage Engine (20s)
+    function toggleMontageModal() {
+      const modal = document.getElementById('montageModal');
+      modal.classList.toggle('hidden');
+      if (modal.classList.contains('hidden')) {
+        stopFastMontage();
+      } else {
+        startFastMontage();
+      }
+    }
+
+    function startFastMontage() {
+      stopFastMontage();
+      montageActive = true;
+      montageSec = 0;
+      updateMontage(0);
+
+      montageTimer = setInterval(() => {
+        montageSec++;
+        updateMontage(montageSec);
+        if (montageSec >= 20) {
+          stopFastMontage();
+        }
+      }, 1000);
+    }
+
+    function stopFastMontage() {
+      if (montageTimer) clearInterval(montageTimer);
+      montageActive = false;
+      montageSec = 0;
+    }
+
+    function updateMontage(sec) {
+      document.getElementById('montageTimerDisplay').textContent = `${String(sec).padStart(2, '0')} / 20s`;
+      document.getElementById('montageProgressLine').style.width = ((sec / 20) * 100) + '%';
+
+      const scene = fastMontageScenes.find(s => sec >= s.start && sec < s.end);
+      if (scene) {
+        document.getElementById('montageContentArea').innerHTML = scene.html;
+      }
+    }
+
+    // Keyboard Shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeLightbox();
+        const mModal = document.getElementById('montageModal');
+        if (!mModal.classList.contains('hidden')) toggleMontageModal();
+      } else if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        prevSlide();
+      } else if (e.key >= '1' && e.key <= '9') {
+        goToSlide(parseInt(e.key));
+      } else if (e.key === '0') {
+        goToSlide(10);
+      } else if (e.key.toLowerCase() === 'f') {
+        toggleFullscreen();
+      } else if (e.key.toLowerCase() === 'm') {
+        toggleMontageModal();
+      }
+    });
+
+    window.onload = () => {
+      renderSlide(1);
+    };
+  </script>
+</body>
+</html>
+"""
+
+# Write to Desktop directory
+with open('/Users/momon/Desktop/BAHAN_PEMBENTANGAN_HEM_SMARTTRACK_2026/index.html', 'w', encoding='utf-8') as f:
+    f.write(HTML_CONTENT)
+
+with open('/Users/momon/Desktop/BAHAN_PEMBENTANGAN_HEM_SMARTTRACK_2026/slides_hem_smarttrack.html', 'w', encoding='utf-8') as f:
+    f.write(HTML_CONTENT)
+
+# Write to scratch repository
+with open('/Users/momon/.gemini/antigravity/scratch/hem_smarttrack_amalan_terbaik/index.html', 'w', encoding='utf-8') as f:
+    f.write(HTML_CONTENT)
+
+with open('/Users/momon/.gemini/antigravity/scratch/hem_smarttrack_amalan_terbaik/slides_hem_smarttrack.html', 'w', encoding='utf-8') as f:
+    f.write(HTML_CONTENT)
+
+print("Berjaya menjana versi eksekutif baharu dengan tangkap layar sebenar, tiada skrip di paparan, dan montaj 20s pantas!")
