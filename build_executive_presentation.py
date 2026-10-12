@@ -176,7 +176,7 @@ HTML_CONTENT = """<!DOCTYPE html>
       <!-- Fast-Paced Dynamic Teaser Montage Button -->
       <button onclick="toggleMontageModal()" class="flex items-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 text-xs font-black px-3.5 py-1.5 rounded-lg shadow-lg shadow-amber-500/25 transition-all transform hover:scale-105 active:scale-95">
         <span>⚡</span>
-        <span>Montaj Teaser (20s)</span>
+        <span>Montaj Video (1080p)</span>
       </button>
 
       <!-- Print / PDF Button -->
@@ -237,57 +237,52 @@ HTML_CONTENT = """<!DOCTYPE html>
   </footer>
 
   <!-- ==========================================
-       MODAL 1: MONTAJ TEASER PANTAS & DINAMIK (20 SAAT)
+       MODAL 1: MONTAJ VIDEO SINEMATIK RASMI (1080P FULL HD)
        ========================================== -->
-  <div id="montageModal" class="fixed inset-0 bg-black/95 backdrop-blur-2xl z-50 hidden flex items-center justify-center p-4">
-    <div class="exec-card max-w-4xl w-full border-amber-500/50 p-6 flex flex-col gap-4 relative shadow-2xl">
-      <button onclick="toggleMontageModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl p-2 z-20">✕</button>
+  <div id="montageModal" class="fixed inset-0 bg-black/95 backdrop-blur-2xl z-50 hidden flex items-center justify-center p-3 md:p-6">
+    <div class="exec-card max-w-5xl w-full border-cyan-500/50 p-4 md:p-6 flex flex-col gap-3 relative shadow-2xl">
+      <button onclick="toggleMontageModal()" class="absolute top-3 right-3 text-slate-400 hover:text-white text-xl p-2 z-20">✕</button>
 
-      <div class="flex items-center justify-between border-b border-slate-700/60 pb-3">
+      <div class="flex items-center justify-between border-b border-slate-700/60 pb-2.5">
         <div class="flex items-center gap-3">
-          <span class="text-2xl animate-bounce">⚡</span>
+          <span class="text-2xl animate-pulse">🎬</span>
           <div>
-            <h2 class="text-lg font-extrabold text-white heading-font tracking-wide">MONTAJ TEASER GIMIK (PANTAS & BERTENAGA)</h2>
-            <p class="text-xs text-amber-400">Transformasi 20 Saat: Dari Krisis Manual ke Kuasa HEM SmartTrack</p>
+            <h2 class="text-base md:text-lg font-black text-white heading-font tracking-wide flex items-center gap-2">
+              MONTAJ VIDEO GIMIK PEMBUKAAN (1080P FULL HD)
+              <span class="text-[10px] bg-cyan-400/20 text-cyan-300 px-2 py-0.5 rounded font-mono border border-cyan-500/30">SINEMATIK</span>
+            </h2>
+            <p class="text-xs text-amber-400">Audio Rasmi Sinematik • Tangkap Layar Sebenar • Widescreen Eksekutif</p>
           </div>
         </div>
-        <div class="flex items-center gap-3">
-          <span id="montageTimerDisplay" class="mono-font text-xs font-bold text-amber-400 bg-slate-950 px-2.5 py-1 rounded border border-slate-800">00 / 20s</span>
+        <div class="hidden sm:flex items-center gap-2 text-xs text-slate-300">
+          <span class="bg-slate-900 px-2.5 py-1 rounded border border-slate-700 font-mono text-[11px]">1080p H.264 • Stereo Audio</span>
         </div>
       </div>
 
-      <!-- Montage Dynamic Screen -->
-      <div id="montageScreen" class="w-full h-80 rounded-2xl bg-gradient-to-br from-slate-950 via-[#070D1E] to-blue-950 border border-blue-500/30 relative overflow-hidden flex flex-col items-center justify-center p-6 text-center shadow-inner">
-        <!-- Content injected by JS -->
-        <div id="montageContentArea" class="z-10 w-full max-w-2xl transition-all duration-300"></div>
-
-        <!-- Ambient animated ring -->
-        <div class="absolute inset-0 bg-radial from-cyan-500/10 via-transparent to-transparent pointer-events-none animate-pulse"></div>
-
-        <!-- Progress bar -->
-        <div class="absolute bottom-0 left-0 right-0 h-1.5 bg-slate-800">
-          <div id="montageProgressLine" class="h-full bg-gradient-to-r from-amber-500 via-cyan-400 to-blue-500 w-0 transition-all duration-200"></div>
-        </div>
+      <!-- Real Video Cinema Viewport -->
+      <div class="w-full rounded-2xl bg-black border border-cyan-500/40 relative overflow-hidden shadow-2xl flex items-center justify-center max-h-[70vh]">
+        <video id="montageVideoPlayer" src="./assets/video_montaj.mp4" playsinline controls class="w-full max-h-[68vh] object-contain rounded-xl"></video>
       </div>
 
-      <!-- Controls -->
+      <!-- Controls & Quick Navigation -->
       <div class="flex items-center justify-between pt-1">
-        <div class="flex items-center gap-3">
-          <button id="btnPlayMontage" onclick="startFastMontage()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-black px-5 py-2 rounded-xl text-xs shadow-lg shadow-amber-500/20 transition-all flex items-center gap-2">
-            ▶ Mainkan Teaser Pantas (20s)
+        <div class="flex items-center gap-2.5">
+          <button onclick="replayMontageVideo()" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black px-4 py-1.5 rounded-xl text-xs shadow-lg shadow-cyan-500/20 transition-all flex items-center gap-1.5">
+            ↺ Main Semula
           </button>
-          <button onclick="stopFastMontage(); toggleMontageModal(); goToSlide(1);" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded-xl text-xs">
-            Langkau & Terus Ke Slaid ➔
+          <button onclick="toggleMontageModal(); goToSlide(1);" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-black px-5 py-1.5 rounded-xl text-xs shadow-lg shadow-amber-500/20 transition-all flex items-center gap-1.5">
+            Terus Ke Slaid 1 Pembentangan ➔
           </button>
         </div>
+
         <div class="text-xs text-slate-400">
-          Inovator: <strong class="text-white">Mohammad Fikrey bin Abdul Gapar</strong>
+          Inovator: <strong class="text-white">Mohammad Fikrey bin Abdul Gapar</strong> (SK Ranggu)
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ==========================================
+    <!-- ==========================================
        MODAL 2: LIGHTBOX SCREENSHOT ZOOM (4K FULLSCREEN)
        ========================================== -->
   <div id="lightboxModal" class="fixed inset-0 bg-black/95 backdrop-blur-2xl z-50 hidden flex items-center justify-center p-4" onclick="closeLightbox()">
@@ -1253,49 +1248,30 @@ HTML_CONTENT = """<!DOCTYPE html>
       }
     }
 
-    // Fast-Paced Montage Engine (20s)
+    // Video Montage Engine (1080p)
     function toggleMontageModal() {
       const modal = document.getElementById('montageModal');
+      const video = document.getElementById('montageVideoPlayer');
       modal.classList.toggle('hidden');
-      if (modal.classList.contains('hidden')) {
-        stopFastMontage();
-      } else {
-        startFastMontage();
-      }
-    }
-
-    function startFastMontage() {
-      stopFastMontage();
-      montageActive = true;
-      montageSec = 0;
-      updateMontage(0);
-
-      montageTimer = setInterval(() => {
-        montageSec++;
-        updateMontage(montageSec);
-        if (montageSec >= 20) {
-          stopFastMontage();
+      if (!modal.classList.contains('hidden')) {
+        if (video) {
+          video.currentTime = 0;
+          video.play().catch(e => console.log('Autoplay:', e));
         }
-      }, 1000);
-    }
-
-    function stopFastMontage() {
-      if (montageTimer) clearInterval(montageTimer);
-      montageActive = false;
-      montageSec = 0;
-    }
-
-    function updateMontage(sec) {
-      document.getElementById('montageTimerDisplay').textContent = `${String(sec).padStart(2, '0')} / 20s`;
-      document.getElementById('montageProgressLine').style.width = ((sec / 20) * 100) + '%';
-
-      const scene = fastMontageScenes.find(s => sec >= s.start && sec < s.end);
-      if (scene) {
-        document.getElementById('montageContentArea').innerHTML = scene.html;
+      } else {
+        if (video) video.pause();
       }
     }
 
-    // Keyboard Shortcuts
+    function replayMontageVideo() {
+      const video = document.getElementById('montageVideoPlayer');
+      if (video) {
+        video.currentTime = 0;
+        video.play();
+      }
+    }
+
+        // Keyboard Shortcuts
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         closeLightbox();
