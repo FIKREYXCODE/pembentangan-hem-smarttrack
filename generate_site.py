@@ -1,11 +1,19 @@
 import base64
 
+with open('/Users/momon/.gemini/antigravity/scratch/hem_smarttrack_amalan_terbaik/logo_sk_ranggu.png', 'rb') as f:
+    b64_sk_ranggu = base64.b64encode(f.read()).decode('utf-8')
+
+with open('/Users/momon/.gemini/antigravity/scratch/hem_smarttrack_amalan_terbaik/logo_jata_negara.png', 'rb') as f:
+    b64_jata_negara = base64.b64encode(f.read()).decode('utf-8')
+
 with open('/Users/momon/.gemini/antigravity/scratch/hem_smarttrack_amalan_terbaik/pembangun_sistem.png', 'rb') as f:
     b64_pembangun = base64.b64encode(f.read()).decode('utf-8')
 
 with open('/Users/momon/.gemini/antigravity/scratch/hem_smarttrack_amalan_terbaik/mobile_mockup.png', 'rb') as f:
     b64_mobile = base64.b64encode(f.read()).decode('utf-8')
 
+IMG_SK_RANGGU = f"data:image/png;base64,{b64_sk_ranggu}"
+IMG_JATA_NEGARA = f"data:image/png;base64,{b64_jata_negara}"
 IMG_PEMBANGUN = f"data:image/png;base64,{b64_pembangun}"
 IMG_MOBILE = f"data:image/png;base64,{b64_mobile}"
 
@@ -118,15 +126,20 @@ html_content = f"""<!DOCTYPE html>
   <div class="mesh-glow bg-amber-500 bottom-0 right-10" style="animation-delay: -7s;"></div>
   <div class="mesh-glow bg-emerald-500 top-1/2 left-1/3" style="animation-delay: -3.5s;"></div>
 
-  <!-- Header Atas -->
-  <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-3 bg-[#070B16]/85 backdrop-blur-xl border-b border-white/10">
-    <div class="flex items-center space-x-3">
-      <div class="px-3 py-1 rounded-full text-xs font-black tracking-wider flex items-center gap-1.5 uppercase bg-amber-500/15 border border-amber-500/40 text-amber-300">
-        <span>🏆</span>
-        <span>Amalan Terbaik Sekolah Rendah 2026</span>
+  <!-- Header Atas: HANYA DUA LOGO INI SAHAJA -->
+  <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-2.5 bg-[#070B16]/90 backdrop-blur-xl border-b border-white/10">
+    <div class="flex items-center space-x-4">
+      <!-- 2 Official Logos Side-by-Side -->
+      <div class="flex items-center gap-3 bg-white/5 px-3 py-1 rounded-xl border border-white/10">
+        <img src="{IMG_JATA_NEGARA}" alt="Jata Negara Malaysia" class="h-8 w-auto object-contain drop-shadow">
+        <div class="h-6 w-px bg-white/20"></div>
+        <img src="{IMG_SK_RANGGU}" alt="Lencana SK Ranggu" class="h-8 w-auto object-contain drop-shadow">
       </div>
-      <span class="text-white/20">|</span>
-      <span class="text-xs font-semibold text-slate-300">Hal Ehwal Murid • SK Ranggu, Tawau</span>
+
+      <div class="flex flex-col">
+        <span class="text-xs font-black tracking-wider text-amber-300 uppercase heading-font">SEKOLAH KEBANGSAAN RANGGU, TAWAU</span>
+        <span class="text-[10px] text-slate-300 font-medium">Kementerian Pendidikan Malaysia • Hal Ehwal Murid (TS25)</span>
+      </div>
     </div>
 
     <div class="flex items-center space-x-3">
@@ -164,20 +177,29 @@ html_content = f"""<!DOCTYPE html>
   <!-- Container Slaid -->
   <main class="relative w-screen h-screen">
 
-    <!-- ==================== SLAID 1: TAJUK UTAMA & PROFIL PEMBANGUN ==================== -->
+    <!-- ==================== SLAID 1: TAJUK UTAMA & DUA LOGO RASMI ==================== -->
     <section class="slide active" data-slide="1">
       <div class="flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-sky-500/15 text-sky-300 border border-sky-500/30">
-            Program Transformasi Sekolah (TS25)
-          </span>
-          <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-            Inovasi Pengurusan Digital HEM
-          </span>
+        <div class="flex items-center gap-4">
+          <!-- 2 Official Logos Prominently Displayed -->
+          <div class="flex items-center gap-3 bg-white/5 px-4 py-1.5 rounded-2xl border border-white/10 shadow-lg">
+            <img src="{IMG_JATA_NEGARA}" alt="Jata Negara Malaysia" class="h-11 w-auto object-contain">
+            <div class="h-8 w-px bg-white/20"></div>
+            <img src="{IMG_SK_RANGGU}" alt="Lencana SK Ranggu" class="h-11 w-auto object-contain">
+          </div>
+          <div>
+            <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-sky-500/15 text-sky-300 border border-sky-500/30 inline-block mr-2">
+              TS25 Transformasi Sekolah
+            </span>
+            <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 inline-block">
+              Amalan Terbaik HEM 2026
+            </span>
+          </div>
         </div>
+
         <div class="text-right">
-          <div class="text-xs font-black tracking-widest text-amber-400 uppercase mono-font">SK RANGGU, TAWAU</div>
-          <div class="text-[11px] text-slate-400">Penanda Arasan Amalan Terbaik 2026</div>
+          <div class="text-xs font-black tracking-widest text-amber-400 uppercase mono-font">SK RANGGU, TAWAU SABAH</div>
+          <div class="text-[11px] text-slate-400">Peti Surat 643, 91008 Tawau, Sabah</div>
         </div>
       </div>
 
@@ -769,14 +791,24 @@ html_content = f"""<!DOCTYPE html>
       </div>
     </section>
 
-    <!-- ==================== SLAID 10: KELESTARIAN & REPLIKASI ==================== -->
+    <!-- ==================== SLAID 10: KELESTARIAN & DUA LOGO PENUTUP ==================== -->
     <section class="slide" data-slide="10">
-      <div>
-        <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-sky-500/15 text-sky-400 border border-sky-500/30 mb-1 inline-block">
-          10. Kelestarian & Potensi Penanda Arasan
-        </span>
-        <h2 class="text-4xl font-black heading-font text-white">Kelestarian & Potensi Replikasi ke Sekolah Lain</h2>
-        <p class="text-slate-400 text-sm mt-0.5">Inovasi ini sedia dijadikan model amalan terbaik untuk sekolah rendah di seluruh negara.</p>
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <!-- 2 Official Logos Side-by-Side -->
+          <div class="flex items-center gap-3 bg-white/5 px-4 py-1.5 rounded-2xl border border-white/10 shadow-lg">
+            <img src="{IMG_JATA_NEGARA}" alt="Jata Negara Malaysia" class="h-10 w-auto object-contain">
+            <div class="h-7 w-px bg-white/20"></div>
+            <img src="{IMG_SK_RANGGU}" alt="Lencana SK Ranggu" class="h-10 w-auto object-contain">
+          </div>
+          <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-sky-500/15 text-sky-400 border border-sky-500/30 inline-block">
+            10. Kelestarian & Potensi Penanda Arasan
+          </span>
+        </div>
+        <div class="text-right">
+          <div class="text-xs font-black tracking-widest text-amber-400 uppercase mono-font">SK RANGGU, TAWAU</div>
+          <div class="text-[11px] text-slate-400">Model Penanda Arasan Sekolah Rendah</div>
+        </div>
       </div>
 
       <div class="grid grid-cols-3 gap-6 my-auto">
@@ -1048,4 +1080,4 @@ with open('/Users/momon/.gemini/antigravity/scratch/hem_smarttrack_amalan_terbai
 with open('/Users/momon/.gemini/antigravity/scratch/hem_smarttrack_amalan_terbaik/slides_hem_smarttrack.html', 'w') as f:
     f.write(html_content)
 
-print("Updated index.html and slides_hem_smarttrack.html successfully!")
+print("Regenerated presentation with strictly only the two official logos!")
