@@ -22,7 +22,7 @@ html_content = f"""<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HEM SmartTrack - Pembentangan Amalan Terbaik SK Ranggu</title>
+  <title>HEM SmartTrack - Montaj & Slaid Pembentangan SK Ranggu</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   
@@ -102,6 +102,15 @@ html_content = f"""<!DOCTYPE html>
       50% {{ opacity: 0.4; transform: scale(0.85); }}
     }}
 
+    /* Montaj Cinematic Styles */
+    .cinematic-box {{
+      animation: zoomSlow 8s ease-out forwards;
+    }}
+    @keyframes zoomSlow {{
+      from {{ transform: scale(1); }}
+      to {{ transform: scale(1.06); }}
+    }}
+
     @media print {{
       @page {{ size: landscape; margin: 0; }}
       body {{ background-color: #070B16 !important; -webkit-print-color-adjust: exact !important; }}
@@ -116,7 +125,7 @@ html_content = f"""<!DOCTYPE html>
         height: 100vh !important;
         padding: 3rem 4rem !important;
       }}
-      header, footer, #notesDrawer, #toastBox {{ display: none !important; }}
+      header, footer, #notesDrawer, #toastBox, #montajModal {{ display: none !important; }}
     }}
   </style>
 </head>
@@ -143,6 +152,12 @@ html_content = f"""<!DOCTYPE html>
     </div>
 
     <div class="flex items-center space-x-3">
+      <!-- BUTANG MONTAJ GIMIK PEMBUKAAN (HIGHLIGHT) -->
+      <button onclick="startMontaj()" class="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-rose-500 via-amber-500 to-emerald-500 hover:opacity-90 text-slate-950 font-black text-xs transition shadow-lg shadow-amber-500/20 animate-pulse">
+        <span>🎬</span>
+        <span>MAIN MONTAJ VIDEO GIMIK (60S)</span>
+      </button>
+
       <!-- Video Timer -->
       <div class="flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full">
         <span class="text-[11px] text-slate-400 font-medium">Masa:</span>
@@ -174,7 +189,101 @@ html_content = f"""<!DOCTYPE html>
     </div>
   </header>
 
-  <!-- Container Slaid -->
+  <!-- ==================== CINEMATIC MONTAJ VIDEO PLAYER MODAL ==================== -->
+  <div id="montajModal" class="hidden fixed inset-0 z-50 bg-black/95 flex flex-col justify-between p-8 backdrop-blur-2xl">
+    <!-- Top Bar -->
+    <div class="flex items-center justify-between text-xs text-slate-400 z-20">
+      <div class="flex items-center gap-3">
+        <span class="px-2.5 py-1 rounded bg-rose-500 text-white font-black tracking-wider text-[10px] uppercase animate-pulse">CINEMATIC MONTAGE</span>
+        <span class="text-white font-bold">Gimik Pembukaan Video Pembentangan (60 Saat)</span>
+      </div>
+      <button onclick="closeMontaj()" class="px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white font-bold transition">
+        Langkau ke Slaid ➔
+      </button>
+    </div>
+
+    <!-- Center Cinematic Canvas -->
+    <div class="my-auto text-center max-w-4xl mx-auto z-20 relative w-full h-[60vh] flex flex-col justify-center items-center">
+      <!-- Scene 1: Logo & Identiti Rasmi -->
+      <div id="montajScene1" class="montaj-scene flex flex-col items-center transition-all duration-700">
+        <div class="flex items-center justify-center gap-8 mb-6">
+          <img src="{IMG_JATA_NEGARA}" alt="Jata Negara" class="h-28 w-auto object-contain drop-shadow-2xl">
+          <div class="h-20 w-px bg-amber-400/40"></div>
+          <img src="{IMG_SK_RANGGU}" alt="Lencana SK Ranggu" class="h-28 w-auto object-contain drop-shadow-2xl">
+        </div>
+        <div class="text-xs uppercase tracking-widest text-amber-300 font-bold mb-2">Kementerian Pendidikan Malaysia • TS25</div>
+        <h2 class="text-4xl lg:text-5xl font-black heading-font text-white">SEKOLAH KEBANGSAAN RANGGU, TAWAU</h2>
+        <p class="text-slate-400 text-sm mt-2">Membawakan Amalan Terbaik Pengurusan Hal Ehwal Murid 2026</p>
+      </div>
+
+      <!-- Scene 2: Isu Sebenar (Dramatik) -->
+      <div id="montajScene2" class="montaj-scene hidden flex flex-col items-center transition-all duration-700">
+        <span class="px-3 py-1 rounded-full bg-rose-500/20 border border-rose-500/40 text-rose-300 text-xs font-black tracking-widest uppercase mb-4">
+          CABARAN & REALITI SEBENAR
+        </span>
+        <h2 class="text-4xl lg:text-6xl font-black heading-font text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-amber-300 to-rose-400 leading-tight">
+          "WhatsApp Berterabur... Buku Disiplin Dikoyak... Rekod Hilang!"
+        </h2>
+        <p class="text-slate-300 text-base max-w-2xl mt-4 leading-relaxed">
+          Sebelum ini guru mengisi kehadiran dalam WhatsApp yang berselerak, laporan Telegram bercampur aduk, dan insiden buku disiplin fizikal dikoyak melenyapkan rekod siasatan murid.
+        </p>
+      </div>
+
+      <!-- Scene 3: Solusi & Kelahiran Sistem -->
+      <div id="montajScene3" class="montaj-scene hidden flex flex-col items-center transition-all duration-700">
+        <span class="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-black tracking-widest uppercase mb-4">
+          SATU TRANSFORMASI DIGITAL BERMULA
+        </span>
+        <h2 class="text-5xl lg:text-7xl font-black heading-font text-transparent bg-clip-text bg-gradient-to-r from-white via-sky-200 to-emerald-300 leading-tight">
+          HEM SmartTrack
+        </h2>
+        <p class="text-2xl text-emerald-400 font-bold mt-2 heading-font">
+          Satu Klik, Semua Terbimbing Berasaskan Data Masa Nyata
+        </p>
+        <p class="text-slate-400 text-sm mt-3">Dibangunkan 100% oleh guru SK Ranggu menggunakan ekosistem awan rasmi.</p>
+      </div>
+
+      <!-- Scene 4: Barisan Penggerak Inovasi -->
+      <div id="montajScene4" class="montaj-scene hidden flex flex-col items-center transition-all duration-700">
+        <div class="flex items-center gap-8 mb-4">
+          <div class="w-32 h-24 rounded-2xl overflow-hidden border-2 border-amber-400/80 shadow-2xl bg-slate-900">
+            <img src="{IMG_PEMBANGUN}" alt="Pembangun Sistem" class="w-full h-full object-cover">
+          </div>
+          <div class="text-left">
+            <div class="text-xs uppercase font-bold text-amber-400 tracking-wider">Pembangun Inovasi:</div>
+            <h3 class="text-2xl font-black text-white">Guru Inovasi SK Ranggu</h3>
+            <div class="text-xs text-slate-300 mt-2 font-medium">
+              Storan Rasmi Google Drive: <b class="text-emerald-400">Puan Komala Joseph (PK HEM)</b>
+            </div>
+            <div class="text-[11px] text-slate-400">Pengurusan Bersepadu Kehadiran, SmartDisiplin & OPR Guru Penyayang</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 5: Pelancaran ke Slaid -->
+      <div id="montajScene5" class="montaj-scene hidden flex flex-col items-center transition-all duration-700">
+        <div class="text-5xl mb-3">🚀</div>
+        <h2 class="text-4xl font-black text-white heading-font">SEDIA MEMBENTANGKAN AMALAN TERBAIK</h2>
+        <p class="text-emerald-400 font-bold text-lg mt-1">Membawa Aspirasi Anugerah Emas TS25 2026</p>
+        <button onclick="closeMontaj()" class="mt-6 px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-black text-sm shadow-xl shadow-amber-500/20 hover:scale-105 transition">
+          Masuk ke Slaid 1 Sekarang ➔
+        </button>
+      </div>
+    </div>
+
+    <!-- Bottom Timeline Bar -->
+    <div class="z-20 max-w-4xl mx-auto w-full">
+      <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 mono-font">
+        <span id="montajSceneName">Adegan 1: Logo & Sekolah</span>
+        <span id="montajTime">00:00 / 00:30</span>
+      </div>
+      <div class="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+        <div id="montajProgressBar" class="h-full bg-gradient-to-r from-rose-500 via-amber-400 to-emerald-400 w-0 transition-all duration-300"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Container Slaid (Slaid 1 hingga 10) -->
   <main class="relative w-screen h-screen">
 
     <!-- ==================== SLAID 1: TAJUK UTAMA & DUA LOGO RASMI ==================== -->
@@ -284,7 +393,6 @@ html_content = f"""<!DOCTYPE html>
       </div>
 
       <div class="grid grid-cols-4 gap-4 my-auto">
-        <!-- Isu 1: WhatsApp -->
         <div class="card-glass p-5 rounded-2xl border-t-4 border-rose-500 flex flex-col justify-between">
           <div>
             <div class="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center font-black text-base mb-3 mono-font">01</div>
@@ -298,7 +406,6 @@ html_content = f"""<!DOCTYPE html>
           </div>
         </div>
 
-        <!-- Isu 2: Buku Disiplin Dikoyak -->
         <div class="card-glass p-5 rounded-2xl border-t-4 border-amber-500 flex flex-col justify-between">
           <div>
             <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-black text-base mb-3 mono-font">02</div>
@@ -312,7 +419,6 @@ html_content = f"""<!DOCTYPE html>
           </div>
         </div>
 
-        <!-- Isu 3: Telegram Bercampur -->
         <div class="card-glass p-5 rounded-2xl border-t-4 border-purple-500 flex flex-col justify-between">
           <div>
             <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-black text-base mb-3 mono-font">03</div>
@@ -326,7 +432,6 @@ html_content = f"""<!DOCTYPE html>
           </div>
         </div>
 
-        <!-- Isu 4: Surat-Menyurat Berselerak -->
         <div class="card-glass p-5 rounded-2xl border-t-4 border-sky-500 flex flex-col justify-between">
           <div>
             <div class="w-10 h-10 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center font-black text-base mb-3 mono-font">04</div>
@@ -607,7 +712,6 @@ html_content = f"""<!DOCTYPE html>
 
         <!-- 3-Step Workflow -->
         <div class="grid grid-cols-3 gap-5">
-          <!-- Step 1 -->
           <div class="card-glass p-5 rounded-2xl border-t-4 border-sky-400">
             <div class="flex items-center justify-between mb-2">
               <span class="text-xs font-bold text-sky-400 mono-font">LANGKAH 01</span>
@@ -621,7 +725,6 @@ html_content = f"""<!DOCTYPE html>
             </ul>
           </div>
 
-          <!-- Step 2 -->
           <div class="card-glass p-5 rounded-2xl border-t-4 border-amber-400">
             <div class="flex items-center justify-between mb-2">
               <span class="text-xs font-bold text-amber-400 mono-font">LANGKAH 02</span>
@@ -635,7 +738,6 @@ html_content = f"""<!DOCTYPE html>
             </ul>
           </div>
 
-          <!-- Step 3 -->
           <div class="card-glass p-5 rounded-2xl border-t-4 border-emerald-400">
             <div class="flex items-center justify-between mb-2">
               <span class="text-xs font-bold text-emerald-400 mono-font">LANGKAH 03</span>
@@ -668,7 +770,6 @@ html_content = f"""<!DOCTYPE html>
       </div>
 
       <div class="grid grid-cols-2 gap-6 my-auto">
-        <!-- Feature 1: Guru Penyayang & OPR -->
         <div class="card-glass p-6 rounded-2xl border-t-4 border-purple-400 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-3">
@@ -695,7 +796,6 @@ html_content = f"""<!DOCTYPE html>
           </div>
         </div>
 
-        <!-- Feature 2: Drive PK HEM Puan Komala Joseph -->
         <div class="card-glass p-6 rounded-2xl border-t-4 border-amber-400 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-3">
@@ -737,7 +837,6 @@ html_content = f"""<!DOCTYPE html>
       </div>
 
       <div class="grid grid-cols-4 gap-4 my-auto">
-        <!-- Impak 1: Masa Kehadiran -->
         <div class="card-glass p-5 rounded-2xl text-center border-t-4 border-sky-400">
           <div class="text-[10px] uppercase tracking-wider text-slate-400 font-bold mb-1.5">Masa Semakan Kehadiran</div>
           <div class="my-2">
@@ -748,7 +847,6 @@ html_content = f"""<!DOCTYPE html>
           <p class="text-[10px] text-slate-400 mt-1">Data selesai sebelum jam 8:30 pagi setiap hari.</p>
         </div>
 
-        <!-- Impak 2: Disiplin Kalis Sabotaj -->
         <div class="card-glass p-5 rounded-2xl text-center border-t-4 border-amber-400">
           <div class="text-[10px] uppercase tracking-wider text-slate-400 font-bold mb-1.5">Integriti Rekod Disiplin</div>
           <div class="my-2">
@@ -759,7 +857,6 @@ html_content = f"""<!DOCTYPE html>
           <p class="text-[10px] text-slate-400 mt-1">Semua kes ada foto bukti & audit trail kekal.</p>
         </div>
 
-        <!-- Impak 3: OPR & Surat Drive -->
         <div class="card-glass p-5 rounded-2xl text-center border-t-4 border-purple-400">
           <div class="text-[10px] uppercase tracking-wider text-slate-400 font-bold mb-1.5">Laporan OPR & Surat</div>
           <div class="my-2">
@@ -770,7 +867,6 @@ html_content = f"""<!DOCTYPE html>
           <p class="text-[10px] text-slate-400 mt-1">Tersimpan dalam Drive PK HEM Pn. Komala.</p>
         </div>
 
-        <!-- Impak 4: Kepuasan Guru -->
         <div class="gold-glass p-5 rounded-2xl text-center border-t-4 border-emerald-400">
           <div class="text-[10px] uppercase tracking-wider text-amber-200 font-bold mb-1.5">Kepuasan Guru & Staf</div>
           <div class="my-2">
@@ -1055,6 +1151,59 @@ html_content = f"""<!DOCTYPE html>
       }}
     }}
 
+    // ==================== MONTAJ PLAYER SYSTEM ====================
+    let montajTimer = null;
+    let montajSeconds = 0;
+    const montajTotalSeconds = 30;
+
+    function startMontaj() {{
+      const modal = document.getElementById('montajModal');
+      modal.classList.remove('hidden');
+      montajSeconds = 0;
+      updateMontajScene(1);
+
+      playTone(330, 'triangle', 0.4);
+
+      if (montajTimer) clearInterval(montajTimer);
+      montajTimer = setInterval(() => {{
+        montajSeconds++;
+        const prog = (montajSeconds / montajTotalSeconds) * 100;
+        document.getElementById('montajProgressBar').style.width = prog + '%';
+        document.getElementById('montajTime').innerText = `00:${{montajSeconds.toString().padStart(2, '0')}} / 00:30`;
+
+        if (montajSeconds === 6) updateMontajScene(2);
+        else if (montajSeconds === 13) updateMontajScene(3);
+        else if (montajSeconds === 20) updateMontajScene(4);
+        else if (montajSeconds === 26) updateMontajScene(5);
+        else if (montajSeconds >= montajTotalSeconds) {{
+          clearInterval(montajTimer);
+        }}
+      }}, 1000);
+    }}
+
+    function updateMontajScene(sceneNum) {{
+      for (let i = 1; i <= 5; i++) {{
+        const el = document.getElementById(`montajScene${{i}}`);
+        if (i === sceneNum) el.classList.remove('hidden');
+        else el.classList.add('hidden');
+      }}
+      const names = [
+        "Adegan 1: Logo & Sekolah",
+        "Adegan 2: Cabaran & Realiti Sebenar",
+        "Adegan 3: Pelancaran HEM SmartTrack",
+        "Adegan 4: Penggerak Inovasi & PK HEM",
+        "Adegan 5: Sedia Membentangkan Amalan Terbaik"
+      ];
+      document.getElementById('montajSceneName').innerText = names[sceneNum - 1];
+      playTone(440 + sceneNum * 50, 'sine', 0.2);
+    }}
+
+    function closeMontaj() {{
+      if (montajTimer) clearInterval(montajTimer);
+      document.getElementById('montajModal').classList.add('hidden');
+      showSlide(1);
+    }}
+
     document.addEventListener('keydown', (e) => {{
       if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {{
         nextSlide();
@@ -1064,8 +1213,9 @@ html_content = f"""<!DOCTYPE html>
         toggleFullScreen();
       }} else if (e.key.toLowerCase() === 'n') {{
         toggleNotes();
-      }} else if (e.key === 'Escape' && !notesDrawer.classList.contains('hidden')) {{
-        notesDrawer.classList.add('hidden');
+      }} else if (e.key === 'Escape') {{
+        if (!notesDrawer.classList.contains('hidden')) notesDrawer.classList.add('hidden');
+        if (!document.getElementById('montajModal').classList.contains('hidden')) closeMontaj();
       }}
     }});
 
@@ -1080,4 +1230,4 @@ with open('/Users/momon/.gemini/antigravity/scratch/hem_smarttrack_amalan_terbai
 with open('/Users/momon/.gemini/antigravity/scratch/hem_smarttrack_amalan_terbaik/slides_hem_smarttrack.html', 'w') as f:
     f.write(html_content)
 
-print("Regenerated presentation with strictly only the two official logos!")
+print("Added animated cinematic video montage player & compiled slides successfully!")
