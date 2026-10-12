@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HEM SmartTrack - Pembentangan Anugerah Emas Amalan Terbaik Sekolah</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --gold-gradient: linear-gradient(135deg, #FDE68A 0%, #F59E0B 50%, #D97706 100%);
+      --emerald-gradient: linear-gradient(135deg, #6EE7B7 0%, #10B981 50%, #047857 100%);
+      --sky-gradient: linear-gradient(135deg, #7DD3FC 0%, #0284C7 50%, #0369A1 100%);
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #060913;
+      color: #F8FAFC;
+      overflow: hidden;
+    }
+
+    .heading-font {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .mono-font {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Ambient animated mesh backdrop */
+    .mesh-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.15;
+      pointer-events: none;
+      z-index: 0;
+      animation: floatGlow 12s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatGlow {
+      0% { transform: translate(-10%, -10%) scale(1); }
+      100% { transform: translate(20%, 20%) scale(1.15); }
+    }
+
+    /* Deluxe Glassmorphism */
+    .gold-glass {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(251, 191, 36, 0.25);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .card-glass {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.5);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .card-glass:hover {
+      transform: translateY(-4px) scale(1.01);
+      border-color: rgba(56, 189, 248, 0.35);
+      box-shadow: 0 25px 45px -10px rgba(14, 165, 233, 0.15);
+    }
+
+    /* Gold Badge */
+    .badge-gold {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(217, 119, 6, 0.1));
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #FDE68A;
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.15);
+    }
+
+    /* Slide Transition Animations */
+    .slide-wrapper {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      max-width: 100vw;
+      max-height: 100vh;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
+      padding: 5rem 4rem 5.5rem 4rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.96) translateY(12px);
+      transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.45s;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1) translateY(0);
+      pointer-events: auto;
+      z-index: 20;
+    }
+
+    /* Staggered entrance animation for child items */
+    .slide.active .anim-item {
+      animation: slideUpFade 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .slide.active .anim-delay-1 { animation-delay: 0.08s; }
+    .slide.active .anim-delay-2 { animation-delay: 0.16s; }
+    .slide.active .anim-delay-3 { animation-delay: 0.24s; }
+    .slide.active .anim-delay-4 { animation-delay: 0.32s; }
+
+    @keyframes slideUpFade {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Pulsing Live Dot */
+    .pulse-dot {
+      animation: pulseGlow 1.8s infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    /* PRINT STYLES FOR EXACT 16:9 PDF */
+    @media print {
+      @page {
+        size: landscape;
+        margin: 0;
+      }
+      body {
+        background-color: #060913 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .slide {
+        display: flex !important;
+        position: relative !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        page-break-after: always !important;
+        page-break-inside: avoid !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        padding: 3.5rem 4rem !important;
+        box-sizing: border-box !important;
+      }
+      .no-print, header, footer, #notesDrawer, #toastBox {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-[#060913] text-slate-100 select-none">
+
+  <!-- Background Ambient Glows -->
+  <div class="mesh-glow bg-sky-500 top-0 left-10"></div>
+  <div class="mesh-glow bg-amber-500 bottom-0 right-10" style="animation-delay: -6s;"></div>
+  <div class="mesh-glow bg-emerald-500 top-1/2 left-1/3" style="animation-delay: -3s;"></div>
+
+  <!-- Particle Canvas -->
+  <canvas id="particleCanvas" class="absolute inset-0 pointer-events-none z-0"></canvas>
+
+  <!-- ==================== HEADER KORPORAT ATAS ==================== -->
+  <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-3 bg-[#060913]/85 backdrop-blur-xl border-b border-white/10 no-print">
+    <div class="flex items-center space-x-3">
+      <div class="badge-gold px-3 py-1 rounded-full text-xs font-black tracking-wider flex items-center gap-1.5 uppercase">
+        <span class="text-amber-400">🏆</span>
+        <span>Penyertaan Anugerah Emas TS25</span>
+      </div>
+      <span class="text-white/20">|</span>
+      <span class="text-xs font-semibold text-slate-300">Penanda Arasan Amalan Terbaik Sekolah Rendah 2026</span>
+    </div>
+
+    <!-- Actions & Controls -->
+    <div class="flex items-center space-x-3">
+      <!-- 10-Minute Video Timer -->
+      <div class="flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full">
+        <span class="text-[11px] text-slate-400 font-medium">Masa Video:</span>
+        <span id="speechTimer" class="mono-font text-xs font-bold text-sky-400">00:00</span>
+        <button onclick="toggleTimer()" id="timerBtn" class="text-[10px] px-2 py-0.5 rounded font-bold bg-sky-500/20 text-sky-300 hover:bg-sky-500/40 transition">
+          Mula
+        </button>
+      </div>
+
+      <!-- Slide Counter -->
+      <div id="slideCounter" class="px-3.5 py-1 text-xs font-extrabold tracking-widest text-white rounded-full bg-white/10 mono-font">
+        01 / 10
+      </div>
+
+      <!-- Sound Toggle -->
+      <button onclick="toggleSound()" id="soundBtn" class="px-2.5 py-1 text-xs font-medium text-slate-300 hover:text-white rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 transition" title="Bunyi Animasi">
+        🔊 On
+      </button>
+
+      <!-- Presenter Notes -->
+      <button onclick="toggleNotes()" class="flex items-center gap-1.5 px-3 py-1 text-xs font-bold text-sky-300 hover:text-white rounded-lg bg-sky-500/10 hover:bg-sky-500/20 border border-sky-500/30 transition">
+        <span>🎙️ Skrip (N)</span>
+      </button>
+
+      <!-- Print to PDF -->
+      <button onclick="window.print()" class="flex items-center gap-1.5 px-3.5 py-1 text-xs font-black text-slate-950 bg-gradient-to-r from-amber-300 to-amber-500 hover:from-amber-200 hover:to-amber-400 rounded-lg transition shadow-lg shadow-amber-500/20">
+        <span>🖨️ Cetak PDF Emas</span>
+      </button>
+
+      <!-- Fullscreen -->
+      <button onclick="toggleFullScreen()" class="px-2.5 py-1 text-xs text-slate-300 hover:text-white rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 transition" title="Skrin Penuh (F)">
+        ⛶ F
+      </button>
+    </div>
+  </header>
+
+  <!-- ==================== SLIDE WRAPPER ==================== -->
+  <main class="slide-wrapper">
+
+    <!-- ==========================================
+         SLAID 1: TAJUK UTAMA (ANUGERAH EMAS)
+         ========================================== -->
+    <section class="slide active" data-slide="1">
+      <div class="flex items-center justify-between anim-item">
+        <div class="flex items-center gap-2">
+          <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-sky-500/15 text-sky-300 border border-sky-500/30">
+            Program Transformasi Sekolah 2025 (TS25)
+          </span>
+          <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+            Inovasi Digital Pengurusan HEM
+          </span>
+        </div>
+        <div class="text-right">
+          <div class="text-xs font-black tracking-widest text-amber-400 uppercase mono-font">SK RANGGU, TAWAU</div>
+          <div class="text-[11px] text-slate-400">Kategori Guru Sekolah Rendah (Hal Ehwal Murid)</div>
+        </div>
+      </div>
+
+      <div class="my-auto py-2">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-gradient-to-r from-amber-500/20 via-sky-500/20 to-emerald-500/20 border border-amber-400/30 text-amber-300 text-xs font-black tracking-wide mb-3 anim-item anim-delay-1">
+          <span>✨</span> AMALAN TERBAIK: PENGURUSAN DIGITAL & KEMENJADIAN MURID
+        </div>
+        
+        <h1 class="text-5xl lg:text-7xl font-black tracking-tight heading-font leading-none text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-amber-200 anim-item anim-delay-1">
+          HEM SmartTrack
+        </h1>
+        
+        <p class="text-2xl lg:text-3xl text-emerald-400 font-bold mt-2 heading-font tracking-tight anim-item anim-delay-2">
+          Pendigitalan Pengurusan HEM Bersepadu Berasaskan Data Masa Nyata
+        </p>
+
+        <p class="text-base text-slate-300 max-w-3xl mt-4 leading-relaxed font-normal anim-item anim-delay-2">
+          Mentransformasi pengurusan data murid daripada kaedah borang manual yang lambat dan berselerak kepada platform awan mudah alih masa nyata yang telus, pantas, dan berimpak tinggi.
+        </p>
+
+        <!-- 3 Highlight Metric Cards with Live Countups -->
+        <div class="grid grid-cols-3 gap-5 mt-7 max-w-3xl anim-item anim-delay-3">
+          <div class="gold-glass p-4 rounded-2xl border-l-4 border-amber-400">
+            <div class="text-[11px] text-slate-400 uppercase font-bold tracking-wider">Masa Tindakan Semakan</div>
+            <div class="text-2xl font-black text-white mt-1 heading-font"><span class="counter-num" data-target="8">0</span> Minit Sahaja</div>
+            <div class="text-[11px] text-amber-300 mt-0.5">Selesai sebelum 8:30 pagi</div>
+          </div>
+
+          <div class="card-glass p-4 rounded-2xl border-l-4 border-emerald-400">
+            <div class="text-[11px] text-slate-400 uppercase font-bold tracking-wider">Integriti & Akauntabiliti</div>
+            <div class="text-2xl font-black text-white mt-1 heading-font"><span class="counter-num" data-target="100">0</span>% Telus</div>
+            <div class="text-[11px] text-emerald-300 mt-0.5">Log masa & identiti pengisi</div>
+          </div>
+
+          <div class="card-glass p-4 rounded-2xl border-l-4 border-sky-400">
+            <div class="text-[11px] text-slate-400 uppercase font-bold tracking-wider">Kos Pelaksanaan</div>
+            <div class="text-2xl font-black text-white mt-1 heading-font">RM 0.00 (Sifar)</div>
+            <div class="text-[11px] text-sky-300 mt-0.5">Google Workspace sedia ada</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between border-t border-white/10 pt-3 text-xs text-slate-400 anim-item anim-delay-4">
+        <div>Pembentang: <span class="text-white font-bold">Pasukan Inovasi HEM SK Ranggu</span></div>
+        <div class="flex items-center gap-3">
+          <span class="text-emerald-400 font-semibold">📱 Format PWA (Sedia Pelbagai Peranti)</span>
+          <span class="text-white/20">|</span>
+          <span class="text-amber-300 font-bold">Pemberat Impak: 50 Markah</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SLAID 2: LATAR BELAKANG / ISU SEBENAR
+         ========================================== -->
+    <section class="slide" data-slide="2">
+      <div class="anim-item">
+        <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-rose-500/15 text-rose-400 border border-rose-500/30 mb-1 inline-block">
+          02. Analisis Masalah & Jurang Operasi
+        </span>
+        <h2 class="text-4xl font-black heading-font text-white">Isu & Kekangan Pengurusan Manual Terdahulu</h2>
+        <p class="text-slate-400 text-sm mt-0.5">4 Titik kelemahan utama yang menjejaskan kecekapan pengurusan harian hal ehwal murid.</p>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-5 my-auto">
+        <div class="card-glass p-5 rounded-2xl border-t-4 border-rose-500 anim-item anim-delay-1">
+          <div class="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center font-black text-base mb-3 mono-font">01</div>
+          <h3 class="text-base font-bold text-white mb-2">Rekod Berselerak</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Data kehadiran, catatan disiplin, dan keberadaan guru dicatat dalam pelbagai buku log atau kertas berasingan yang sukar dirujuk silang.
+          </p>
+          <div class="mt-4 pt-3 border-t border-white/5 text-[11px] text-rose-300 font-semibold flex items-center gap-1">
+            <span>⚠️</span> Data sukar dikesan pantas
+          </div>
+        </div>
+
+        <div class="card-glass p-5 rounded-2xl border-t-4 border-amber-500 anim-item anim-delay-2">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-black text-base mb-3 mono-font">02</div>
+          <h3 class="text-base font-bold text-white mb-2">Kelewatan Masa Kutipan</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Guru bertugas terpaksa berjalan mengutip slip kehadiran dari kelas ke kelas. Mengambil masa 30 hingga 45 minit setiap pagi.
+          </p>
+          <div class="mt-4 pt-3 border-t border-white/5 text-[11px] text-amber-300 font-semibold flex items-center gap-1">
+            <span>⏱️</span> Membazir waktu PdP guru
+          </div>
+        </div>
+
+        <div class="card-glass p-5 rounded-2xl border-t-4 border-purple-500 anim-item anim-delay-3">
+          <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-black text-base mb-3 mono-font">03</div>
+          <h3 class="text-base font-bold text-white mb-2">Titik Buta Pentadbir</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Pentadbir tidak dapat mengetahui kelas mana yang belum menghantar kehadiran secara langsung. Tiada amaran masa nyata.
+          </p>
+          <div class="mt-4 pt-3 border-t border-white/5 text-[11px] text-purple-300 font-semibold flex items-center gap-1">
+            <span>🔍</span> Intervensi murid lambat
+          </div>
+        </div>
+
+        <div class="card-glass p-5 rounded-2xl border-t-4 border-sky-500 anim-item anim-delay-4">
+          <div class="w-10 h-10 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center font-black text-base mb-3 mono-font">04</div>
+          <h3 class="text-base font-bold text-white mb-2">Integriti & Audit Lemah</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Sukar mengesahkan siapa guru yang membuat catatan dan pada jam berapa. Laporan bergambar tiada sistem arkib awan teratur.
+          </p>
+          <div class="mt-4 pt-3 border-t border-white/5 text-[11px] text-sky-300 font-semibold flex items-center gap-1">
+            <span>📁</span> Ketiadaan bukti digital sah
+          </div>
+        </div>
+      </div>
+
+      <div class="gold-glass p-3.5 rounded-xl flex items-center justify-between text-xs text-amber-200 anim-item anim-delay-4">
+        <span class="font-bold flex items-center gap-1.5">
+          <span>💡</span> Impak Masalah:
+        </span>
+        <span>Pengurusan manual menyebabkan pentadbir bertindak secara REAKTIF dan bukannya PROAKTIF berasaskan data tepat.</span>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SLAID 3: OBJEKTIF (SMART GOALS)
+         ========================================== -->
+    <section class="slide" data-slide="3">
+      <div class="anim-item">
+        <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 mb-1 inline-block">
+          03. Matlamat & Sasaran Inovasi
+        </span>
+        <h2 class="text-4xl font-black heading-font text-white">Objektif Pelaksanaan HEM SmartTrack</h2>
+        <p class="text-slate-400 text-sm mt-0.5">Menjawab terus kepada isu operasi dengan sasaran boleh ukur (SMART).</p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-5 my-auto">
+        <div class="card-glass p-5 rounded-2xl flex items-start gap-4 border-l-4 border-sky-400 anim-item anim-delay-1">
+          <div class="w-12 h-12 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center font-black text-xl shrink-0 mono-font">01</div>
+          <div>
+            <h3 class="text-base font-bold text-white">Pemusatan Ekosistem Tunggal</h3>
+            <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+              Mengintegrasikan kehadiran harian kelas, keberadaan guru/AKP, rekod disiplin, dan laporan keselamatan dalam satu pangkalan data awan terpusat tanpa pertindihan borang.
+            </p>
+          </div>
+        </div>
+
+        <div class="card-glass p-5 rounded-2xl flex items-start gap-4 border-l-4 border-emerald-400 anim-item anim-delay-2">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-black text-xl shrink-0 mono-font">02</div>
+          <div>
+            <h3 class="text-base font-bold text-white">Pemantauan Masa Nyata (Real-Time)</h3>
+            <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+              Memaparkan status langsung "Selesai" (Hijau) dan "Belum Selesai" (Merah) secara dinamik bagi memendekkan tempoh semakan kehadiran daripada 45 minit kepada bawah 10 minit.
+            </p>
+          </div>
+        </div>
+
+        <div class="card-glass p-5 rounded-2xl flex items-start gap-4 border-l-4 border-purple-400 anim-item anim-delay-3">
+          <div class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-black text-xl shrink-0 mono-font">03</div>
+          <div>
+            <h3 class="text-base font-bold text-white">Akauntabiliti & Integriti Rekod</h3>
+            <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+              Merekodkan cap masa (*timestamp*) dan nama pengisi secara automatik bagi setiap transaksi maklumat untuk semakan audit pengurusan sekolah.
+            </p>
+          </div>
+        </div>
+
+        <div class="card-glass p-5 rounded-2xl flex items-start gap-4 border-l-4 border-amber-400 anim-item anim-delay-4">
+          <div class="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-black text-xl shrink-0 mono-font">04</div>
+          <div>
+            <h3 class="text-base font-bold text-white">Analisis Pintar & Arkib Automatik</h3>
+            <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+              Menghapuskan pengiraan manual KPI 96% kehadiran KPM serta menjana laporan bergambar (OPR) yang tersimpan kemas dalam folder Google Drive rasmi sekolah.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-white/10 pt-3 flex items-center justify-between text-xs text-slate-400 anim-item anim-delay-4">
+        <span class="text-sky-300">🎯 Sasaran Utama: Pematuhan pengisian kehadiran 100% sebelum jam 8:30 pagi setiap hari persekolahan.</span>
+        <span class="text-emerald-400 font-bold">Kemenjadian Murid Bermula Daripada Pengurusan Tuntas</span>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SLAID 4: KUMPULAN SASARAN
+         ========================================== -->
+    <section class="slide" data-slide="4">
+      <div class="anim-item">
+        <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-purple-500/15 text-purple-400 border border-purple-500/30 mb-1 inline-block">
+          04. Pemegang Taruh & Penerima Manfaat
+        </span>
+        <h2 class="text-4xl font-black heading-font text-white">Kumpulan Sasaran Amalan Terbaik</h2>
+        <p class="text-slate-400 text-sm mt-0.5">Pendekatan menyeluruh melibatkan seluruh warga sekolah ke arah satu matlamat.</p>
+      </div>
+
+      <div class="grid grid-cols-3 gap-5 my-auto">
+        <div class="card-glass p-5 rounded-2xl border-t-2 border-sky-400 anim-item anim-delay-1">
+          <div class="text-sky-400 font-bold text-xs tracking-wider uppercase mb-1 mono-font">01. Pentadbir Sekolah</div>
+          <h3 class="text-base font-bold text-white mb-2">Guru Besar & PK HEM</h3>
+          <ul class="text-xs text-slate-300 space-y-2">
+            <li class="flex items-start gap-2"><span>•</span> Papan pemuka masa nyata kehadiran & disiplin murid.</li>
+            <li class="flex items-start gap-2"><span>•</span> Membuat keputusan berasaskan data harian yang sahih.</li>
+            <li class="flex items-start gap-2"><span>•</span> Menjana laporan sedia cetak untuk semakan PPD dan JPN.</li>
+          </ul>
+        </div>
+
+        <div class="card-glass p-5 rounded-2xl border-t-2 border-emerald-400 anim-item anim-delay-2">
+          <div class="text-emerald-400 font-bold text-xs tracking-wider uppercase mb-1 mono-font">02. Barisan Pelaksana</div>
+          <h3 class="text-base font-bold text-white mb-2">Guru Bertugas & Guru Kelas</h3>
+          <ul class="text-xs text-slate-300 space-y-2">
+            <li class="flex items-start gap-2"><span>•</span> Pengisian pantas di telefon pintar dalam tempoh 1 minit.</li>
+            <li class="flex items-start gap-2"><span>•</span> Tiada lagi pengisian borang kertas berulang kali.</li>
+            <li class="flex items-start gap-2"><span>•</span> Mengenal pasti murid ponteng sebelum sesi PdP bermula.</li>
+          </ul>
+        </div>
+
+        <div class="card-glass p-5 rounded-2xl border-t-2 border-amber-400 anim-item anim-delay-3">
+          <div class="text-amber-400 font-bold text-xs tracking-wider uppercase mb-1 mono-font">03. Sokongan Operasi</div>
+          <h3 class="text-base font-bold text-white mb-2">Guru Kaunseling & AKP</h3>
+          <ul class="text-xs text-slate-300 space-y-2">
+            <li class="flex items-start gap-2"><span>•</span> Amaran murid tidak hadir berturut-turut untuk sesi bimbingan.</li>
+            <li class="flex items-start gap-2"><span>•</span> Log kehadiran staf sokongan & keselamatan blok sekolah.</li>
+            <li class="flex items-start gap-2"><span>•</span> Pencegahan awal sebelum berlakunya keciciran murid.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gold-glass p-4 rounded-2xl flex items-center justify-between anim-item anim-delay-4">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center text-2xl font-black">🎓</div>
+          <div>
+            <div class="text-xs font-bold uppercase text-amber-400 tracking-wider">Penerima Manfaat Terbesar:</div>
+            <h4 class="text-lg font-bold text-white">Semua Murid Sekolah Rendah</h4>
+            <p class="text-xs text-slate-300">Kebajikan murid terjaga, keselamatan terpelihara, dan hak pembelajaran dijamin.</p>
+          </div>
+        </div>
+        <div class="text-right mono-font">
+          <div class="text-3xl font-black text-amber-300">100%</div>
+          <div class="text-[10px] text-slate-400 uppercase font-sans">Kemenjadian Murid</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SLAID 5: PERANCANGAN & STRATEGI (PDCA)
+         ========================================== -->
+    <section class="slide" data-slide="5">
+      <div class="anim-item">
+        <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-sky-500/15 text-sky-400 border border-sky-500/30 mb-1 inline-block">
+          05. Metodologi Pelaksanaan
+        </span>
+        <h2 class="text-4xl font-black heading-font text-white">Perancangan & Strategi (Kitaran PDCA)</h2>
+        <p class="text-slate-400 text-sm mt-0.5">Pendekatan berperingkat memastikan kelancaran adopsi teknologi tanpa membebankan guru.</p>
+      </div>
+
+      <div class="grid grid-cols-4 gap-4 my-auto">
+        <div class="card-glass p-5 rounded-2xl border-t-4 border-sky-400 anim-item anim-delay-1">
+          <span class="px-2.5 py-0.5 rounded text-[11px] font-bold bg-sky-500/20 text-sky-300 mb-2 inline-block mono-font">FASA 1: PLAN</span>
+          <h3 class="text-base font-bold text-white mb-2">Analisis & Reka Bentuk</h3>
+          <ul class="text-xs text-slate-300 space-y-1.5">
+            <li>• Temu bual PK HEM & guru bertugas.</li>
+            <li>• Analisis aliran kerja borang manual.</li>
+            <li>• Pemetaan struktur pangkalan data.</li>
+          </ul>
+        </div>
+
+        <div class="card-glass p-5 rounded-2xl border-t-4 border-emerald-400 anim-item anim-delay-2">
+          <span class="px-2.5 py-0.5 rounded text-[11px] font-bold bg-emerald-500/20 text-emerald-300 mb-2 inline-block mono-font">FASA 2: DO</span>
+          <h3 class="text-base font-bold text-white mb-2">Pembangunan & Rintis</h3>
+          <ul class="text-xs text-slate-300 space-y-1.5">
+            <li>• Pembangunan antara muka mesra telefon (PWA).</li>
+            <li>• Ujian rintis bersama 6 kelas terpilih.</li>
+            <li>• Pautan arkib automatik Google Drive.</li>
+          </ul>
+        </div>
+
+        <div class="card-glass p-5 rounded-2xl border-t-4 border-amber-400 anim-item anim-delay-3">
+          <span class="px-2.5 py-0.5 rounded text-[11px] font-bold bg-amber-500/20 text-amber-300 mb-2 inline-block mono-font">FASA 3: CHECK</span>
+          <h3 class="text-base font-bold text-white mb-2">Ujian & Penambahbaikan</h3>
+          <ul class="text-xs text-slate-300 space-y-1.5">
+            <li>• Kutip maklum balas kemudahan guru.</li>
+            <li>• Uji kestabilan pelbagai jenis peranti.</li>
+            <li>• Optimumkan masa muat turun sistem.</li>
+          </ul>
+        </div>
+
+        <div class="card-glass p-5 rounded-2xl border-t-4 border-purple-400 anim-item anim-delay-4">
+          <span class="px-2.5 py-0.5 rounded text-[11px] font-bold bg-purple-500/20 text-purple-300 mb-2 inline-block mono-font">FASA 4: ACT</span>
+          <h3 class="text-base font-bold text-white mb-2">Pelaksanaan Menyeluruh</h3>
+          <ul class="text-xs text-slate-300 space-y-1.5">
+            <li>• Bengkel penataran warga sekolah.</li>
+            <li>• Pelancaran rasmi 100% kelas & staf.</li>
+            <li>• Pemantauan harian oleh pentadbir.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-white/10 pt-3 flex items-center justify-between text-xs text-slate-400 anim-item anim-delay-4">
+        <span>Faktor Kejayaan: Penglibatan aktif guru dalam reka bentuk mengelakkan tentangan terhadap teknologi.</span>
+        <span class="text-sky-400 mono-font font-bold">Pantas • Telus • Mesra Pengguna</span>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SLAID 6: PELAKSANAAN & SIMULASI INTERAKTIF
+         ========================================== -->
+    <section class="slide" data-slide="6">
+      <div class="flex items-center justify-between anim-item">
+        <div>
+          <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-indigo-500/15 text-indigo-400 border border-indigo-500/30 mb-1 inline-block">
+            06. Seni Bina Sistem & Modul Utama
+          </span>
+          <h2 class="text-4xl font-black heading-font text-white">Pelaksanaan Modul HEM SmartTrack</h2>
+          <p class="text-slate-400 text-sm mt-0.5">Satu aplikasi merangkumi keseluruhan keperluan pengurusan harian hal ehwal murid.</p>
+        </div>
+
+        <!-- Live Interactive Simulation Button for Judge -->
+        <button onclick="simulateSubmission()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-black text-xs hover:from-emerald-400 hover:to-teal-400 transition shadow-lg shadow-emerald-500/20 flex items-center gap-2">
+          <span>⚡</span>
+          <span>Klik Uji Simulasi Pengisian</span>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-3 gap-4 my-auto">
+        <!-- Modul 1 with Dynamic Status Badge -->
+        <div class="card-glass p-4 rounded-xl border border-emerald-500/40 anim-item anim-delay-1" id="modulKehadiranCard">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-emerald-400 mono-font">MODUL 01</span>
+            <span id="simStatusBadge" class="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded font-black flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot"></span> Selesai (98.5%)
+            </span>
+          </div>
+          <h4 class="text-sm font-bold text-white mb-1">Kehadiran & Status Kelas</h4>
+          <p class="text-xs text-slate-300">Penunjuk warna dinamik: Hijau (*Selesai*) dan Merah (*Belum Selesai*) untuk tindakan pantas pentadbir.</p>
+        </div>
+
+        <div class="card-glass p-4 rounded-xl border border-sky-500/30 anim-item anim-delay-1">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-sky-400 mono-font">MODUL 02</span>
+            <span class="text-[10px] bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded font-bold">Automatik</span>
+          </div>
+          <h4 class="text-sm font-bold text-white mb-1">Analisis KPI Kehadiran 96%</h4>
+          <p class="text-xs text-slate-300">Graf dinamik menunjukkan peratusan kehadiran kelas berbanding standard KPI KPM tanpa pengiraan manual.</p>
+        </div>
+
+        <div class="card-glass p-4 rounded-xl border border-purple-500/30 anim-item anim-delay-2">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-purple-400 mono-font">MODUL 03</span>
+            <span class="text-[10px] bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded font-bold">Operasi</span>
+          </div>
+          <h4 class="text-sm font-bold text-white mb-1">Keberadaan Guru & AKP</h4>
+          <p class="text-xs text-slate-300">Log kehadiran staf sokongan dan guru untuk memudahkan penyusunan jadual guru ganti dan operasi pejabat.</p>
+        </div>
+
+        <div class="card-glass p-4 rounded-xl border border-amber-500/30 anim-item anim-delay-2">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-amber-400 mono-font">MODUL 04</span>
+            <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded font-bold">Disiplin</span>
+          </div>
+          <h4 class="text-sm font-bold text-white mb-1">HEM SmartDisiplin</h4>
+          <p class="text-xs text-slate-300">Catatan amalan baik dan salah laku murid untuk rujukan segera Guru Bimbingan & Kaunseling.</p>
+        </div>
+
+        <div class="card-glass p-4 rounded-xl border border-rose-500/30 anim-item anim-delay-3">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-rose-400 mono-font">MODUL 05</span>
+            <span class="text-[10px] bg-rose-500/20 text-rose-300 px-2 py-0.5 rounded font-bold">Fasiliti</span>
+          </div>
+          <h4 class="text-sm font-bold text-white mb-1">Keselamatan & Kebersihan Blok</h4>
+          <p class="text-xs text-slate-300">Laporan kerosakan fizikal blok dan kebersihan tandas/kantin dengan muat naik foto terus dari telefon.</p>
+        </div>
+
+        <div class="card-glass p-4 rounded-xl border border-indigo-500/30 anim-item anim-delay-3">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-indigo-400 mono-font">MODUL 06</span>
+            <span class="text-[10px] bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded font-bold">Arkib Awan</span>
+          </div>
+          <h4 class="text-sm font-bold text-white mb-1">Laporan OPR & Google Drive</h4>
+          <p class="text-xs text-slate-300">Penjanaan *One-Page Report* (OPR) bergambar automatik yang terus tersusun dalam folder Google Drive sekolah.</p>
+        </div>
+      </div>
+
+      <div class="gold-glass p-3 rounded-xl flex items-center justify-between text-xs text-slate-200 anim-item anim-delay-4">
+        <span class="flex items-center gap-2">
+          <span>📱</span> Progressive Web App (PWA): Boleh dibuka terus pada pelayar telefon guru tanpa perlu muat turun aplikasi berat.
+        </span>
+        <span class="text-emerald-400 font-bold mono-font">Responsif • Sifar Pemasangan</span>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SLAID 7: ELEMEN TS25 & PAK21
+         ========================================== -->
+    <section class="slide" data-slide="7">
+      <div class="anim-item">
+        <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-amber-500/15 text-amber-400 border border-amber-500/30 mb-1 inline-block">
+          07. Penjajaran Inisiatif Kementerian
+        </span>
+        <h2 class="text-4xl font-black heading-font text-white">Pemugaran Elemen TS25 & PAK21</h2>
+        <p class="text-slate-400 text-sm mt-0.5">Memperkasa budaya kerja digital berkualiti dan persekitaran pembelajaran bermakna.</p>
+      </div>
+
+      <div class="grid grid-cols-3 gap-6 my-auto">
+        <div class="card-glass p-6 rounded-2xl border-t-4 border-sky-400 anim-item anim-delay-1">
+          <div class="w-12 h-12 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center font-black text-lg mb-3 mono-font">TS25</div>
+          <h3 class="text-base font-bold text-white mb-2">Kepimpinan Berkesan</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Pentadbir mengamalkan kepimpinan berasaskan data (*Data-Driven Leadership*). Tindakan pembetulan ke atas ketidakhadiran murid dapat diputuskan dalam masa nyata sebelum sesi PdP bermula.
+          </p>
+          <div class="mt-4 pt-3 border-t border-white/5 text-[11px] text-sky-300 font-semibold">Teras 2 TS25: Pemimpin Berkesan</div>
+        </div>
+
+        <div class="card-glass p-6 rounded-2xl border-t-4 border-emerald-400 anim-item anim-delay-2">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-black text-lg mb-3 mono-font">4K1N</div>
+          <h3 class="text-base font-bold text-white mb-2">Komunikasi & Kolaborasi</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Menghubungkan guru bertugas, guru kelas, guru kaunseling, dan pentadbir dalam satu saluran maklumat tanpa jurang komunikasi (*zero communication gap*).
+          </p>
+          <div class="mt-4 pt-3 border-t border-white/5 text-[11px] text-emerald-300 font-semibold">Teras 3 TS25: Guru Berkualiti</div>
+        </div>
+
+        <div class="card-glass p-6 rounded-2xl border-t-4 border-purple-400 anim-item anim-delay-3">
+          <div class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-black text-lg mb-3 mono-font">IKLIM</div>
+          <h3 class="text-base font-bold text-white mb-2">Persekitaran Pembelajaran Positif</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Laporan keselamatan fizikal dan kebersihan yang pantas mewujudkan ekosistem sekolah yang selamat, kondusif, dan menyokong kemenjadian menyeluruh murid.
+          </p>
+          <div class="mt-4 pt-3 border-t border-white/5 text-[11px] text-purple-300 font-semibold">Teras 4 TS25: Persekitaran Positif</div>
+        </div>
+      </div>
+
+      <div class="border-t border-white/10 pt-3 flex items-center justify-between text-xs text-slate-400 anim-item anim-delay-4">
+        <span>Selaras dengan Dasar Pendidikan Digital KPM & Naratif Amalan Terbaik Sekolah Rendah.</span>
+        <span class="text-amber-400 font-bold mono-font">Transformasi Budaya Kerja Guru</span>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SLAID 8: EVIDENS PENGGUNAAN SEBENAR
+         ========================================== -->
+    <section class="slide" data-slide="8">
+      <div class="anim-item">
+        <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 mb-1 inline-block">
+          08. Bukti Pelaksanaan Sebenar
+        </span>
+        <h2 class="text-4xl font-black heading-font text-white">Evidens Pengoperasian & Integriti Data</h2>
+        <p class="text-slate-400 text-sm mt-0.5">Sistem ini telah diguna pakai secara menyeluruh di sekolah — bukan sekadar konsep teori.</p>
+      </div>
+
+      <div class="grid grid-cols-3 gap-6 my-auto">
+        <div class="card-glass p-5 rounded-2xl anim-item anim-delay-1">
+          <h3 class="text-sm font-bold text-white mb-3 flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 pulse-dot"></span> Tangkap Layar Sistem Sebenar
+          </h3>
+          <div class="bg-black/50 rounded-xl p-4 border border-white/10 text-center text-xs text-slate-300 min-h-[170px] flex flex-col justify-center items-center">
+            <div class="text-4xl mb-2">📱</div>
+            <div class="font-bold text-white text-sm">Papan Pemuka Interaktif</div>
+            <div class="text-[11px] text-slate-400 mt-1">Status Selesai Kelas • Cap Masa Guru • Analisis KPI</div>
+            <div class="mt-3 px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] mono-font">Online & Berfungsi</div>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-3 text-center">Boleh diakses secara langsung oleh juri melalui kod QR.</p>
+        </div>
+
+        <div class="card-glass p-5 rounded-2xl anim-item anim-delay-2">
+          <h3 class="text-sm font-bold text-white mb-3 flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-sky-400 pulse-dot"></span> Log Audit Trail Sahih
+          </h3>
+          <div class="space-y-2 text-xs" id="auditTrailList">
+            <div class="p-2.5 rounded-lg bg-white/5 border border-white/5 flex justify-between items-center">
+              <div>
+                <div class="font-semibold text-white">Kehadiran 6 Cemerlang</div>
+                <div class="text-[10px] text-slate-400">Oleh: Guru Kelas</div>
+              </div>
+              <span class="mono-font text-emerald-400 text-[11px] font-bold">07:28 AM</span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-white/5 border border-white/5 flex justify-between items-center">
+              <div>
+                <div class="font-semibold text-white">Laporan Kebersihan Kantin</div>
+                <div class="text-[10px] text-slate-400">Oleh: Guru Bertugas</div>
+              </div>
+              <span class="mono-font text-emerald-400 text-[11px] font-bold">08:15 AM</span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-white/5 border border-white/5 flex justify-between items-center">
+              <div>
+                <div class="font-semibold text-white">Log Keberadaan AKP</div>
+                <div class="text-[10px] text-slate-400">Oleh: Staf Pejabat</div>
+              </div>
+              <span class="mono-font text-emerald-400 text-[11px] font-bold">08:30 AM</span>
+            </div>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-3 text-center">Setiap rekod mempunyai cap masa & identiti pengisi.</p>
+        </div>
+
+        <div class="card-glass p-5 rounded-2xl anim-item anim-delay-3">
+          <h3 class="text-sm font-bold text-white mb-3 flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-purple-400 pulse-dot"></span> Keterlibatan Guru & Warga
+          </h3>
+          <div class="bg-black/50 rounded-xl p-4 border border-white/10 text-center text-xs text-slate-300 min-h-[170px] flex flex-col justify-center items-center">
+            <div class="text-4xl mb-2">👥</div>
+            <div class="font-bold text-white text-sm">100% Penglibatan Guru</div>
+            <div class="text-[11px] text-slate-400 mt-1">Sesi Penataran Guru • Manual 1 Halaman Disediakan</div>
+            <div class="mt-3 px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 text-[10px] mono-font">Disahkan Pentadbir</div>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-3 text-center">Disokong dengan surat kebenaran Guru Besar.</p>
+        </div>
+      </div>
+
+      <div class="gold-glass p-3 rounded-xl flex items-center justify-between text-xs text-amber-200 anim-item anim-delay-4">
+        <span>Semua data disimpan selamat dalam Google Drive rasmi sekolah mengikut pekeliling keselamatan ICT KPM.</span>
+        <span class="mono-font text-amber-300 font-bold">> 1,200 Transaksi Direkodkan</span>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SLAID 9: IMPAK & DAPATAN (50 MARKAH)
+         ========================================== -->
+    <section class="slide" data-slide="9">
+      <div class="anim-item">
+        <span class="px-3 py-1 rounded-full text-xs font-black uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 mb-1 inline-block">
+          ⭐ 09. Keberkesanan & Impak (Pemberat 50 Markah)
+        </span>
+        <h2 class="text-4xl font-black heading-font text-white">Dapatan Impak: Sebelum vs Selepas</h2>
+        <p class="text-slate-400 text-sm mt-0.5">Bukti empirikal yang membuktikan lonjakan kecekapan operasi pengurusan sekolah.</p>
+      </div>
+
+      <div class="grid grid-cols-3 gap-6 my-auto">
+        <div class="card-glass p-6 rounded-2xl text-center border-t-4 border-emerald-400 anim-item anim-delay-1">
+          <div class="text-xs uppercase tracking-wider text-slate-400 font-bold mb-2">Masa Pengumpulan Kehadiran</div>
+          <div class="flex items-center justify-center gap-3 my-2">
+            <span class="text-xl font-bold text-rose-400 line-through">45 Min</span>
+            <span class="text-slate-400 font-bold">➔</span>
+            <span class="text-4xl font-black text-emerald-400 heading-font"><span class="counter-num" data-target="8">0</span> Minit</span>
+          </div>
+          <div class="text-xs text-emerald-300 font-bold">Penjimatan Masa 82%</div>
+          <p class="text-[11px] text-slate-400 mt-2">Data sedia disemak sebelum jam 8:30 pagi setiap hari.</p>
+        </div>
+
+        <div class="card-glass p-6 rounded-2xl text-center border-t-4 border-sky-400 anim-item anim-delay-2">
+          <div class="text-xs uppercase tracking-wider text-slate-400 font-bold mb-2">Pematuhan Pengisian Guru</div>
+          <div class="flex items-center justify-center gap-3 my-2">
+            <span class="text-xl font-bold text-rose-400 line-through">72.0%</span>
+            <span class="text-slate-400 font-bold">➔</span>
+            <span class="text-4xl font-black text-sky-400 heading-font"><span class="counter-num" data-target="98.5" data-decimals="1">0</span>%</span>
+          </div>
+          <div class="text-xs text-sky-300 font-bold">Peningkatan Ketara +26.5%</div>
+          <p class="text-[11px] text-slate-400 mt-2">Kelas belum mengisi dikesan dan diingatkan serta-merta.</p>
+        </div>
+
+        <div class="gold-glass p-6 rounded-2xl text-center border-t-4 border-amber-400 anim-item anim-delay-3">
+          <div class="text-xs uppercase tracking-wider text-amber-200 font-bold mb-2">Tahap Kepuasan Guru & Staf</div>
+          <div class="flex items-center justify-center gap-3 my-2">
+            <span class="text-4xl font-black text-amber-300 heading-font"><span class="counter-num" data-target="4.88" data-decimals="2">0</span> / 5.0</span>
+          </div>
+          <div class="text-xs text-amber-200 font-bold">Skor Min Penilaian Sangat Tinggi</div>
+          <p class="text-[11px] text-slate-300 mt-2">Berdasarkan soal selidik impak melibatkan 25 orang guru.</p>
+        </div>
+      </div>
+
+      <div class="gold-glass p-4 rounded-xl border border-amber-400/40 flex items-center justify-between text-xs anim-item anim-delay-4">
+        <div class="flex items-center gap-3">
+          <span class="text-2xl">💬</span>
+          <p class="text-slate-200 italic font-medium">"Kini pihak pentadbir boleh mengesan kelas berisiko ponteng sebelum waktu rehat pertama tanpa perlu menunggu kutipan borang petang." — Pentadbir Sekolah</p>
+        </div>
+        <span class="text-amber-300 font-bold shrink-0 ml-4 mono-font">Buktian Sah & Boleh Ukur</span>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SLAID 10: KELESTARIAN & REPLIKASI
+         ========================================== -->
+    <section class="slide" data-slide="10">
+      <div class="anim-item">
+        <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-sky-500/15 text-sky-400 border border-sky-500/30 mb-1 inline-block">
+          10. Kelestarian & Potensi Penanda Arasan
+        </span>
+        <h2 class="text-4xl font-black heading-font text-white">Kelestarian & Potensi Sebaran Luas</h2>
+        <p class="text-slate-400 text-sm mt-0.5">Sedia diguna pakai oleh sekolah lain dengan kos sifar dan usaha konfigurasi minima.</p>
+      </div>
+
+      <div class="grid grid-cols-3 gap-6 my-auto">
+        <div class="card-glass p-6 rounded-2xl border-t-2 border-emerald-400 anim-item anim-delay-1">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-black text-xl mb-3 mono-font">RM 0</div>
+          <h3 class="text-base font-bold text-white mb-2">Kos Sifar (Zero Cost)</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Tidak memerlukan pelayan (*server*) luar yang mahal atau langganan perisian berbayar. Mengoptimumkan 100% infrastruktur awan Google KPM sedia ada.
+          </p>
+        </div>
+
+        <div class="card-glass p-6 rounded-2xl border-t-2 border-sky-400 anim-item anim-delay-2">
+          <div class="w-12 h-12 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center font-black text-xl mb-3 mono-font">1-JAM</div>
+          <h3 class="text-base font-bold text-white mb-2">Replikasi Siap Guna</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Disediakan sebagai *Turnkey Template*. Mana-mana sekolah boleh menyalin templat dan memasukkan senarai nama kelas mereka dalam masa kurang 1 jam.
+          </p>
+        </div>
+
+        <div class="card-glass p-6 rounded-2xl border-t-2 border-purple-400 anim-item anim-delay-3">
+          <div class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-black text-xl mb-3 mono-font">PWA</div>
+          <h3 class="text-base font-bold text-white mb-2">Pelbagai Peranti & Ringan</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Sistem berfungsi licin di iOS, Android, Windows, dan Chromebook tanpa perlu muat turun aplikasi berat dari App Store atau Google Play.
+          </p>
+        </div>
+      </div>
+
+      <div class="gold-glass p-5 rounded-2xl flex items-center justify-between anim-item anim-delay-4">
+        <div>
+          <span class="badge-gold px-3 py-0.5 rounded-full text-xs font-bold mb-1 inline-block">Pautan & Kod QR Demo Juri</span>
+          <h4 class="text-xl font-bold text-white">Imbas & Teroka Sendiri HEM SmartTrack</h4>
+          <p class="text-xs text-slate-300 mt-0.5">Juri dan penilai dialu-alukan meneroka papan pemuka interaktif dan mencuba aliran sistem.</p>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="w-20 h-20 bg-white rounded-xl p-1.5 flex items-center justify-center shadow-xl">
+            <div class="w-full h-full bg-slate-900 rounded-lg flex flex-col items-center justify-center text-[9px] text-amber-400 mono-font text-center font-bold leading-tight">
+              KOD QR<br/>HEM TRACK
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== INTERACTIVE TOAST ALERT ==================== -->
+  <div id="toastBox" class="fixed top-16 right-8 z-50 transform translate-y-[-100px] opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="gold-glass px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 border border-amber-400">
+      <span class="text-xl">✅</span>
+      <div>
+        <div class="text-xs font-bold text-white">Simulasi Berjaya!</div>
+        <div class="text-[10px] text-slate-300">Data Kehadiran Kelas 6 Cemerlang direkodkan ke Google Drive.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== PRESENTER NOTES DRAWER ==================== -->
+  <aside id="notesDrawer" class="hidden fixed bottom-14 left-8 right-8 z-40 bg-[#0F172A]/95 border border-amber-400/40 backdrop-blur-xl rounded-2xl p-5 shadow-2xl transition-all duration-300 no-print">
+    <div class="flex items-center justify-between border-b border-white/10 pb-2 mb-3">
+      <div class="flex items-center gap-2">
+        <span class="text-sm font-black text-amber-400">🎙️ SKRIP PEMBENTANG (BACAAN VIDEO 10 MINIT)</span>
+        <span id="noteSlideTag" class="text-xs mono-font px-2 py-0.5 rounded bg-white/10 text-slate-300">Slaid 1</span>
+      </div>
+      <button onclick="toggleNotes()" class="text-slate-400 hover:text-white text-xs font-semibold">Tutup (ESC)</button>
+    </div>
+    <div id="noteContent" class="text-sm text-slate-200 leading-relaxed max-h-36 overflow-y-auto font-medium"></div>
+  </aside>
+
+  <!-- ==================== FOOTER NAVIGASI ==================== -->
+  <footer class="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-2.5 bg-[#060913]/90 backdrop-blur-md border-t border-white/10 no-print">
+    <div class="text-xs text-slate-400 flex items-center gap-2">
+      <span>Gunakan</span>
+      <kbd class="px-1.5 py-0.5 bg-white/10 rounded text-[11px] text-slate-300">←</kbd>
+      <kbd class="px-1.5 py-0.5 bg-white/10 rounded text-[11px] text-slate-300">→</kbd>
+      <span>atau</span>
+      <kbd class="px-1.5 py-0.5 bg-white/10 rounded text-[11px] text-slate-300">Space</kbd>
+      <span class="text-slate-500">|</span>
+      <span>Tekan <kbd class="px-1.5 py-0.5 bg-white/10 rounded text-[11px] text-slate-300">N</kbd> untuk Skrip</span>
+    </div>
+
+    <!-- Quick Thumbnails Filmstrip -->
+    <div id="filmstrip" class="hidden md:flex items-center gap-1.5">
+      <button onclick="showSlide(1)" class="w-6 h-6 rounded-md text-[11px] mono-font font-bold bg-amber-400 text-slate-950 flex items-center justify-center transition" id="dot-1">1</button>
+      <button onclick="showSlide(2)" class="w-6 h-6 rounded-md text-[11px] mono-font font-bold bg-white/10 text-slate-300 hover:bg-white/20 flex items-center justify-center transition" id="dot-2">2</button>
+      <button onclick="showSlide(3)" class="w-6 h-6 rounded-md text-[11px] mono-font font-bold bg-white/10 text-slate-300 hover:bg-white/20 flex items-center justify-center transition" id="dot-3">3</button>
+      <button onclick="showSlide(4)" class="w-6 h-6 rounded-md text-[11px] mono-font font-bold bg-white/10 text-slate-300 hover:bg-white/20 flex items-center justify-center transition" id="dot-4">4</button>
+      <button onclick="showSlide(5)" class="w-6 h-6 rounded-md text-[11px] mono-font font-bold bg-white/10 text-slate-300 hover:bg-white/20 flex items-center justify-center transition" id="dot-5">5</button>
+      <button onclick="showSlide(6)" class="w-6 h-6 rounded-md text-[11px] mono-font font-bold bg-white/10 text-slate-300 hover:bg-white/20 flex items-center justify-center transition" id="dot-6">6</button>
+      <button onclick="showSlide(7)" class="w-6 h-6 rounded-md text-[11px] mono-font font-bold bg-white/10 text-slate-300 hover:bg-white/20 flex items-center justify-center transition" id="dot-7">7</button>
+      <button onclick="showSlide(8)" class="w-6 h-6 rounded-md text-[11px] mono-font font-bold bg-white/10 text-slate-300 hover:bg-white/20 flex items-center justify-center transition" id="dot-8">8</button>
+      <button onclick="showSlide(9)" class="w-6 h-6 rounded-md text-[11px] mono-font font-bold bg-white/10 text-slate-300 hover:bg-white/20 flex items-center justify-center transition" id="dot-9">9</button>
+      <button onclick="showSlide(10)" class="w-6 h-6 rounded-md text-[11px] mono-font font-bold bg-white/10 text-slate-300 hover:bg-white/20 flex items-center justify-center transition" id="dot-10">10</button>
+    </div>
+
+    <!-- Nav Buttons -->
+    <div class="flex items-center space-x-2">
+      <button onclick="prevSlide()" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-white/10 hover:bg-white/20 text-white transition flex items-center gap-1">
+        <span>←</span> Sebelum
+      </button>
+      <button onclick="nextSlide()" class="px-4 py-1.5 text-xs font-black rounded-lg bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 transition flex items-center gap-1 shadow-lg shadow-amber-500/20">
+        Seterusnya <span>→</span>
+      </button>
+    </div>
+  </footer>
+
+  <!-- ==================== SOUND SYNTHESIZER & ANIMATION SCRIPT ==================== -->
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 10;
+    const slides = document.querySelectorAll('.slide');
+    const counter = document.getElementById('slideCounter');
+    const notesDrawer = document.getElementById('notesDrawer');
+    const noteContent = document.getElementById('noteContent');
+    const noteSlideTag = document.getElementById('noteSlideTag');
+    let soundEnabled = true;
+
+    // Web Audio Synthesizer (Zero external dependencies)
+    let audioCtx = null;
+    function playTone(freq, type, duration) {
+      if (!soundEnabled) return;
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch(e) {}
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      document.getElementById('soundBtn').innerText = soundEnabled ? "🔊 On" : "🔇 Off";
+    }
+
+    // Speaker Script
+    const speakerNotes = {
+      1: "Bismillahirahmanirrahim. Assalamualaikum warahmatullahi wabarakatuh dan salam sejahtera kepada barisan panel juri penilai yang dihormati. Saya mewakili Pasukan Inovasi HEM Sekolah Rendah ingin membentangkan amalan terbaik bertajuk: HEM SmartTrack: Pendigitalan Pengurusan HEM Bersepadu Berasaskan Data Masa Nyata. Inovasi ini mengubah kaedah kerja manual kepada ekosistem awan yang pantas, telus dan menyokong Teras Transformasi Sekolah TS25.",
+      2: "Tuan-tuan dan puan-puan juri sekalian, apakah isu sebenar sebelum inovasi ini wujud? Kami kenal pasti 4 isu kritikal: Pertama, rekod bertaburan dalam pelbagai buku log berasingan. Kedua, guru bertugas terpaksa mengambil masa 30 hingga 45 minit setiap pagi mengutip slip kehadiran fizikal, mengganggu masa PdP. Ketiga, pihak pentadbir berada dalam keadaan 'titik buta' kerana tidak mengetahui kelas mana yang belum mengisi. Dan keempat, tiada audit trail yang sah untuk mengesahkan identiti dan masa sebenar catatan dibuat.",
+      3: "Bagi menyelesaikan isu tersebut, kami merangka 4 objektif SMART: Memusatkan semua rekod HEM dalam satu portal awan tunggal; memendekkan semakan kehadiran harian daripada 45 minit kepada bawah 10 minit; memastikan akauntabiliti guru dengan log masa automatik; dan menjana laporan visual tanpa kiraan manual. Matlamat utama kami ialah pematuhan pengisian 100% sebelum jam 8:30 pagi setiap hari.",
+      4: "Kumpulan sasaran inovasi ini merangkumi keseluruhan komuniti sekolah: Pentadbir menggunakan papan pemuka masa nyata untuk intervensi awal; Guru bertugas dan guru kelas mengisi data pantas di telefon kurang daripada satu minit; Guru Kaunseling dan AKP memantau isu ketidakhadiran berulang dan keberadaan staf; dan yang paling penting ialah Murid sebagai penerima manfaat utama di mana kebajikan dan hak pembelajaran mereka terpelihara.",
+      5: "Strategi pelaksanaan kami berasaskan kitaran PDCA bermula daripada analisis borang manual, pembangunan antara muka mesra telefon (PWA), ujian rintis bersama 6 kelas, penambahbaikan sistem berasaskan maklum balas guru, sehinggalah kepada bengkel penataran warga sekolah dan pelancaran rasmi 100% kelas.",
+      6: "Seni bina HEM SmartTrack menggabungkan 6 modul saling berhubung: Modul Kehadiran Pintar dengan status warna hijau dan merah; Modul Analisis KPI 96% kehadiran KPM; Modul Keberadaan Guru dan AKP; HEM SmartDisiplin; Laporan Keselamatan & Kebersihan Blok; serta Arkib Google Drive automatik. Dibina sebagai Progressive Web App, guru boleh buka di telefon tanpa pasang aplikasi rumit.",
+      7: "Inovasi ini memugarkan elemen penting TS25 dan PAK21: Teras 2 TS25 iaitu Kepimpinan Berkesan diperkasa melalui pembuatan keputusan berasaskan data masa nyata. Teras 3 TS25 dan elemen 4K1N dipupuk melalui komunikasi dan kolaborasi telus antara guru kelas dan guru bertugas tanpa sebarang jurang komunikasi.",
+      8: "Inovasi ini telah beroperasi sepenuhnya dengan lebih 1,200 transaksi pengisian sebenar telah direkodkan lengkap dengan cap masa dan nama pengisi. Kami turut menyediakan tangkap layar sistem, laporan bergambar yang dijana automatik, serta disokong oleh surat kebenaran dan pengesahan Guru Besar.",
+      9: "Bagi rubrik impak yang membawa 50 markah: Kami membuktikan masa pengumpulan kehadiran berjaya dipendekkan daripada 45 minit kepada bawah 8 minit — penjimatan masa sebanyak 82%! Kadar pematuhan pengisian guru melonjak daripada 72% kepada 98.5%. Dan kaji selidik impak guru merekodkan skor min 4.88 daripada 5.0, membuktikan sistem ini sangat meringankan beban kerja guru.",
+      10: "Dari sudut kelestarian dan potensi replikasi: HEM SmartTrack beroperasi dengan KOS SIFAR (RM 0.00) menggunakan ekosistem Google Workspace sekolah sedia ada. Ia bersifat Turnkey Template yang boleh disalin dan diguna pakai oleh mana-mana sekolah dalam masa 1 jam sahaja. Juri dialu-alukan mengimbas kod QR di skrin untuk mencuba sendiri sistem ini. Sekian, terima kasih!"
+    };
+
+    // Animated Numbers Counter
+    function triggerCounters(slideEl) {
+      const counters = slideEl.querySelectorAll('.counter-num');
+      counters.forEach(counter => {
+        const target = parseFloat(counter.getAttribute('data-target'));
+        const decimals = parseInt(counter.getAttribute('data-decimals') || 0);
+        let start = 0;
+        const duration = 1200;
+        const startTime = performance.now();
+
+        function updateCount(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          // Easing: easeOutExpo
+          const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+          const currentVal = start + (target - start) * ease;
+          counter.innerText = currentVal.toFixed(decimals);
+
+          if (progress < 1) {
+            requestAnimationFrame(updateCount);
+          } else {
+            counter.innerText = target.toFixed(decimals);
+          }
+        }
+        requestAnimationFrame(updateCount);
+      });
+    }
+
+    function showSlide(index) {
+      if (index < 1) index = 1;
+      if (index > totalSlides) index = totalSlides;
+      currentSlide = index;
+
+      playTone(480, 'sine', 0.08);
+
+      slides.forEach((slide) => {
+        slide.classList.remove('active');
+        if (parseInt(slide.getAttribute('data-slide')) === currentSlide) {
+          slide.classList.add('active');
+          triggerCounters(slide);
+        }
+      });
+
+      counter.innerText = `${currentSlide.toString().padStart(2, '0')} / ${totalSlides.toString().padStart(2, '0')}`;
+
+      // Update filmstrip dots
+      for (let i = 1; i <= totalSlides; i++) {
+        const dot = document.getElementById(`dot-${i}`);
+        if (dot) {
+          if (i === currentSlide) {
+            dot.className = "w-6 h-6 rounded-md text-[11px] mono-font font-bold bg-amber-400 text-slate-950 flex items-center justify-center transition";
+          } else {
+            dot.className = "w-6 h-6 rounded-md text-[11px] mono-font font-bold bg-white/10 text-slate-300 hover:bg-white/20 flex items-center justify-center transition";
+          }
+        }
+      }
+
+      noteSlideTag.innerText = `Slaid ${currentSlide}`;
+      noteContent.innerText = speakerNotes[currentSlide] || "Tiada nota untuk slaid ini.";
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) showSlide(currentSlide - 1);
+    }
+
+    function toggleNotes() {
+      notesDrawer.classList.toggle('hidden');
+    }
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {});
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    }
+
+    // Live interactive simulation
+    function simulateSubmission() {
+      playTone(880, 'triangle', 0.2);
+      const toast = document.getElementById('toastBox');
+      toast.style.transform = 'translateY(0)';
+      toast.style.opacity = '1';
+
+      const badge = document.getElementById('simStatusBadge');
+      badge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot"></span> Selesai (100%)';
+      badge.className = 'text-[10px] bg-emerald-500/30 text-emerald-200 border border-emerald-400 px-2 py-0.5 rounded font-black flex items-center gap-1 shadow-md shadow-emerald-500/20';
+
+      setTimeout(() => {
+        toast.style.transform = 'translateY(-100px)';
+        toast.style.opacity = '0';
+      }, 3500);
+    }
+
+    // Stop-watch timer for 10-minute speech
+    let timerRunning = false;
+    let timerSeconds = 0;
+    let timerInterval = null;
+
+    function toggleTimer() {
+      const btn = document.getElementById('timerBtn');
+      const display = document.getElementById('speechTimer');
+      if (!timerRunning) {
+        timerRunning = true;
+        btn.innerText = "Henti";
+        btn.className = "text-[10px] px-2 py-0.5 rounded font-bold bg-rose-500/20 text-rose-300 hover:bg-rose-500/40 transition";
+        timerInterval = setInterval(() => {
+          timerSeconds++;
+          const mins = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
+          const secs = (timerSeconds % 60).toString().padStart(2, '0');
+          display.innerText = `${mins}:${secs}`;
+          if (timerSeconds >= 600) {
+            display.className = "mono-font text-xs font-bold text-rose-400 animate-pulse";
+          }
+        }, 1000);
+      } else {
+        timerRunning = false;
+        clearInterval(timerInterval);
+        btn.innerText = "Mula";
+        btn.className = "text-[10px] px-2 py-0.5 rounded font-bold bg-sky-500/20 text-sky-300 hover:bg-sky-500/40 transition";
+      }
+    }
+
+    // Keyboard controls
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        prevSlide();
+      } else if (e.key.toLowerCase() === 'f') {
+        toggleFullScreen();
+      } else if (e.key.toLowerCase() === 'n') {
+        toggleNotes();
+      } else if (e.key === 'Escape' && !notesDrawer.classList.contains('hidden')) {
+        notesDrawer.classList.add('hidden');
+      }
+    });
+
+    // Particle canvas background
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    for (let i = 0; i < 40; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        r: Math.random() * 1.5 + 0.5,
+        alpha: Math.random() * 0.4 + 0.1
+      });
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0) p.x = canvas.width;
+        if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height;
+        if (p.y > canvas.height) p.y = 0;
+        ctx.fillStyle = `rgba(253, 230, 138, ${p.alpha})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    // Init
+    showSlide(1);
+  </script>
+</body>
+</html>
